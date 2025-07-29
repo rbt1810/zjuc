@@ -1,0 +1,281 @@
+{
+    "metadata": {
+        "content_type": "lecture_notes",
+        "document_title": "Introduction: What Is Data Science",
+        "institution": "Zhejiang University",
+        "sections": [
+            "Course Syllabus",
+            "What Is Data Science",
+            "Machine Learning",
+            "Mathematical Representation",
+            "Conclusion"
+        ]
+    },
+    "pages": [
+        {
+            "title": "Outlines",
+            "content": [
+                {
+                    "item_id": "outlines",
+                    "header": "Outlines",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Course Syllabus",
+                                "What Is Data Science",
+                                "Machine Learning",
+                                "Mathematical Representation",
+                                "Conclusion"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Some Examples of Data",
+            "content": [
+                {
+                    "item_id": "question",
+                    "header": "Examples Query",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Can you give some examples of data ?"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "examples",
+                    "header": "Data Examples",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Table",
+                                "1D signal (audio, stock price)",
+                                "2D signal (image)",
+                                "3D signal (video), etc."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Big Data : 5 Big “V”",
+            "content": [
+                {
+                    "item_id": "5v",
+                    "header": "The 5 V's of Big Data",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Volume : KB, MB, GB (10^9 bytes), TB, PB, EB (10^18 bytes), ZB, YB, exponential growth (about 120%/year)",
+                                "Variety : different sources from business to industry, different types",
+                                "Veracity : Noisy data with errors and inconsistency, redundant information contained in the data, need to retrieve useful information",
+                                "Velocity : fast speed for data generation and information transfer, need for realtime processing",
+                                "Value : business values for product recommendations and trading ; social values for precision medicine, public health, traffic control, etc."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "What is data science",
+            "content": [
+                {
+                    "item_id": "definition",
+                    "header": "Definition and Perspectives",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Retrieve information from data with the help of computational power",
+                                "Transfer the information into knowledge",
+                                "Two perspectives of data sciences :",
+                                "Study science with the help of data : bioinformatics, astrophysics, geosciences, etc.",
+                                "Use scientific methods to exploit data : statistics, machine learning, data mining, pattern recognition, data base, etc."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Study Science with the Help of Data",
+            "content": [
+                {
+                    "item_id": "pioneering",
+                    "header": "Historical Example",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "A pioneering work of data science : Kepler’s Laws"
+                        }
+                    ]
+                }
+            ],
+            "image": [
+                {"path": ["~/zjuc/agent/lectures/introduction/Images/image_Im16.png",
+                        "~/zjuc/agent/lectures/introduction/Images/image_Im17.png"]},
+                {"description": "Photo of Kepler and planets. Tabular that shows Kepler's third law."}
+            ]
+        },
+        {
+            "title": "Scientific Study of Data",
+            "content": [
+                {
+                    "item_id": "processes",
+                    "header": "Key Components",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Grabbing data : business and industrial problem, professional areas",
+                                "Storing data : engineering problem, computer science, electronic engineering",
+                                "Analyzing data (key problem) : scientific problem, mathematics, statistics, computer science"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Data Analysis",
+            "content": [
+                {
+                    "item_id": "data_types",
+                    "header": "Ordinary data types :",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Table : classical data (could be treated as matrix)",
+                                "Set of points : mathematical description",
+                                "Time series : text, audio, stock prices, DNA sequences, etc.",
+                                "Image : 2D signal (or matrix equivalently, e.g., pixels), MRI, CT, supersonic imaging",
+                                "video : 2D in space and 1D in time (another kind of time series)",
+                                "Webpage and newspaper : time series with spatial structure",
+                                "Network : relational data, graph (nodes and edges)"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "basic_assumption",
+                    "header": "Basic assumption",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "the data are generated from an underlying model, which is unknown in practice"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "model_types",
+                    "header": "Model Types",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Set of points : probability distribution",
+                                "Time series : stochastic processes, e.g., Hidden Markov Model (HMM)",
+                                "Image : random fields, e.g., Gibbs random fields",
+                                "Network : graphical models, Beyesian models"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Difficulties",
+            "content": [
+                {
+                    "item_id": "challenges",
+                    "header": "Challenges",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Huge volume of data",
+                                "Extremely high dimensions",
+                                "Curse of dimensionality : the model complexity and computational complexity become exponentially increasing with the growth of dimension"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "solutions",
+                    "header": "Solutions :",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Make use of prior information",
+                                "Restrict to simple models",
+                                "Make use of special structures, e.g., sparsity, low rank, smoothness",
+                                "Dimensionality reduction, e.g., PCA, LDA, etc.",
+                                "Complex variety of data",
+                                "Large noise : data are always contaminated with noises"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Solution - Algorithms",
+            "content": [
+                {
+                    "item_id": "algorithm_description",
+                    "header": "Algorithm Framework",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Algorithms are in the interdisciplinary part of computer science and mathematics : establish mathematical models, solve it numerically, implement it in the computer languages"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "algorithm_techniques",
+                    "header": "Algorithmic Techniques",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Reduce the algorithmic complexity, with the help of techniques from mathematics or computer science",
+                                "Distributional and parallel computing : divide-and-conquer, e.g., MapReduce, GPU"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "top_algorithms",
+                    "header": "IEEE 2006 top 10 algorithms in data mining",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "C4.5",
+                                "K-Means",
+                                "SVM",
+                                "Apriori",
+                                "EM",
+                                "PageRank",
+                                "NaiveBayes",
+                                "K-Nearest Neighbors",
+                                "AdaBoost",
+                                "CART"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

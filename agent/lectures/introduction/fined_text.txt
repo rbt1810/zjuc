@@ -1,0 +1,800 @@
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+MA333 Introduction to Big Data Analysis Course Introduction
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Conclusion
+
+Machine Learning
+
+Outlines
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Course Info
+
+Semester 2024-2025 Spring • Instructor : ZHANG, Zhen £(cid:220)(cid:8)⁄ • Oﬃce : Room M5014, School of Science
+
+Phone : 88018753
+
+Email : zhangz@sustech.edu.cn
+
+Oﬃce hours : Tuesday morning, 10 :00-12 :00; or send email to make an appointment for other time.
+
+Lecture : 3 credits, 3 hours per week.
+
+Prerequisite : Calculus (or Mathematical Analysis); Linear Algebra; Probability Theory or Probability Theory and Mathematical Statistics (or other similar courses).
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Grading Policy
+
+Homework : Approximately 6 homework assignments (including programming assignments and written problems). The written homework could be handed in after class.
+
+In-class quizzes : typically once every two weeks, test how well you learned about the basic concepts, including ﬁll-in-the-blank, single and multiple choices, and simple Q & A
+
+Programming projects : include coding, data analytics, and reports
+
+One closed-book ﬁnal exam
+
+Grading policy : assignments (30%), quizzes (15%), programming projects (20%), and the ﬁnal exam (35%).
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Contents
+
+Intended for undergraduate students who are interested in pursuing industrial work and research in big data science.
+
+Concise and self-contained introduction to mathematical aspect of big data science, including theoretical analysis, algorithms and programming with python
+
+Major topics :
+
+Introduction to python programming and data preprocessing • Three fundamental problems : classiﬁcation, regression, clustering
+
+Model selection, dimensionality reduction • Hot topics : text analysis, social network analysis, neural network and deep learning, and recommender systems if time permits
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+References
+
+Œ(cid:226)(cid:137)˘(cid:19)(cid:218)§(cid:238)p(cid:246)(cid:31)˝§p(cid:31)(cid:19)(cid:152)(cid:209)(cid:135)(cid:22)§2017. • ¯(cid:236)˘S§–(cid:147)u˝§(cid:152)u(cid:140)˘(cid:209)(cid:135)(cid:22)§2016. • An Introduction to Statistical Learning with Applications in Python, by Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor, Springer, 2023. https ://www.statlearning.com/ • Pattern Recognition and Machine Learning, by Christopher M. Bishop, Springer, 2006.
+
+The Elements of Statistical Machine Learning : Data mining, Inference and Prediction, 2nd Edition, by Trevor Hastie, Robert Tibshirani, and Jerome Friedman, Springer, 2009. https ://hastie.su.domains/ElemStatLearn/
+
+Foundations of Machine Learning, by Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar, MIT Press, 2018.
+
+Understanding Machine Learning, by Shai Shalev-Shwartz and Shai Ben-David, Cambridge University Press, 2018.
+
+Deep learning, by Ian Goodfellow, Yoshua Bengio, and Aaron Courville, MIT Press, 2016. https ://www.deeplearningbook.org/
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+References
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Conclusion
+
+Machine Learning
+
+Outlines
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Some Examples of Data
+
+Can you give some examples of data?
+
+Table, 1D signal (audio, stock price), 2D signal (image), 3D signal (video), etc.
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Big Data : 5 Big “V”
+
+Volume : KB, MB, GB (109 bytes), TB, PB, EB (1018 bytes), ZB, YB, exponential growth (about 120%/year)
+
+Variety : diﬀerent sources from business to industry, diﬀerent types • Veracity : Noisy data with errors and inconsistency, redundant information contained in the data, need to retrieve useful information • Velocity : fast speed for data generation and information transfer, need
+
+for realtime processing
+
+Value : business values for product recommendations and trading; social values for precision medicine, public health, traﬃc control, etc.
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+What is data science
+
+Retrieve information from data with the help of computational power
+
+Transfer the information into knowledge • Two perspectives of data sciences :
+
+Study science with the help of data : bioinformatics, astrophysics, geosciences, etc.
+
+Use scientiﬁc methods to exploit data : statistics, machine learning, data mining, pattern recognition, data base, etc.
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Study Science with the Help of Data
+
+A pioneering work of data science : Kepler’s Laws
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Scientiﬁc Study of Data
+
+Grabbing data : business and industrial problem, professional areas
+
+Storing data : engineering problem, computer science, electronic engineering
+
+Analyzing data (key problem) : scientiﬁc problem, mathematics, statistics, computer science
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Data Analysis
+
+Ordinary data types :
+
+Table : classical data (could be treated as matrix) • Set of points : mathematical description • Time series : text, audio, stock prices, DNA sequences, etc. • Image : 2D signal (or matrix equivalently, e.g., pixels), MRI, CT, supersonic imaging
+
+video : 2D in space and 1D in time (another kind of time series)
+
+Webpage and newspaper : time series with spatial structure • Network : relational data, graph (nodes and edges)
+
+Basic assumption : the data are generated from an underlying model, which is unknown in practice
+
+Set of points : probability distribution • Time series : stochastic processes, e.g., Hidden Markov Model (HMM)
+
+Image : random ﬁelds, e.g., Gibbs random ﬁelds • Network : graphical models, Beyesian models
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Diﬃculties
+
+Huge volume of data • Extremely high dimensions
+
+Curse of dimensionality : the model complexity and computational complexity become exponentially increasing with the growth of dimension
+
+Solutions :
+
+Make use of prior information • Restrict to simple models • Make use of special structures, e.g., sparsity, low rank, smoothness
+
+Dimensionality reduction, e.g., PCA, LDA, etc.
+
+Complex variety of data
+
+Large noise : data are always contaminated with noises
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Solution - Algorithms
+
+Algorithms are in the interdisciplinary part of computer science and mathematics : establish mathematical models, solve it numerically, implement it in the computer languages
+
+Reduce the algorithmic complexity, with the help of techniques from mathematics or computer science
+
+Distributional and parallel computing : divide-and-conquer, e.g., MapReduce, GPU
+
+IEEE 2006 top 10 algorithms in data mining : C4.5, K-Means, SVM, Apriori, EM, PageRank, NaiveBayes, K-Nearest Neighbors, AdaBoost, CART
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Conclusion
+
+Machine Learning
+
+Outlines
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Deﬁnition
+
+Artiﬁcial Intelligence (AI) : learning from experiences (data), and improve the computer program adaptively
+
+Mathematics : Learning the underlying model from data, and generalize the model to adapt new data
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Related Areas
+
+Control theory : optimize the cost with optimal control parameters
+
+Information theory : entropy, optimal coding with best information
+
+Psycology : reference for machine learning algorithms
+
+Neuroscience : artiﬁcial neural network
+
+Biology : genetic algorithms
+
+Theory of Computing : study the computational complexity
+
+Statistics : large-sample limiting behavior, statistical learning theory
+
+Artiﬁcial Intelligence : symbolic computing
+
+Bayesian theory : conditionally probabilistic network
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Applications
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Supervised and Unsupervised Learning
+
+Supervised learning : classiﬁcation, regression
+
+Unsupervised learning : density estimation, clustering, dimensionality reduction
+
+Semi-supervised learning : with missing data, e.g., EM; self-supervised learning, learn the missing part of images, inpainting
+
+Reinforcement learning : play games, e.g., Go, StarCraft; robotics; auto-steering
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Supervised Learning
+
+Given labels of data : the labels could be symbols (spam or non-spam), integers (0 or 1), real numbers, etc.
+
+Training : ﬁnd the optimal parameters (or model) to minimize the error between the prediction and target
+
+Classiﬁcation : SVM, KNN, Desicion tree, etc.
+
+Regression : linear regression, CART, etc.
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Classiﬁcation
+
+Output is discrete • Examples : given the study hours, in-class performance, and ﬁnal grades (Pass or Fail) of past students, can you predict the ﬁnal grades of the current students based on their study hours and in-class performance?
+
+Applications : Credit risk evaluation, clinical prediction of tumor, classiﬁcation of protein functions, etc.
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Regression
+
+Output is continuous • Examples : given the study hours, in-class performance, and ﬁnal scores of past students, can you predict the ﬁnal scores of the current students based on their study hours and in-class performance?
+
+Applications : epidemiology, ﬁnance, investment analysis, etc.
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Unsupervised Learning
+
+No labels
+
+Optimize the parameters based on some natural rules, e.g., cohesion or divergence
+
+Clutering : K-Means, SOM
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Representation of Data
+
+Input space X = {All possible samples}; x ∈ X is an input vector, also called feature, predictor, independent variable, etc.; typically multi-dimensional; e.g., x ∈ Rp is a weight vector or coding vector
+
+Output space Y = {All possible results}; y ∈ Y is an output vector, also called response, dependent variable, etc.; typically one-dimensional; e.g., y = 0 or 1 for classiﬁcation problems, y ∈ R for regression problems.
+
+For supervised learning, assume that (x,y) ∼ P, a joint distribution on the sample space X × Y
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Supervised Learning
+
+Goal : given x, predict what is y ; in deterministic settings, ﬁnd the dependence relation y = f (x); in probabilistic settings, ﬁnd the conditional distribution P(y|x) of y given x
+
+Training dataset : {(xi,yi)}n i=1 approximation ˆf (x) or ˆP(y|x)
+
+i.i.d.∼ P, used to learn an
+
+Test dataset : {(xj,yj)}n+m j=n+1
+
+i.i.d.∼ P, used to make a
+
+prediction ˆyj = ˆf (xj) or ˆyj = argmax yj accurate the approximation is
+
+ˆP(yj|xj), and verify how
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Unsupervised Learning
+
+Goal : in probabilistic settings, ﬁnd the distribution P(x) of x and approximate it; there is no y
+
+Training dataset : {xi}n i=1
+
+i.i.d.∼ P, used to learn an
+
+approximation ˆP(x); no test data in general
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Learning Models
+
+Decision function (hypothesis) space :
+
+F = {fθ|fθ = fθ(x),θ ∈ Θ} or F = {Pθ|Pθ = Pθ(y|x),θ ∈ Θ}
+
+Loss function : a measure for the “goodness” of the prediction, L(y,f (x))
+
+0-1 loss : L(y,f (x)) = Iy(cid:54)=f (x) = 1 − Iy=f (x) • Square loss : L(y,f (x)) = (y − f (x))2 • Absolute loss : L(y,f (x)) = |y − f (x)| • Cross-entropy loss : L(y,f (x)) = −y logf (x) − (1 − y)log(1 − f (x))
+
+Risk : in average sense, R(f ) = EP[L(y,f (x))] = (cid:82)
+
+X×Y L(y,f (x))P(x,y)dxdy
+
+Target of learning : choose the best f ∗ to minimize R(f ), R(f )
+
+Target of learning : choose the best f ∗ to minimize R(f ), f ∗ = min
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Risk Minimization Strategy
+
+Empirical risk minimization (ERM) : given training set n (cid:80) i=1
+
+Empirical risk minimization (ERM) : given training set n (cid:80) i=1
+
+i=1, Remp(f ) = 1 n
+
+{(xi,yi)}n
+
+By law of large number,
+
+lim n→∞
+
+Optimization problem : min f ∈F 1 n
+
+Remp(f ) = R(f ) n (cid:80) i=1
+
+L(yi,f (xi))
+
+Structural risk minimization (SRM) : given training set {(xi,yi)}n Rsrm(f ) = 1 n
+
+n (cid:80) i=1
+
+L(yi,f (xi)) + λJ(f )
+
+J(f ) measures how complex the model f is, typically the degree of complexity
+
+λ (cid:62) 0 is a tradeoﬀ between the empirical risk and model complexity
+
+Optimization problem : min f ∈F 1 n
+
+n (cid:80) i=1
+
+L(yi,f (xi)) + λJ(f )
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Algorithms
+
+Computational methods to solve the problem for f • Numerical methods to solve the optimization problems • Gradient descent method, including coordinate descent, sequential minimal optimization (SMO), etc. • Newton’s method and quasi-Newton’s method • Combinatorial optimization • Genetic algorithms • Monte Carlo methods • ...
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Model Assessment
+
+Assume we have learned the model y = ˆf (x), what is the error?
+
+Training error : Remp(ˆf ) = 1 n
+
+n (cid:80) i=1
+
+L(yi,ˆf (xi)), tells the diﬃculty
+
+of learning problem
+
+Test error : etest(ˆf ) = 1 m
+
+n+m (cid:80) j=n+1
+
+L(yj,ˆf (xj)), tells the capability
+
+of prediction; in particular, if 0-1 loss is used
+
+Error rate : etest(ˆf ) = 1 m
+
+Accuracy : rtest(ˆf ) = 1 m
+
+n+m (cid:80) j=n+1 n+m (cid:80) j=n+1
+
+Iyj(cid:54)=ˆf (xj)
+
+Iyj=ˆf (xj)
+
+etest + rtest = 1
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Model Assessment (Cont’)
+
+Generalization error :
+
+Rexp(ˆf ) = EP[L(y,ˆf (x))] = (cid:82)
+
+L(y,ˆf (x))P(x,y)dxdy, tells
+
+X×Y the capability for predicting unknown data from the same distribution, its upper bound M deﬁnes the generalization ability
+
+As n → ∞, M → 0 • As F becomes larger, M increases
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Overﬁtting
+
+Too many model parameters
+
+Better for training set, but worse for test set
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Model Selection
+
+Regularization : min f ∈F 1 n
+
+n (cid:80) i=1
+
+L(yi,f (xi)) + λJ(f ) (cid:124) (cid:123)(cid:122) (cid:125) penalty
+
+, choose λ to
+
+minimize empirical risk and model complexity simultaneously
+
+Cross-validation (CV) : split the training set into training subset and validation subset, use training set to train diﬀerent models repeatedly, use validation set to select the best model with the smallest (validation) error
+
+Simple CV : randomly split the data into two subsets • K-fold CV : randomly split the data into K disjoint subsets with the same size, treat the union of K −1 subsets as training set, the other one as validation set, do this repeatedly and select the best model with smallest mean (validation) error
+
+Leave-one-out CV : K = n in the previous case
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Conclusion
+
+Machine Learning
+
+Outlines
+
+Mathematical Representation
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Data Science VS. Other Techniques
+
+Data science is an interdisciplinary area using mathematics, statistics, computer science and engineering, and other profession techniques
+
+Conclusion
+
+Course Syllabus
+
+What Is Data Science
+
+Machine Learning
+
+Mathematical Representation
+
+Where Math and Statistics Emerge
+
+Conclusion
+

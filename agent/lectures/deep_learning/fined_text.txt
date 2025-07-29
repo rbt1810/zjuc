@@ -1,0 +1,1240 @@
+Introduction
+
+The structural building block of Deep Learning
+
+MA333 Introduction to Big Data Science Deep Learning
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Outlines
+
+Introduction
+
+What is Deep Learning? Why Deep Learning is Growing? History
+
+The structural building block of Deep Learning
+
+Forward Propagation Back Propagation
+
+Architectures
+
+Recurrent Neural Network (RNN) Convolutional Neural Network (CNN) Generative model
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+What is Deep Learning?
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Deep Learning
+
+Deep learning is a sub ﬁeld of
+
+Machine Learning that very closely tries to mimic human brain’s working using neurons.
+
+These techniques focus on building Artiﬁcial Neural Networks (ANN) using several hidden layers.
+
+There are a variety of deep learning networks such as Multilayer Perceptron (MLP), Autoencoders (AE), Convolution Neural Network (CNN), Recurrent Neural Network (RNN).
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+ML vs DL
+
+In Machine Learning, the features need to be identiﬁed by an domain expert.
+
+In Deep Learning, the features are learned by the neural network.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Why Deep Learning is Growing?
+
+Processing power needed for Deep learning is readily becoming available using GPUs, Distributed Computing and powerful CPUs.
+
+Moreover, as the data amount grows, Deep Learning models seem to outperform Machine Learning models.
+
+Explosion of features and datasets.
+
+Focus on customization and real time decisioning.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Why Now?
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+History
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Big Guys
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Outlines
+
+Introduction
+
+What is Deep Learning? Why Deep Learning is Growing? History
+
+The structural building block of Deep Learning
+
+Forward Propagation Back Propagation
+
+Architectures
+
+Recurrent Neural Network (RNN) Convolutional Neural Network (CNN) Generative model
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The Perceptron : Forward Propagation
+
+ˆy = g
+
+(cid:32)
+
+w0 +
+
+m (cid:88)
+
+xiwi
+
+i=1
+
+ˆy is the Output,
+
+g is a Non-linear activation function,
+
+w0 is the Bias.
+
+Architectures
+
+(cid:33)
+
+,
+
+Introduction
+
+The structural building block of Deep Learning
+
+The Perceptron : Forward Propagation
+
+ˆy = g
+
+(cid:16)
+
+w0 + XTW
+
+X =
+
+
+
+ 
+
+x1 ... xm
+
+
+
+  and W =
+
+Architectures
+
+(cid:17)
+
+,where
+
+
+
+ 
+
+w1 ... wm
+
+
+
+ .
+
+Introduction
+
+The structural building block of Deep Learning
+
+Common Activation Functions
+
+Note all activation functions are nonlinear.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Single Layer Neural Network
+
+zi = w(1)
+
+0,i + (cid:80)m
+
+j=1 xjw(1) j,i ,
+
+ˆyi = g
+
+(cid:16)
+
+0,i + (cid:80)d1 w(2)
+
+j=1 zjw(2)
+
+j,i
+
+(cid:17)
+
+.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Deep Neural Network
+
+0,i + (cid:80)dk−1 Theorem (Universal approximation theorem (Cybenko 1980, 1989))
+
+zk,i = w(k)
+
+j=1 g (zk−1,j)w(k) j,i .
+
+1. Any function can be approximated by a three-layer neural network within suﬃciently high accuracy.
+
+2. Any bounded continuous function can be approximated by a two-layer neural network within suﬃciently high accuracy.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Loss Optimization
+
+We want to ﬁnd the network weights that achieve the lowest loss
+
+W∗ = argmin
+
+W
+
+1 n
+
+n (cid:88)
+
+i=1
+
+L
+
+(cid:16)
+
+f
+
+(cid:16)
+
+x(i);W
+
+(cid:17)
+
+,y(i)(cid:17)
+
+,
+
+where L(cid:0)f (cid:0)x(i);W(cid:1),y(i)(cid:1) is the loss function we deﬁned according to the speciﬁc problem to measure the diﬀerences between output state f (cid:0)x(i);W(cid:1) and reference state y(i). It also can be written as
+
+W∗ = argmin
+
+C(W).
+
+W
+
+Remember
+
+W =
+
+(cid:110)
+
+W(0),W(1),···
+
+(cid:111)
+
+.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Gradient Decent
+
+We can use Gradient Decent algorithm to ﬁnd the optimal parameter W.
+
+Note that we should calculate ∂C
+
+∂W to update W.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Notations
+
+wl
+
+jk is the weight for the connection from the kth neuron in the (l − 1)th
+
+layer to the jth neuron in the lth layer.
+
+for brevity bl • al
+
+j = wl
+
+j0 is the bias of the jth neuron in the lth layer.
+
+j for the activation of the jth neuron in the lth layer zl j . (cid:33)
+
+(cid:32)
+
+(cid:88)
+
+j = g(zl al
+
+wl
+
+k + bl
+
+jkal−1
+
+j ) = g
+
+j
+
+k
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Four fundamental equations
+
+We ﬁrst deﬁne the error δl
+
+j of neuron j in layer by
+
+δl j ≡
+
+∂C ∂zl j
+
+,
+
+and we give the four fundamental equations of back propagation :
+
+δL = ∇aC (cid:12) σ(cid:48) (cid:16)
+
+zL(cid:17) (cid:19)
+
+(cid:18)(cid:16)
+
+wl+1(cid:17)T
+
+δl =
+
+δl+1
+
+(cid:12) σ(cid:48) (cid:16)
+
+zl(cid:17)
+
+(BP1)
+
+(BP2)
+
+∂C ∂bL j ∂C ∂wl jk
+
+= δl j
+
+= al−1 k
+
+δl j
+
+(BP3)
+
+(BP4)
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+An equation for the error in the output layer (BP1)
+
+The components of δL are given by
+
+δL = ∇aC (cid:12) σ(cid:48) (cid:16)
+
+zL(cid:17)
+
+(BP1)
+
+D´emonstration. δL j =
+
+∂C ∂zL j
+
+=
+
+=
+
+=
+
+(cid:88)
+
+k
+
+∂C ∂aL j ∂C ∂aL j
+
+∂C ∂aL k
+
+∂aL j ∂zL j σ(cid:48) (cid:16)
+
+∂aL k ∂zL j
+
+=
+
+zL j
+
+(cid:17)
+
+∂C ∂aL j
+
+∂σ
+
+(cid:16)
+
+zL j ∂zL j
+
+(cid:17)
+
+.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+An equation for the error in the hidden layer (BP2)
+
+δl =
+
+(cid:18)(cid:16)
+
+wl+1(cid:17)T
+
+δl+1
+
+(cid:19)
+
+(cid:12) σ(cid:48) (cid:16)
+
+zl(cid:17)
+
+(BP2)
+
+D´emonstration.  = (cid:80) j = ∂C ∂C δl  k ∂zl ∂zl+1 j k (cid:16)(cid:80) (cid:17) zl+1 i wl+1 ki al k = i  ∂zl+1 j = (cid:80) k δl+1 δl  k k ∂zl j kj σ(cid:48) (cid:16) ∂zl+1 = wl+1 k ∂zl j
+
+
+
+⇒
+
+
+
+∂zl+1 k ∂zl j + bl+1
+
+= (cid:80)
+
+k =
+
+∂zl+1 k ∂zl j i wl+1
+
+k δl+1 k (cid:16)(cid:80)
+
+ki σ (cid:0)zl
+
+i
+
+(cid:1)(cid:17)
+
++ bl+1 k
+
+zl j
+
+(cid:17) ⇒ δl
+
+j = (cid:80)
+
+kj σ(cid:48) (cid:16)
+
+k δl+1
+
+k wl+1
+
+zl j
+
+(cid:17)
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The change of the cost with respect to any bias (BP3)
+
+∂C ∂bL j
+
+= δl j
+
+(BP3)
+
+D´emonstration.  ∂zl = (cid:80) ∂C  k k ∂zl ∂bl j k (cid:16)(cid:80) jkdl−1 k wl k
+
+∂C ∂bl j zl j =
+
+
+
+∂zl j ∂bl j
+
+= ∂C ∂zl j (cid:17) + bl
+
+j ⇒ ∂zl
+
+k ∂bl j
+
+= 1
+
+⇒ ∂C ∂bl j
+
+= ∂C ∂zl j
+
+1 = δl j.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The change of the cost with respect to any weight (BP4)
+
+∂C ∂wl jk
+
+= al−1 k
+
+δl j
+
+(BP4)
+
+D´emonstration.
+
+ 
+
+
+
+∂C ∂wl jk
+
+zl j =
+
+∂zl j ∂wl jk
+
+∂zl ∂C i ∂zl ∂wl i jk jmal−1 m wl m
+
+= (cid:80) i (cid:16)(cid:80)
+
+= ∂C ∂zl j (cid:17)
+
+∂zl j ∂wl jk ∂zl j ∂wl jk
+
++ bl
+
+j ⇒
+
+∂C ∂zl j
+
+∂C ∂wl jk
+
+⇒
+
+=
+
+= al−1 k
+
+= δl
+
+jal−1 k
+
+.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Back Propagation procedure
+
+1. Input x : Set the corresponding activation a1 for the input layer.
+
+2. Feedforward : For each l = 2,3,...,L compute zl = wlal−1 + bl and al = σ (cid:0)zl(cid:1).
+
+3. Output error δL : Compute the vector δL = ∇aC (cid:12) σ(cid:48) (cid:0)zL(cid:1). • 4. Backpropagate the error : For each l = L − 1,L − 2,...,2 (cid:12) σ(cid:48) (cid:0)zl(cid:1).
+
+5. Output : The gradient of the cost function is given by = δl j. ∂C ∂wl jk
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Gradient Descent
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Stochastic Gradient Descent
+
+Mini-batches lead to fast training!
+
+Can parallelize computation + achieve signiﬁcant speed increases on GPUs.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Outlines
+
+Introduction
+
+What is Deep Learning? Why Deep Learning is Growing? History
+
+The structural building block of Deep Learning
+
+Forward Propagation Back Propagation
+
+Architectures
+
+Recurrent Neural Network (RNN) Convolutional Neural Network (CNN) Generative model
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+A sequence modeling problem : predict the next word
+
+France is where I grew up, but I now live in Boston. I speak ﬂuent ???.
+
+The food was good, not bad at all. vs. The food was bad, not good at all.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Sequence modeling : design criteria
+
+To model sequences, we need to :
+
+1. Handle variable-length sequences
+
+2. Track long-term dependencies
+
+3. Maintain information about order
+
+4. Share parameters across the sequence
+
+Today : Recurrent Neural Networks (RNNs) as an approach to sequence modeling problems
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+RNN state update and output
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+RNNs : backpropagation through time
+
+Note that it reuse the same weight matrices at every time step
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Standard RNN gradient ﬂow : exploding gradients
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Standard RNN gradient ﬂow : vanishing gradients
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The problem of long-term dependencies
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Trick 1 : activation functions
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Trick 2 : parameter initialization
+
+Initialize weights to identity matrix .
+
+Initialize biases to zero.
+
+In =
+
+
+
+     
+
+1 0 0 ··· 0 1 0 ··· 0 0 1 ··· ... ... ... 0 0 0 ···
+
+...
+
+This helps prevent the weights from shrinking to zero.
+
+Architectures
+
+0 0 0 ... 1
+
+
+
+     
+
+Introduction
+
+The structural building block of Deep Learning
+
+Trick 3 : gated cells
+
+Idea : use a more complex recurrent unit with gates to control what information is passed through
+
+Long Short Term Memory (LSTMs) networks rely on a gated cell to track information throughout many time steps.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Long Short Term Memory (LSTMs)
+
+LSTM repeating modules contain interacting layers that control information ﬂow.
+
+LSTM cells are able to track information throughout many time steps.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Architectures
+
+Long Short Term Memory (LSTMs)
+
+What information to throw away?
+
+What to store?
+
+What to output?
+
+Introduction
+
+The structural building block of Deep Learning
+
+Recurrent neural networks (RNNs)
+
+1. RNNs are well suited for sequence modeling tasks.
+
+2. Model sequences via a recurrence relation.
+
+3. Training RNNs with backpropagation through time.
+
+4. Gated cells like LSTMs let us model long-term dependencies.
+
+5. Models for music generation, classiﬁcation, machine translation.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Tasks in Computer Vision
+
+Regression : output variable takes continuous value.
+
+Classiﬁcation : output variable takes class label. Can produce probability of belonging to a particular class.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Problems in Manual Feature Extraction
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Learning Feature Representations
+
+Can we learn a hierarchy of features directly from the data instead of hand engineering?
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Architectures
+
+Fully Connected Neural Network
+
+Fully Connected :
+
+Connect
+
+Input :
+
+2D image.
+
+neuron in hidden layer to all neurons in input layer.
+
+Vector of pixel values.
+
+No spatial information!
+
+And many, many parameters!
+
+And many, many parameters!
+
+Introduction
+
+The structural building block of Deep Learning
+
+Using Spatial Structure
+
+Connect patch in input layer to a single neuron in subsequent layer.
+
+• Use a sliding window to deﬁne connections. • How can we weight the patch to detect particular features?
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Applying Filters to Extract Features
+
+1 Apply a set of weights (a ﬁlter) to extract local features.
+
+2 Use multiple ﬁlters to extract diﬀerent features.
+
+3 Spatially share parameters of each ﬁlter. (features that matter in one part of the input should matter elsewhere.)
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Features of X
+
+Image is represented as matrix of pixel values and computers are literal!
+
+We want to be able to classify an X as an X even if it is shifted, shrunk, rotated, deformed.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Filters to Detect X Features
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The Convolution Operation
+
+Suppose we want to compute the convolution of a 5x5 image and a 3x3 ﬁlter.
+
+We slide the 3x3 ﬁlter over the input image, element-wise multiply, and add the outputs :
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The Convolution Operation
+
+Suppose we want to compute the convolution of a 5x5 image and a 3x3 ﬁlter.
+
+We slide the 3x3 ﬁlter over the input image, element-wise multiply, and add the outputs :
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Producing Feature Maps
+
+Diﬀerent ﬁlters have diﬀerent eﬀects!
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Pooling
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+CNNs for Classiﬁcation
+
+1. Convolution : Apply ﬁlters with learned weights to generate feature maps.
+
+2. Non-linearity : Often ReLU. • 3. Pooling : Downsampling operation on each feature map. Train model with image data.
+
+2. Non-linearity : Often ReLU. • 3. Pooling : Downsampling operation on each feature map. Train model with image data.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+ImageNet Challenge : Classiﬁcation Task
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+The problem when go deeper
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Architectures
+
+Better network structure for learning : ResNet
+
+Introduce shortcut connections (exists in prior literature in various forms).
+
+Key invention is to skip 2 layers. Skipping single layer do not give much improvement for some reason.
+
+Introduction
+
+The structural building block of Deep Learning
+
+ResNet vs ODENet
+
+ResNet : ht+1 = ht + f (ht,θt),
+
+ODENet :
+
+dh(t) dt = f (h(t),t,θ).
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Beyond Classiﬁcation
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Architectures
+
+Supervised vs unsupervised learning
+
+Supervised Learning
+
+Unsupervised Learning
+
+Data : (x, y)
+
+x is data, y is label.
+
+Data : x
+
+x is data, no labels!
+
+Goal : Learn function to map x ⇒ y.
+
+Goal : Learn some hidden or underlying structure of the data.
+
+Examples : Classiﬁcation, regression, object detection, semantic segmentation, etc.
+
+Examples : Clustering, feature or dimensionality reduction, etc.
+
+Introduction
+
+The structural building block of Deep Learning
+
+Generative modeling
+
+Goal : Take as input training samples from some distribution and learn a model that represents that distribution
+
+How can we learn pmodel(x) similar to pdata(x)?
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Why generative models? Outlier detection
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+What if we just want to sample
+
+Idea : do not explicitly model density, and instead just sample to generate new instances.
+
+Problem : want to sample from complex distribution can not do this directly!
+
+Solution : sample from something simple (noise), learn a transformation to the training distribution.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Generative Adversarial Networks (GANs)
+
+Generative Adversarial Networks (GANs) are a way to make a generative model by having two neural networks compete with each other.
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+Architectures
+
+Training GANs
+
+Neural Network Discriminator tries to identify real data from fakes created by the generator.
+
+Neural Network Generator tries to create imitations of data to trick the discriminator.
+
+
+
+min θg
+
+max θd
+
+(cid:2)Ex∼pdata logDθd(x) + Ez∼p(z) log(cid:0)1 − Dθd
+
+(cid:0)Gθg(z)(cid:1)(cid:1)(cid:3)
+
+Introduction
+
+The structural building block of Deep Learning
+
+What if we want the model density
+
+Flow based model
+
+f is bijective and diﬀerentiable functions. • We have the explicitly model density pzk(zk).
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+CVF
+
+Theorem (Change of Variable Theorem) Given any z0 ∼ pz0(z0), if the transformation f : Rd → Rd is diﬀerentiable and bijective, then the distribution of x = f (z0) is px(x) = pz0(z0) (cid:12) (cid:12)det ∂f (cid:12) ∂z0
+
+.
+
+(cid:12) (cid:12) (cid:12)
+
+The density probability follows
+
+logpzk(zk) = logpz0(z0) −
+
+k (cid:88)
+
+i=1
+
+(cid:12) (cid:12) (cid:12) (cid:12)
+
+det
+
+∂fi ∂zi−1
+
+(cid:12) (cid:12) (cid:12) (cid:12)
+
+.
+
+we want to ﬁnd parameter λ of neural network fi satisﬁes :
+
+argmin λ
+
+DKL(pdata||pλ zk
+
+) ≈ argmax
+
+λ
+
+m (cid:88)
+
+i=1
+
+logpλ zk
+
+(x(i)),
+
+Architectures
+
+Introduction
+
+The structural building block of Deep Learning
+
+FUTURE : LONG WAY TO GO
+
+Theory : why deep learning works? How? Interpretability.
+
+Capacity : how deep is enough?/Network structure selection.
+
+Manipulate network.
+
+Geometry of loss function.
+
+Deep learning with less data?
+
+Interdisciplinary ﬁelds : statistics, physics, geometry, game theory...
+
+More exciting applications! Healthcare, industrial process, ﬁnance, AI game play, animation...
+
+Architectures
+

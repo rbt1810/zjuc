@@ -1,0 +1,818 @@
+{
+    "metadata": {
+        "content_type": "lecture_notes",
+        "document_title": "Introduction to Mathematical Representation in Machine Learning",
+        "author": "Data Science Department",
+        "institution": "Zhejiang University",
+        "date_created": "2023-10-15",
+        "sections": [
+            "Course Syllabus",
+            "What Is Data Science",
+            "Machine Learning",
+            "Mathematical Representation",
+            "Conclusion"
+        ]
+    },
+    "pages": [
+        {
+            "title": "Representation of Data",
+            "content": [
+                {
+                    "item_id": "input_space",
+                    "header": "Input Space",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\mathcal{X} = \\{\\text{All possible samples}\\}",
+                            "description": "Input space definition"
+                        },
+                        {
+                            "type": "text",
+                            "value": "x ∈ X is an input vector, also called:"
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                "Feature",
+                                "Predictor",
+                                "Independent variable"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": "Typically multi-dimensional"
+                        },
+                        {
+                            "type": "example",
+                            "content": "e.g., x ∈ ℝᵖ is a weight vector or coding vector"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "output_space",
+                    "header": "Output Space",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\mathcal{Y} = \\{\\text{All possible results}\\}",
+                            "description": "Output space definition"
+                        },
+                        {
+                            "type": "text",
+                            "value": "y ∈ Y is an output vector, also called:"
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                "Response",
+                                "Dependent variable"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": "Typically one-dimensional"
+                        },
+                        {
+                            "type": "examples",
+                            "content": [
+                                "y = 0 or 1 for classification problems",
+                                "y ∈ ℝ for regression problems"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "joint_distribution",
+                    "header": "Joint Distribution",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "For supervised learning, we assume that:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "(\\mathbf{x}, y) \\sim P",
+                            "description": "Samples follow a joint distribution"
+                        },
+                        {
+                            "type": "text",
+                            "value": "where P is a joint distribution on the sample space 𝒳 × 𝒴"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Supervised Learning",
+            "content": [
+                {
+                    "item_id": "Goal",
+                    "header": "Goal",
+                    "summary": "The goal of supervised learning",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "given x, predict what is y"
+                        },
+                        {
+                            "type": "bullet",
+                            "content": "In deterministic settings: find the dependence relation"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "y = f(\\mathbf{x})",
+                            "description": "dependence relation"
+                        },
+                        {
+                            "type": "bullet",
+                            "content": "In probabilistic settings: find the conditional distribution"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "P(y|\\mathbf{x})",
+                            "description": "conditional probability of y given x"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "TrainingDataset",
+                    "header": "Training Dataset",
+                    "summary": "Dataset used for training",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\{(\\mathbf{x}_i, y_i)\\}_{i=1}^n \\overset{i.i.d.}{\\sim} P",
+                            "elements": [
+                                "i.i.d. sampling",
+                                "joint distribution P",
+                                "n observations"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": "used to learn an approximation:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\hat{f}(\\mathbf{x})",
+                            "meaning": "Estimated function (deterministic)"
+                        },
+                        {
+                            "type": "text",
+                            "value": "or"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\hat{P}(y|\\mathbf{x})",
+                            "meaning": "Estimated probability (probabilistic)"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "TestDataset",
+                    "header": "Test Dataset",
+                    "summary": "Dataset used for testing",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\{(\\mathbf{x}_j, y_j)\\}_{j=n+1}^{n+m} \\overset{i.i.d.}{\\sim} P"
+                        },
+                        {
+                            "type": "text",
+                            "value": "used to make a prediction:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\hat{y}_j = \\hat{f}(\\mathbf{x}_j)",
+                            "meaning": "Deterministic prediction"
+                        },
+                        {
+                            "type": "text",
+                            "value": "or"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\hat{y}_j = \\arg\\max_{y_j} \\hat{P}(y_j | \\mathbf{x}_j)",
+                            "meaning": "MAP prediction"
+                        },
+                        {
+                            "type": "text",
+                            "value": "to verify prediction accuracy"
+                        }
+                    ]
+                }
+            ],
+            "image": [
+                {
+                    "title": "Supervised Learning Workflow",
+                    "path": "~/zjuc/agent/lectures/introduction/Images/image_Im25.png",
+                    "core_components": {
+                        "training_data": ["(x₁, y₁)", "(x₂, y₂)", "...,", "(xₙ, yₙ)"],
+                        "learning_process": "generates predictive model",
+                        "prediction_process": "applies model to new inputs",
+                        "model": ["ŷ = f(x) (deterministic)", "P̂(y|x) (probabilistic)"],
+                        "new_input": "xᵢ (unseen data)",
+                        "prediction": "ŷᵢ = f(xᵢ)"
+                    },
+                    "workflow_sequence": [
+                        "training_data → learning_process → model",
+                        "new_input → prediction_process → prediction"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Unsupervised Learning",
+            "content": [
+                {
+                    "item_id": "GoalUnsupervised",
+                    "header": "Goal",
+                    "summary": "The goal of unsupervised learning",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "In probabilistic settings, find the distribution of x and approximate it"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "P(\\mathbf{x})",
+                            "meaning": "Probability distribution of input data"
+                        },
+                        {
+                            "type": "text",
+                            "value": "There is no output variable y",
+                            "note": "No label y."
+                        }
+                    ]
+                },
+                {
+                    "item_id": "TrainingDatasetUnsupervised",
+                    "header": "Training Dataset",
+                    "summary": "Dataset used for training",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\{\\mathbf{x}_i\\}_{i=1}^n \\overset{i.i.d.}{\\sim} P",
+                            "elements": [
+                                "i.i.d. sampling",
+                                "joint distribution P",
+                                "n observations"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": "used to learn an approximation"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\hat{P}(\\mathbf{x})",
+                            "meaning": "Estimated data distribution"
+                        },
+                        {
+                            "type": "note",
+                            "value": "Typically no test data in unsupervised learning"
+                        }
+                    ]
+                }
+            ],
+            "image": [
+                {
+                    "title": "Unsupervised Learning Process",
+                    "path": "~/zjuc/agent/lectures/introduction/Images/image_Im26.png",
+                    "core_components": {
+                        "training_data": ["x₁", "x₂", "...", "xₙ"],
+                        "learning_process": "models data distribution",
+                        "result": [
+                            "Clusters",
+                            "Density estimation",
+                            "Latent representations"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Learning Models",
+            "content": [
+                {
+                    "item_id": "HypothesisSpace",
+                    "header": "Decision Function Space",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\mathcal{F} = \\{f_\\theta | f_\\theta = f_\\theta(\\mathbf{x}), \\theta \\in \\Theta\\}",
+                            "note": "Θ is parameter space, e.g., weights in a neural network"
+                        },
+                        {
+                            "type": "text",
+                            "value": "or"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\mathcal{F} = \\{P_\\theta | P_\\theta = P_\\theta(y|\\mathbf{x}), \\theta \\in \\Theta\\}",
+                            "note": "Probabilistic model family"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "LossFunctions",
+                    "header": "Loss Functions",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Measure for the 'goodness' of the prediction:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "L(y, f(\\mathbf{x}))"
+                        },
+                        {
+                            "type": "sub_section",
+                            "header": "Common Loss Functions:",
+                            "content": [
+                                {
+                                    "item_id": "01_loss",
+                                    "header": "0-1 Loss",
+                                    "content_array": [
+                                        {
+                                            "type": "formula",
+                                            "latex": "L(y, f(\\mathbf{x})) = I_{y \\neq f(\\mathbf{x})}"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "value": "Used for classification problems"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "item_id": "square_loss",
+                                    "header": "Square Loss",
+                                    "content_array": [
+                                        {
+                                            "type": "formula",
+                                            "latex": "L(y, f(\\mathbf{x})) = (y - f(\\mathbf{x}))^2"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "value": "Used for regression problems"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "item_id": "abs_loss",
+                                    "header": "Absolute Loss",
+                                    "content_array": [
+                                        {
+                                            "type": "formula",
+                                            "latex": "L(y, f(\\mathbf{x})) = |y - f(\\mathbf{x})|"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "value": "Robust regression loss"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "item_id": "cross_entropy_loss",
+                                    "header": "Cross-Entropy Loss",
+                                    "content_array": [
+                                        {
+                                            "type": "formula",
+                                            "latex": "L(y, f(\\mathbf{x})) = -y \\log f(\\mathbf{x}) - (1-y)\\log(1-f(\\mathbf{x}))"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "value": "Used for probabilistic classification"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "Risk",
+                    "header": "Risk",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Expected loss over the data distribution:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "R(f) = \\mathbb{E}_{P}[L(y, f(\\mathbf{x}))] = \\int_{\\mathcal{X} \\times \\mathcal{Y}} L(y, f(\\mathbf{x})) P(\\mathbf{x}, y) d\\mathbf{x} dy"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "LearningTarget",
+                    "header": "Target of Learning",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Choose the optimal model that minimizes risk:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "f^* = \\arg \\min_{f \\in \\mathcal{F}} R(f)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Risk Minimization Strategy",
+            "content": [
+                {
+                    "item_id": "ERM",
+                    "header": "Empirical Risk Minimization (ERM)",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Minimize the average loss over training data:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "R_{\\text{emp}}(f) = \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(\\mathbf{x}_i))"
+                        },
+                        {
+                            "type": "justification",
+                            "content": "By law of large numbers:",
+                            "formula": "\\lim_{n \\to \\infty} R_{\\text{emp}}(f) = R(f)"
+                        },
+                        {
+                            "type": "optimization",
+                            "problem": "\\min_{f \\in \\mathcal{F}} \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(\\mathbf{x}_i))"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "SRM",
+                    "header": "Structural Risk Minimization (SRM)",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Balances fit and model complexity:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "R_{\\text{srm}}(f) = \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(\\mathbf{x}_i)) + \\lambda J(f)"
+                        },
+                        {
+                            "type": "components",
+                            "items": [
+                                {
+                                    "term": "J(f)",
+                                    "definition": "Complexity measure (e.g., L2 norm, VC dimension)"
+                                },
+                                {
+                                    "term": "λ",
+                                    "definition": "Regularization parameter (trade-off coefficient), λ ≥ 0"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "optimization",
+                            "problem": "\\min_{f \\in \\mathcal{F}} \\frac{1}{n} \\sum_{i=1}^n L(y_i, f(\\mathbf{x}_i)) + \\lambda J(f)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Algorithms",
+            "content": [
+                {
+                    "item_id": "OptimizationMethods",
+                    "header": "Numerical Optimization Approaches",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Computational methods to solve minimization problems:"
+                        },
+                        {
+                            "type": "categorized_list",
+                            "categories": [
+                                {
+                                    "name": "First-order Methods",
+                                    "items": [
+                                        "Gradient descent",
+                                        "Stochastic gradient descent (SGD)",
+                                        "Coordinate descent"
+                                    ]
+                                },
+                                {
+                                    "name": "Second-order Methods",
+                                    "items": [
+                                        "Newton's method",
+                                        "Quasi-Newton methods (BFGS, L-BFGS)"
+                                    ]
+                                },
+                                {
+                                    "name": "Specialized Algorithms",
+                                    "items": [
+                                        "Sequential Minimal Optimization (SMO)",
+                                        "Expectation-Maximization (EM)"
+                                    ]
+                                },
+                                {
+                                    "name": "Stochastic Methods",
+                                    "items": [
+                                        "Monte Carlo methods",
+                                        "Simulated annealing"
+                                    ]
+                                },
+                                {
+                                    "name": "Evolutionary Algorithms",
+                                    "items": [
+                                        "Genetic algorithms",
+                                        "Particle swarm optimization"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "AlgorithmSelection",
+                    "header": "Algorithm Selection Criteria",
+                    "content_array": [
+                        {
+                            "type": "factors",
+                            "items": [
+                                "Problem convexity",
+                                "Dataset size",
+                                "Parameter dimensionality",
+                                "Computation/memory constraints",
+                                "Required precision"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Model Assessment",
+            "content": [
+                {
+                    "item_id": "TrainingError",
+                    "header": "Training Error",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "R_{\\text{emp}}(\\hat{f}) = \\frac{1}{n} \\sum_{i=1}^n L(y_i, \\hat{f}(\\mathbf{x}_i))",
+                            "description": "Measures learning difficulty"
+                        },
+                        {
+                            "type": "note",
+                            "content": "Indicates how well the model fits the training data"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "TestError",
+                    "header": "Test Error",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "e_{\\text{test}}(\\hat{f}) = \\frac{1}{m} \\sum_{j=n+1}^{n+m} L(y_j, \\hat{f}(\\mathbf{x}_j))",
+                            "description": "Measures prediction capability"
+                        },
+                        {
+                            "type": "sub_header",
+                            "value": "For classification (0-1 loss):"
+                        },
+                        {
+                            "type": "side-by-side",
+                            "concepts": [
+                                {
+                                    "title": "Error Rate",
+                                    "formula": "e_{\\text{test}}(\\hat{f}) = \\frac{1}{m} \\sum_{j=n+1}^{n+m} I_{y_j \\neq \\hat{f}(\\mathbf{x}_j)}"
+                                },
+                                {
+                                    "title": "Accuracy",
+                                    "formula": "r_{\\text{test}}(\\hat{f}) = \\frac{1}{m} \\sum_{j=n+1}^{n+m} I_{y_j = \\hat{f}(\\mathbf{x}_j)}"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "relationship",
+                            "formula": "e_{\\text{test}} + r_{\\text{test}} = 1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Model Assessment (Cont')",
+            "content": [
+                {
+                    "item_id": "GeneralizationError",
+                    "header": "Generalization Error",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "R_{\\exp}(\\hat{f}) = \\mathbb{E}_{P}\\left[L(y, \\hat{f}(\\mathbf{x}))\\right]",
+                            "description": "Expected predictive performance on unseen data"
+                        },
+                        {
+                            "type": "properties",
+                            "header": "Key Properties:",
+                            "items": [
+                                "Defines the model's generalization ability",
+                                "As n → ∞: M → 0",
+                                "As ℱ becomes larger: M increases"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "BiasVariance",
+                    "header": "Bias-Variance Tradeoff",
+                    "content_array": [
+                        {
+                            "type": "formula",
+                            "latex": "\\mathbb{E}[(y - \\hat{f}(\\mathbf{x}))^2] = \\underbrace{\\text{Bias}(\\hat{f}(\\mathbf{x}))^2}_{\\text{Model simplicity}} + \\underbrace{\\text{Var}(\\hat{f}(\\mathbf{x}))}_{\\text{Model complexity}} + \\sigma_\\epsilon^2"
+                        },
+                        {
+                            "type": "balance_diagram",
+                            "elements": {
+                                "Underfitting": ["High bias", "Low variance"],
+                                "Overfitting": ["Low bias", "High variance"],
+                                "Optimal": ["Balanced bias-variance"]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Overfitting",
+            "content": [
+                {
+                    "item_id": "OverfittingDefinition",
+                    "header": "What is Overfitting?",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Occurs when a model:"
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                "Has too many parameters relative to the number of observations",
+                                "Learns noise and random fluctuations in the training data",
+                                "Performs exceptionally well on training data but poorly on test data",
+                                "Fails to generalize to unseen data"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "OverfittingSymptoms",
+                    "header": "Symptoms of Overfitting",
+                    "content_array": [
+                        {
+                            "type": "comparison_table",
+                            "headers": ["Metric", "Training Set", "Test Set"],
+                            "rows": [
+                                {
+                                    "metric": "Error",
+                                    "training": "Very low",
+                                    "test": "High"
+                                },
+                                {
+                                    "metric": "Accuracy",
+                                    "training": "Very high",
+                                    "test": "Substantially lower"
+                                },
+                                {
+                                    "metric": "Loss",
+                                    "training": "Decreases continuously",
+                                    "test": "Decreases then increases"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "OverfittingVisual",
+                    "header": "Visual Representation",
+                    "content_array": [
+                        {
+                            "type": "diagram",
+                            "elements": [
+                                "Underfit model: Overly smooth curve",
+                                "Proper fit: Follows true pattern",
+                                "Overfit model: Passes through every data point"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "image": [
+                {
+                    "path": ["~/zjuc/agent/lectures/introduction/Images/image_Im27.png",
+                        "~/zjuc/agent/lectures/introduction/Images/image_Im28.png"],
+                    "description": "Comparison of model fits showing underfitting, proper fit, and overfitting"
+                }
+            ]
+        },
+        {
+            "title": "Model Selection",
+            "content": [
+                {
+                    "item_id": "Regularization",
+                    "header": "Regularization",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Technique to prevent overfitting by adding complexity penalty:"
+                        },
+                        {
+                            "type": "formula",
+                            "latex": "\\min_{f \\in \\mathcal{F}} \\underbrace{\\frac{1}{n} \\sum_{i=1}^n L(y_i, f(\\mathbf{x}_i))}_{\\text{Empirical risk}} + \\underbrace{\\lambda J(f)}_{\\text{Complexity penalty}}"
+                        },
+                        {
+                            "type": "regularization_types",
+                            "items": [
+                                {
+                                    "name": "L2 Regularization (Ridge)",
+                                    "formula": "J(f) = ||\\mathbf{w}||^2_2"
+                                },
+                                {
+                                    "name": "L1 Regularization (Lasso)",
+                                    "formula": "J(f) = ||\\mathbf{w}||_1"
+                                },
+                                {
+                                    "name": "Elastic Net",
+                                    "formula": "J(f) = \\alpha ||\\mathbf{w}||_1 + (1-\\alpha)||\\mathbf{w}||^2_2"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item_id": "CrossValidation",
+                    "header": "Cross-Validation (CV)",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Procedure for robust model selection and hyperparameter tuning:"
+                        },
+                        {
+                            "type": "cv_methods",
+                            "methods": [
+                                {
+                                    "name": "Hold-out (Simple CV)",
+                                    "description": "Random train/validation split (e.g., 70/30)"
+                                },
+                                {
+                                    "name": "K-Fold CV",
+                                    "description": "Data split into K folds, each fold used as validation once"
+                                },
+                                {
+                                    "name": "Leave-One-Out CV (LOOCV)",
+                                    "description": "Each sample used as validation once (K = n)"
+                                },
+                                {
+                                    "name": "Stratified K-Fold",
+                                    "description": "Preserves class proportions in each fold"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "optimization",
+                            "text": "Select model with minimal average validation error"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "HyperparameterTuning",
+                    "header": "Hyperparameter Optimization",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Strategies for tuning hyperparameters:"
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                "Grid search: Exhaustive search over parameter space",
+                                "Random search: Random parameter combinations",
+                                "Bayesian optimization: Probability-based parameter exploration"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "image": [
+                {
+                    "title": "K-Fold Cross Validation Schematic",
+                    "path": "~/zjuc/agent/lectures/introduction/Images/image_Im29.png",
+                    "description": "Visualization of data shuffling and partitioning in K-fold CV"
+                }
+            ]
+        }
+    ]
+}

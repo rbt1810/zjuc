@@ -1,0 +1,920 @@
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Introduction to Big Data Analysis Dimensionality Reduction
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Outlines
+
+Introduction
+
+Principal Component Analysis
+
+Linear Discriminant Analysis
+
+Nonlinear Dimensionality Reduction
+
+Feature Selection
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+What is Dimensionality Reduction
+
+The process of reducing the number of random variables under consideration, via obtaining a set of /uncorrelated0principal variable
+
+By mapping from high-dimensional space to low-dimensional space
+
+Learning f : X → Y, where dimX = n and dimY = r with n > r.
+
+Including both unsupervised learning (mostly common) and supervised learning
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Why Need Dimensionality Reduction?
+
+Curse of dimensionality
+
+Eg : classify cats and dogs using features, if we want to cover 20% of the feature space, how many data do we need?
+
+However, the number of samples is limited in practice
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Why Need Dimensionality Reduction? (Cont’)
+
+Due to the sparsity of data in high dimensions, it is easy to overﬁt • Hard to train a good model to classify the corner data (getting more in high dimensions)
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Curse of Dimensionality
+
+The volume of hypersphere decays to zero with the increase of dimension
+
+The performance gets worse with the increase of dimension
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Roles of Dimensionality Reduction
+
+Data compression
+
+Denoising
+
+Feature extraction by mapping and feature selection (eg. Lasso)
+
+Reduce both spatial and time complexity, so that fewer parameters are needed and smaller computational power is required
+
+Data visualization
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Methods in Dimensionality Reduction
+
+Linear dimensionality reduction :
+
+Principal component analysis (PCA) • Linear discriminant analysis (LDA) • Independent component analysis (ICA)
+
+Nonlinear dimensionality reduction :
+
+Kernel based methods (Kernel PCA) • Manifold learning (ISOMAP, Locally Linear Embedding (LLE), Multidimensional scaling (MDS), t-SNE)
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Outlines
+
+Introduction
+
+Principal Component Analysis
+
+Linear Discriminant Analysis
+
+Nonlinear Dimensionality Reduction
+
+Feature Selection
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Variance and Covariance Matrix
+
+Variance measures the variability or divergence of single variable : Var(X) = E(X − EX)2, sample version (cid:80)n S2 = 1 n−1 Std(X) = (cid:112)Var(X)
+
+i=1(xi − ¯x)2 ; standard deviation :
+
+For more variables, Cov(X,Y) = E(X − EX)(Y − EY), (cid:80)n i=1(xi − ¯x)(yi − ¯y)
+
+If X = (x1,...,xn)T ∈ Rn×p is the sample matrix, then n−1(X − 1n¯xT)T(X − 1n¯xT) = n X)T(X − 1 n is a projection matrix with rank n − 1.
+
+If X = (x1,...,xn)T ∈ Rn×p is the sample matrix, then n−1(X − 1n¯xT)T(X − 1n¯xT) = n X)T(X − 1 n is a projection matrix with rank n − 1.
+
+n X) = 1
+
+n1n1T n1n1T
+
+n1n1T
+
+n−1XTJX, where
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Principal Component Analysis (PCA)
+
+PCA transforms a set of strongly correlated variables to another set (typically much smaller) of weakly correlated variables by using orthogonal transformation
+
+The new variables are called principal components
+
+The new set of variables are linear combinations of the original variables whose variance information is inherited as much as possible
+
+Unsupervised learning
+
+Proposed by Karl Pearson, successfully used in economics by Stone (1947) : keep 97.4% information, 17 variables about income and expenditure are ﬁnally reduced to 3 variables (F1 : total income, F2 : rate of change in total income, F3 : economic development or recession)
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Geometric Interpretation
+
+Assume a set of 2D data follows Gaussian distribution (but not limited to Gaussian distribution!), the reduction to 1D is successfully achieved by taking a direction with larger variance (larger variability of data)
+
+The direction in the major axis contains more information than the other direction, since smaller variance indicates the variables are almost the same
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Linear Algebra
+
+Let {ei}p
+
+i=1 be the canonical basis in Euclidean space, want to i=1 such that the random
+
+ﬁnd another orthonormal basis {˜ei}p vector v = (cid:80)p v = (cid:80)p Cov(˜xi, ˜xj) ≈ 0 for i (cid:54)= j
+
+i=1 xiei can be expressed in the new basis by
+
+i=1 ˜xi˜ei, where Var(˜x1) (cid:62) ··· (cid:62) Var(˜xp) and
+
+By linear algebra, the coordinate transformation is given by the linear transformation : (˜e1,··· ,˜ep) = (e1,··· ,ep)W, where W ∈ Rp×p is an invertible matrix
+
+The component coeﬃcients is transformed accordingly : x = W˜x
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Eigendecomposition of Sample Covariance Matrix
+
+Assume we have n centralized samples {xi}n i=1 xi = 0p
+
+Then XT = (x1,··· ,xn) = W(˜x1,··· ,˜xn) = W ˜XT • The sample covariance matrix of X is Cov(X) = 1 • The sample covariance matrix of ˜X is n−1W TXTXW = W TCov(X)W
+
+Its diagonals are the sample versions of Var(˜x1),...,Var(˜xp), while its oﬀ-diagonals are the covariances between ˜xi and ˜xj • Need that Cov(˜X) is nearly diagonal with decreasing diagonal entries for some W.
+
+Equivalent to do eigendecomposition :
+
+Cov(X) = Odiag(λ1,··· ,λp)OT with some orthogonal matrix O ∈ Rp×p and λ1 (cid:62) ··· (cid:62) λp (cid:62) 0, then let W = O completes the job
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Interpretations
+
+Variances in the transformed variables : Var(˜xi) = λi, eigenvalues of Cov(X)
+
+The new basis consists of the columns of W = O, i.e., the eigenvectors of Cov(X)
+
+The percentage
+
+λi j=1 λj
+
+(cid:80)p
+
+explains the importance of the new
+
+variable ˜xi
+
+Given a thereshold t, we can choose the number of variables r such that the total contribution to the variance of the new r variables (cid:80)r exceeds the threshold t. Thus these r directions w1,...,wr are enough to represent the original n variables (cid:80)p
+
+For any random vector x ∈ Rp, the corresponding r principal 1 x,...,wT r x components are thus wT
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Another Viewpoint - Best Reconstruction
+
+Note that the new basis {˜ej}p • After the projection (if we keep the ﬁrst r components), the projected point of each sample xi is ˜xi,1w1 + ··· + ˜xi,rwr, where the coordinate is given by ˜xi,j = wT j xi ;
+
+The reconstruction error is the sum of all squared L2 errors of all samples :
+
+RE(W) =
+
+n (cid:88)
+
+(cid:107)
+
+r (cid:88)
+
+˜xi,jwj − xi(cid:107)2
+
+2 =
+
+n (cid:88)
+
+(cid:107)(WrW T
+
+r − I)xi(cid:107)2 2
+
+i=1
+
+j=1
+
+i=1
+
+=
+
+n (cid:88)
+
+i (I − WrW T xT
+
+r )xi = Tr(
+
+n (cid:88)
+
+xixT
+
+i (I − WrW T
+
+r ))
+
+i=1
+
+i=1
+
+=Tr(X TX(I − WrW T
+
+r )) = Tr(X TX) − Tr(W T
+
+r X TXWr)
+
+Resulting in an optimization problem :
+
+min Wr
+
+−Tr(W T
+
+r X TXWr),
+
+subject toW T
+
+r Wr = I
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+PCA Algorithm
+
+Given the data matrix X = (x1,...,xn)T ∈ Rn×p and a threshold t (in some other cases, the number of principal components r) :
+
+1. Centralize the data by their mean ¯x = 1 n1T
+
+1. Centralize the data by their mean ¯x = 1 sample covariance matrix C = 1
+
+2. Compute the eigenvalues {λi}p eigenvectors {wi}p
+
+2. Compute the eigenvalues {λi}p eigenvectors {wi}p
+
+i=1
+
+3. Order the eigenvalues as λ(1) (cid:62) ··· (cid:62) λ(p), and compose an orthogonal matrix W by the eigenvectors columnwise in the same order : W = (w1,...,wp)
+
+4. Compute the variance contribution of the ﬁrst r eigenvalues : (cid:80)r
+
+4. Compute the variance contribution of the ﬁrst r eigenvalues : , ﬁnd a suitable r such that this variance
+
+i=1
+
+contribution is greater than the threshold t
+
+5. Pick the ﬁrst r columns in W and form a matrix Wr = (w1,...,wr) ∈ Rp×r
+
+6. Output ˜Xr = XWr ∈ Rn×r as the projected data matrix, whose rows consist of data points in r dimensional subspace
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+An Example
+
+The data : the monthly prices of three brands of vehicles (Jeep : x1, Toyota : x2, Benz : x3) • The the covariance matrix is given by
+
+C =
+
+
+
+ 
+
+1 2√ 10 − 2√ 10
+
+2√
+
+10 1 −4 5
+
+− 2√ 10 −4 5 1
+
+
+
+ 
+
+Compute the characteristic polynomial :
+
+det(λI − C) =
+
+(cid:12) (cid:12) (cid:12) (cid:12) (cid:12) (cid:12) (cid:12)
+
+λ − 1 − 2√ 10 − 2√ λ − 1 10 4 2√ 5
+
+10
+
+2√ 10 4 5 λ − 1
+
+(cid:12) (cid:12) (cid:12) (cid:12) (cid:12) (cid:12) (cid:12)
+
+Solve for the eigenvalues : λ1 = 2.38, λ2 = 0.42, λ3 = 0.2
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+An Example (Cont’)
+
+Plug in each eigenvalues and solve for the corresponding eigenvectors, e.g., (λ1I − C)w1 = 0, or equivalently, w12 + 2√ 10 
+
+10
+
+One can ﬁnd three eigenvectors as w1 = (0.54,0.59,−0.59)T, w2 = (0.84,−0.39,0.39)T, w3 = (0,0.71,0.71)T
+
+The three components are
+
+˜x1 = wT ˜x2 = wT ˜x3 = wT
+
+1 x = 0.54x1 + 0.59x2 − 0.59x3, 2 x = 0.84x1 − 0.39x2 + 0.39x3, 3 x = 0.71x2 + 0.71x3.
+
+As λ1 (cid:29) λ2,λ3, the ﬁrst principal component ˜x1 reﬂects the change of prices in all three brands of vehicles
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Outlines
+
+Introduction
+
+Principal Component Analysis
+
+Linear Discriminant Analysis
+
+Nonlinear Dimensionality Reduction
+
+Feature Selection
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Linear Discriminant Analysis (LDA)
+
+Supervised learning : based on the labels, do linear projection in order to maximize the between-class point scatter (variability) in low dimensions
+
+Initially proposed by R. Fisher for two-class classiﬁcation (1936)
+
+Generalized by C. R. Rao (1948) to K classes {C1,...,CK}
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Basic Concepts
+
+The number of samples in each class is nk = (cid:80) i:xi∈Ck k=1 nk
+
+The number of samples in each class is nk = (cid:80) i:xi∈Ck k=1 nk
+
+(cid:80) i:xi∈Ck
+
+xi, whereas
+
+the mean of all samples is µ = (cid:80)K
+
+k=1
+
+nk n µk
+
+Before projection, the between-class point scatter is nk n (µk − µ)(µk − µ)T ; after projection Sb = (cid:80)K Wr ∈ Rp×r, the between-class point scatter is ˜Sb = W T r SbWr • Before projection, the within-class point scatter (variance) for (xi − µk)(xi − µk)T, thus the
+
+k=1
+
+(cid:80) i:xi∈Ck
+
+each class Ck is Sk = 1 nk total within-class point scatter is Sw = (cid:80)K projection, the within-class point scatter for each class Ck is ˜Sk = W T ˜Sw = W T
+
+nk n Sk ; after
+
+k=1
+
+r SkWr, and the total within-class point scatter is r SwWr
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Optimization Problem
+
+Need to ﬁnd the optimal directions (columns of Wr) such that the between-class point scatter ˜Sb is maximized and within-class point scatter ˜Sw is minimized, i.e.,
+
+max w
+
+J(w) =
+
+wTSbw wTSww
+
+This is equivalent to solve
+
+max w
+
+Jb(w) = wTSbw,
+
+subject to wTSww = 1
+
+By introducing a Lagrange multiplier λ, we deﬁne Lagrangian as L(w,λ) = wTSbw − λ(wTSww − 1)
+
+The optima is obtained as the solution to the equation
+
+∇wL = 2Sb − 2λSww = 0 ⇒ S−1
+
+w Sbw = λw
+
+• The optimal directions are the eigenvectors of S−1
+
+w Sb
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+An Example
+
+Given two sets of data : class 1 is
+
+{(4,1)T,(2,4)T,(2,3)T,(3,6)T,(4,4)T}, and class 2 is {(9,10)T,(6,8)T,(9,3)T,(8,7)T,(10,8)T}
+
+Class means : µ1 = (3,3.6)T, µ2 = (8.4,7.6)T, the point scatter metrics are
+
+S1 =
+
+Sb =
+
+(cid:16) 0.8 −0.4 2.6 (cid:16) 7.29 4.86 4.86 3.24
+
+−0.4
+
+(cid:17)
+
+(cid:17)
+
+,
+
+,
+
+S2 =
+
+Sw =
+
+(cid:16) 1.84 −0.28 5.36 (cid:16) 1.32 −0.34
+
+−0.28
+
+−0.34
+
+4
+
+(cid:17)
+
+(cid:17)
+
+.
+
+,
+
+The eigenvalue of S−1
+
+w Sb is solved from
+
+0 = det(λI −S−1
+
+w Sb) =
+
+(cid:12) (cid:12) (cid:12)
+
+λ − 5.97 −3.98
+
+−1.72
+
+λ − 1.15
+
+(cid:12) (cid:12) (cid:12) ⇒ λ = 7.11
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+An Example (Cont’)
+
+The optimal directions is w∗ = (0.96,0.28)T • After projection, the data become 1D : • Class 1 : {4.12,3.03,2.75,4.55,4.95} • Class 2 : {11.42,7.98,9.48,9.63,11.83}
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+PCA vs. LDA
+
+PCA
+
+Start from sample covariance matrix and ﬁnd directions with maximal variances
+
+Unsupervised learning, used as pre-training step, must be coupled with other learning methods
+
+LDA
+
+Make use of labels and ﬁnd projections after which the classiﬁcation becomes more obvious
+
+Supervised learning, can be used as classiﬁcation or coupled with other learning methods
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Outlines
+
+Introduction
+
+Principal Component Analysis
+
+Linear Discriminant Analysis
+
+Nonlinear Dimensionality Reduction
+
+Feature Selection
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Kernel PCA
+
+PCA works well for Gaussian distribution
+
+If the data do not follow Gaussian, we can ﬁnd a map φ : Rp → Rq so that φ(x) (almost) follows Gaussian
+
+We can do PCA for the transformed data {φ(xi)}n • Similar to nonlinear SVM, kernel trick can be used to avoid explicit computation of φ
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Covariance Matrix in Transformed Space
+
+Assume the transformed data are centralized : i=1 φ(xi) = 0
+
+Covariance Matrix ˜C = 1 n−1 • Do PCA for transformed data is equivalent to ﬁnd the eigenvalues and eigenvectors of ˜C
+
+Let λ be an eigenvalue of ˜C and v ∈ Rq be the corresponding eigenvector, i.e., ˜Cv = λv. • It can be shown that v = (cid:80)n λ(n−1)φ(xi)Tv
+
+i=1 αiφ(xi) where
+
+αi = 1
+
+(cid:80)n
+
+Furthermore, αi = 1
+
+i=1 K(xi,xj)αj, where
+
+λ(n−1) K(xi,xj) = φ(xi)Tφ(xj) is kernel function
+
+It is suﬃcient to solve the eigenvalue problem :
+
+Kα = λ(n − 1)α where K = (K(xi,xj))i,j is kernel matrix and α = (αi) is the coeﬃcient vector of v
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Kernel PCA Algorithm
+
+1. Choose a kernel function K(x,y) satisfying the necessary properties
+
+2. Compute the kernel matrix K = (K(xi,xj))i,j 3. Compute the eigenvalues λ1 (cid:62) ··· (cid:62) λq and eigenvectors α(1),...,α(q) of K
+
+4. For any new sample x, the j component after projection is
+
+zj = vT
+
+j φ(x) =
+
+n (cid:88)
+
+α(j) i K(xi,x)
+
+i=1
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Kernel PCA : An Example
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Manifolding Learning
+
+A manifold is a topological space that locally resembles Euclidean space near each point. It generalizes the concepts of curves and surfaces in Euclidean space.
+
+The dimension of a manifold is the minimal number of coordinates to represent a point on the manifold
+
+Some dimensionality reduction methods are based on the concept of manifold : ISOMAP, LLE, MDS, t-SNE
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Locally Linear Embedding (LLE)
+
+Reduce the number of free coordinates while keeping the local geometric structure of the data, e.g., if xA and xB are neighbor in high dimension, after the dimension reduction (transformation), they must be close to each other in low dimension
+
+The clustering eﬀect should also be inherited
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+LLE Reconstruction
+
+Assume each data point is locally linearly dependent of its neighbors : it can be written as the linear combination of its K nearest neighbors {xkij}K the KNN indices {kij}K
+
+j=1, with
+
+j=1
+
+The weight is determined by the optimization for each xi :
+
+min w
+
+(cid:107)xi −
+
+K (cid:88)
+
+wikijxkij(cid:107)2
+
+2
+
+j=1
+
+subject to
+
+K (cid:88)
+
+wikij = 1, wij (cid:62) 0
+
+j=1
+
+where wij = 0 if j /∈ {kij}K
+
+j=1
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Low Dimensional Representation
+
+In r (r < p) dimensional space, ﬁnd n points such that the local structure (e.g., clustering eﬀect) is preserved
+
+min y1,...,yn
+
+n (cid:88)
+
+i=1
+
+(cid:107)yi −
+
+n (cid:88)
+
+j=1
+
+wijyj(cid:107)2 2
+
+This is equivalent to the matrix minimization problem
+
+min Y
+
+Tr(YTMY),
+
+s.t. YYT = I,
+
+where Y = (y1,...,yn)T ∈ Rn×r and M = (I − W)T(I − W) with W = (wij)n i,j=1 being the weight matrix (not necessarily symmetric)
+
+This is solved by eigen-decomposition : The columns of Y consist of the r eigenvectors corresponding to the r smallest eigenvalues of M
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Summary of LLE
+
+Only one tuning parameter K
+
+Linear algebra computation
+
+Only local information, no global information • No explicit mapping as in PCA (˜Xr = XWr)
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+The Motivation of ISOMAP
+
+The distance between two points may be diﬀerent in diﬀerent metrics (manifold metric vs. Euclidean metric)
+
+Geodesic distance could be a good metric instead of Euclidean distance
+
+Computation of geodesic distance, minimal path in graph
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+ISOMAP Algorithm
+
+Construct KNN graph G = (V,E) :
+
+For each xi, ﬁnd its K nearest neighbors {xj}j∈N(i)
+
+The weight of the edge
+
+< i,j > between xi and xj is the Euclidean distance for each j ∈ N(i)
+
+Use Floyd algorithm to compute the minimal path between each pair of vertices (i,j) as the geodesic distance dG(i,j)
+
+Find the low dimensional representation (e.g. by MDS) :
+
+min y1,...,yn
+
+(cid:88)
+
+i(cid:54)=j
+
+(dG(i,j) − (cid:107)yi − yj(cid:107))2
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Floyd Algorithm (Complexity O(n3))
+
+1. Initialization :
+
+dG(i,j) =
+
+(cid:40)
+
+dx(i,j), ∞,
+
+if < i,j >∈ E
+
+otherwise
+
+2. For each pair (i,j), update the distance as follows : for each k = 1,...,n, dG(i,j) = min{dG(i,j),dG(i,k) + dG(k,j)} 3. The ﬁnal output dG(i,j) is the geodesic distance between i and j
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Summary of ISOMAP
+
+Only one tuning parameter K
+
+High computational power
+
+Preserve the global information
+
+Sensitive to noise
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Multidimensional Scaling (MDS)
+
+For data points in high dimensional space, x1,...,xn ∈ Rp, i,j, e.g.,
+
+Find {yi}n
+
+i=1 ⊂ Rr (r < p), such that the distance information
+
+is preserved :
+
+min y1,...,yn
+
+SM(y1,...,yn)
+
+where SM(y1,...,yn) = (cid:80) function. This is called least square or Kruskal-Shephard scaling
+
+i(cid:54)=j(dij − (cid:107)yi − yj(cid:107))2 is the stress
+
+Alternative objective function (Sammon mapping) : (dij−(cid:107)yi−yj(cid:107))2 dij • This is nonconvex minimization
+
+takes care of small dij
+
+i(cid:54)=j
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+t-distributed Stochastic Neighbor Embedding (t-SNE)
+
+Developed by Laurens van der Maaten and Geoﬀrey Hinton
+
+Eﬀective for data visualization in 2D and 3D, applications in computer security research, music analysis, cancer research, especially for bioinformatic data
+
+Often display clusters in low dimensional space (may be false ﬁndings)
+
+With special parameter choices, approximates a simple form of spectral clustering
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Similarity in High Dimensional Space
+
+For data points in high dimensional space, x1,...,xn ∈ Rp, ﬁnd the similarity of xi and xj in the form of probability pij
+
+The similarity of data point xj to data point xi is the conditional probability, pj|i, that xi would pick xj as its neighbor if neighbors were picked in proportion to their probability density under a Gaussian centered at xi :
+
+pj|i =
+
+(cid:80)
+
+exp(−(cid:107)xi − xj(cid:107)2/2σ2 i ) k(cid:54)=i exp(−(cid:107)xi − xk(cid:107)2/2σ2 i )
+
+pij = (pj|i + pi|j)/2n, pii = 0 • The bandwidth is adapted to the density of the data : smaller values of σi are used in denser parts of the data space
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Similarity in Low Dimensional Space
+
+t-SNE aims to learn a set of low dimensional data y1,...,yn ∈ Rr that reﬂects the similarity pij as well as possible
+
+The similarity between the data point yi and yj follows t-distribution : (assume qii = 0)
+
+qij =
+
+(cid:80)
+
+(1 + (cid:107)yi − yj(cid:107)2)−1 k(cid:54)=l(1 + (cid:107)yk − yl(cid:107)2)−1
+
+t-distribution is heavy tailed so that large pij (dissimilar data pair) leads to even larger qij (falls apart)
+
+The closedness between the two similarity measures pij and qij is given by the Kullback-Leibler divergence :
+
+DKL(P(cid:107)Q) =
+
+(cid:88)
+
+i(cid:54)=j
+
+pij log
+
+pij qij
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Comparison (Optical Character Recognition)
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Outlines
+
+Introduction
+
+Principal Component Analysis
+
+Linear Discriminant Analysis
+
+Nonlinear Dimensionality Reduction
+
+Feature Selection
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+What is Feature Selection
+
+Low computational cost, better accuracy (avoid overﬁtting), and better interpretation,
+
+Feature engineering : feature extraction and selection. Feature extraction is according to the knowledge of the professions, usually done by expertise in the professional areas
+
+Three types : Filter, Wrapper, and Embedded
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Subset Selection
+
+Subset search :
+
+Forward search (forward stepwise, forward stagewise) : ∅ ⇒ {x1} ⇒ {x1,x4} ⇒ ···
+
+Backward search (backward stepwise) :
+
+{x1,x2,...,xp} ⇒ {x1,x2,...,xp} \ {x4} ⇒ ···
+
+Bidirectional search
+
+Evaluation metrics :
+
+Distances : Euclidean, Manhattan, point scatter matrices, Kullback-Leibler divergence, etc.
+
+Information : mutual information, information gain (IG), etc. • Correlations : Pearson correlation, Maximal information coeﬃcients (MIC)
+
+Stopping rules : number of features, number of iterations, non-incremental metrics, attaining optimality, etc.
+
+Validation and comparison
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+Three Types of Feature Selection
+
+Filter : ﬁlter the features by their correlations (or MIC, IG) with response variables
+
+Wrapper : use accuracy, precision, recall, AUC, etc.
+
+Akaike Information Criteria (AIC) : AIC = −2ln(L) + 2k • Bayes Information Criteria (BIC) : BIC = −2ln(L) + k ln(n) • Minimize AIC or BIC, where L is likelihood function, k is the number of features (parameters), n is the number of samples
+
+Embedded :
+
+Random forest : feature importance • Regularization : Ridge and LASSO • Recursive feature elimination (RFE) : select the best (worst) feature according to the coeﬃcients (e.g. linear regression), then do this recursively to ﬁnd the feature importance
+
+Introduction Principal Component Analysis Linear Discriminant Analysis Nonlinear Dimensionality Reduction Feature Selection
+
+References
+
+Œ(cid:226)'(cid:219)(cid:19)(cid:216)§˘(cid:228)(cid:140)Œ(cid:226)˘(cid:19) • –(cid:147)u§¯(cid:236)˘S§2016 • T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning : Data mining, Inference, and Prediction, 2nd Edition, 2009
+
+Arthur, D., Vassilvitskii, S. “k-means++ : the advantages of careful seeding”. Proceedings of the eighteenth annual ACM-SIAM symposium on Discrete algorithms, Society for Industrial and Applied Mathematics Philadelphia, PA, USA. pp. 1027ı1035, 2007
+
+Lingras P, West C, Interval Set Clustering of Web Users with Rough Kmeans, Journal of Intelligent Information Systems 23(1) :5ı16, 2004
+

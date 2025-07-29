@@ -1,0 +1,938 @@
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Introduction to Big Data Analysis Ensemble Methods
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Outlines
+
+Introduction
+
+Bagging and Random Forest
+
+Boosting and AdaBoost
+
+Gradient Boosting Decision Tree
+
+XGBoost (Optional)
+
+References
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Ensemble Methods
+
+Wisdom of Crowds (“n(cid:135)ˇ(cid:153)œ§”(cid:135)ˆ(cid:129)(cid:0)”) • Multiple weak learners (base learners, may be heterogenous) can improve learning performance
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Why it can improve the performance
+
+More expressive, can approximate larger functional space • Single linear classiﬁer (perceptron) does not work • Try multiple classiﬁers
+
+Reduce misclassﬁcation rate
+
+Misclassﬁcation rate of single classiﬁer is p • Choose N classiﬁers, same but independent, voting • Error rate of majority vote = (cid:80) k )pk(1 − p)N−k (N k>N/2
+
+When N = 5,p = 0.1, Error rate < 0.01
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Two commonly used ensemble methods
+
+Bagging
+
+Random sampling :
+
+generating independent models, and averaging for regressions (making majority vote for classiﬁcations) • Reducing variances • Example : Random forests
+
+Boosting
+
+Sequential training :
+
+training the subsequent models based on the errors of previous models
+
+Reducing bias • Examples : AdaBoost and GBDT
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Outlines
+
+Introduction
+
+Bagging and Random Forest
+
+Boosting and AdaBoost
+
+Gradient Boosting Decision Tree
+
+XGBoost (Optional)
+
+References
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Bagging
+
+Bagging is short for bootstrap aggregation • Bagging generates a committee of predictors and combine them in a certain manner to the ﬁnal model
+
+Single predictor suﬀers from instability, while bagging could improve the stability by majority vote (classiﬁcation) or averaging (regression) over all single predictors
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Sampling
+
+Given a dataset D of n samples, at the iteration
+
+m = 1,...,M, the training set Dm is obtained by sampling from D with replacement. Then Dm is used to construct classiﬁer ˆfm(x).
+
+Sampling with replacement : some samples in D may be missing in Dm, while some other samples may occur more than once
+
+On average, 63.2% of the samples in D could be selected into Dm. In fact, for each sample, the probability that it is not selected in one round is 1 − 1 rounds with probability lim n→∞ n)n = 0.368.
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Algorithm
+
+Input : training set D = {(x1,y1),...,(xN,yN)} • Output : additive model ˆfbag(x)
+
+1. For m = 1 to M :
+
+1.1 Sample from D with replacement to obtain Dm 1.2 Train a model ˆfm(x) from the dataset Dm : for classiﬁcation,
+
+ˆfm(x) returns a K-class 0-1 vector ek ; for regression, it is just a value
+
+2. Compute bagging estimate ˆfbag(x) = 1 M
+
+M (cid:80) m=1
+
+ˆfm(x) : for
+
+classiﬁcation, make majority vote ˆGbag(x) = argmaxk ˆfk(x); for regression, just return the average value
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Variance Reduction
+
+In bagging, we use the same model to train diﬀerent sample set in each iteration; assume the models {ˆfm(x)}M m=1 have the same variance σ2(x), while the correlation of each pair is ρ(x)
+
+Then the variance of the ﬁnal model is :
+
+Var(ˆfbag(x)) =
+
+1 M2
+
+(cid:16) M (cid:88)
+
+m=1
+
+Var(ˆfm(x)) +
+
+(cid:88)
+
+t(cid:54)=m
+
+(cid:17) Cov(ˆft(x)ˆfm(x))
+
+= ρ(x)σ2(x) +
+
+1 − ρ(x) M
+
+σ2(x)
+
+As M → ∞, Var(ˆfbag(x)) → ρ(x)σ2(x). This usually reduces the variance.
+
+If ρ(x) = 0, the variance could approach zero • The random sampling in bagging is to reduce the correlation ρ(x), i.e., make the sub-predictors as independent as possible
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Limitations of Decision Tree
+
+Stuck at local optimum : The greedy algorithm makes it stop at the local optimum, as it seeks the maximal information gain in each tree split
+
+Decision boundary : Use one feature in each split, the decision boundary is parallel to the coordinate axes
+
+Bad representability and instability
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Random Forest
+
+Random Forest further reduces the variance by adding independency to the committee of decision trees
+
+This is achieved by introducing more randomness. • More randomness :
+
+Sampling on the training data with replacement • Select features at random
+
+No pruning is needed.
+
+Example : RF consisting of 3 independent trees, each with an error rate of 40%. Then the probability that more than one tree misclassify the samples is 0.43 + 3 ∗ 0.42 ∗ (1 − 0.4) = 0.352
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Random Forest Algorithm
+
+Input : training set D = {(x1,y1),...,(xN,yN)} • Output : additive model ˆfrf (x)
+
+1. For m = 1 to M :
+
+1.1 Sample from D with replacement to obtain Dm 1.2 Grow a random-forest tree Tm to the dataset Dm : by
+
+recursively repeating the following steps for each terminal node of the tree, until the minimum node size nmin is reached 1.2.1 Select q features at random from the p features 1.2.2 Pick the best feature/split-point among the q 1.2.3 Split the node into two daughter nodes
+
+2. Output the ensemble of trees {Tm}M M (cid:80) m=1
+
+2. Output the ensemble of trees {Tm}M M (cid:80) m=1
+
+m=1 : for regression,
+
+Tm(x) : for classiﬁcation, make majority vote
+
+Small value of q increases the independency of trees; empirically, q = log2 p + 1
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Model Evaluation
+
+Margins : The diﬀerence between the percentage of decision trees that correctly classify the samples and the percentage of trees misclassifying the samples
+
+Out-of-bag (OOB) erros : The observation is called out-of-bag sample to some trees if it is not sampled for those trees. Denote the training set in the m-th sampling by Dm. OOB error is computed as :
+
+1. For each observation (xi,yi), ﬁnd the trees which treat it as OOB sample : {ˆTm(x) : (xi,yi) /∈ Dm}
+
+2. Use those trees to classify this observation and make majority vote as the label of this observation : ˆfoob(xi) = argmax y∈Y
+
+M (cid:80) m=1
+
+I(ˆfm(xi) = y)I(xi /∈ Dm)
+
+3. Compute the number of misclassiﬁed samples, and take the ratio of this number to the total number of samples as OOB i=1 I(ˆfoob(xi) (cid:54)= yi) error : Erroob = 1 N (cid:80)N
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Feature Importance
+
+Using split criteria
+
+The improvement in the split-criterion as feature importance
+
+It is accumulated over all the
+
+trees for each variable
+
+Using OOB randomization
+
+Randomly permute the values of each feature in the OOB samples, and compute the prediction accuracy
+
+The decrease in accuracy as a result of this permutation is averaged over all trees as feature importance
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Pros and Cons
+
+Where it is good
+
+Bagging or random forest (RF) work for models with high variance but low bias
+
+Better for nonlinear estimators • RF works for very high-dimensional data, and no need to do feature selection as RF gives the feature importance
+
+Easy to do parallel computing
+
+Disadvantage
+
+Overﬁtting when the samples are large-sized with great noise, or when the dimension of data is low
+
+Slow computing performance comparing to single tree • Hard to interpret
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Outlines
+
+Introduction
+
+Bagging and Random Forest
+
+Boosting and AdaBoost
+
+Gradient Boosting Decision Tree
+
+XGBoost (Optional)
+
+References
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Boosting
+
+Boosting : combines the outputs of many “weak” classiﬁers to produce a powerful “committee”
+
+Weak classiﬁer : error rate < 0.5 (random guessing)
+
+Sequentially apply the weak classiﬁers to the repeatedly modiﬁed data, emphasizing the misclassiﬁed samples
+
+Combine weak classiﬁers through a weighted majority vote or averaging to produce the ﬁnal prediction
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Boosting Fits an Additive Model
+
+Additive model : f (x) =
+
+M (cid:80) m=1
+
+βmb(x;γm)
+
+Possible choices for basis function b(x;γ) :
+
+Neural networks : σ(γ0 + γT • Wavelets • Cubic spline basis • Trees • Eigenfunctions in reproducing kernel Hilbert space (RKHS)
+
+1 x), where σ(t) = 1/(1 + e−t)
+
+N (cid:80) i=1 • Loss function : squared error L(y,f (x)) = (y − f (x))2 or
+
+Parameter ﬁtting : min {βm,γm}
+
+Parameter ﬁtting : min {βm,γm}
+
+L(yi,
+
+βmb(xi;γm))
+
+likelihood-based loss
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Forward Stagewise Additive Modeling
+
+Input : training set D = {(x1,y1),...,(xN,yN)} • Output : additive model fM(x)
+
+1. Initialize f0(x) = 0 2. For m = 1 to M :
+
+2.1 Compute (βm,γm) = argmin β,γ
+
+N (cid:80) i=1
+
+L(yi,fm−1(xi) + βb(xi;γ))
+
+2.2 Update fm(x) = fm−1(x) + βmb(xi;γm)
+
+Squared error loss : in step 2.1,
+
+L(yi,fm−1(xi) + βb(xi;γ)) = (yi − fm−1(xi) (cid:125)
+
+(cid:124)
+
+(cid:123)(cid:122) residual
+
+−βb(xi;γ)2
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Exponential Loss and AdaBoost
+
+Exponential loss : L(y,f (x)) = exp(−yf (x)) • Classiﬁer as basis function : b(x;γ) = G(x) ∈ {−1,1} • Let w(m) n (cid:88)
+
+Exponential loss : L(y,f (x)) = exp(−yf (x)) • Classiﬁer as basis function : b(x;γ) = G(x) ∈ {−1,1} • Let w(m) i = exp(−yifm−1(xi)), then step 2.1 turns to be :
+
+w(m) i
+
+(βm,Gm) = argmin β,G
+
+exp(−βyiG(xi))
+
+i=1 (cid:104) (cid:88)
+
+w(m) i
+
+(eβ − e−β) + e−β
+
+n (cid:88)
+
+w(m) i
+
+yi(cid:54)=G(xi)
+
+i=1
+
+Gm = argmin G
+
+βm = argmin β w(m) i
+
+βm = argmin β w(m) i
+
+(cid:15)m = (
+
+n (cid:80) I(yi (cid:54)= G(xi)). i=1 (cid:15)m(eβ − e−β) + e−β(cid:105) (cid:104)
+
+w(m) i
+
+= 1
+
+2 log 1−(cid:15)m (cid:15)m
+
+where
+
+I(yi
+
+(cid:54)= G(xi)))/
+
+n (cid:80) i=1
+
+w(m) i
+
+is weighted error rate
+
+(cid:105)
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+AdaBoost Algorithm
+
+Input : training set D = {(x1,y1),...,(xN,yN)}, loss function L(y,f (x))
+
+Output : Weighted classiﬁer G(x)
+
+1. Initialize wi = 1/N, i = 1,...,N 2. For m = 1 to M :
+
+2.1 Fit a classiﬁer Gm(x) to the training data D with weight {wi}
+
+2.2 Compute the error (cid:15)m = (
+
+2.3 Compute αm = log 1−(cid:15)m (cid:15)m 2.4 Update the weight w(m+1)
+
+i
+
+n (cid:80) i=1 (αm = 2βm > 1)
+
+w(m) i
+
+I(yi
+
+(cid:54)= G(xi)))/
+
+n (cid:80) i=1
+
+w(m) i
+
+= w(m) i
+
+exp(αmI(yi
+
+(cid:54)= Gm(xi)), for
+
+i = 1,...,N
+
+3. Output G(x) = sign
+
+(cid:104) M (cid:80) m=1
+
+(cid:105) αmGm(x)
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Illustration
+
+Weights of weak classiﬁers : the better the classiﬁer is, the larger its weight is
+
+Weights of samples :
+
+Re-weighting after each step, increase the weights for misclassiﬁed samples
+
+Simulation : 2-class
+
+classiﬁcation, 1000 training samples from each class, 10,000 test samples; two-leaf classiﬁcation tree (stump) as base learner
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Loss Functions
+
+For classiﬁcation, exponential loss and binomial negative log-likelihood (deviance) loss log(1 + exp(−2yf )) share the same population minimizer; thus it is equivalent to MLE rule
+
+For classiﬁcation, squared error loss is not good (not monotonically decreasing); the exponential loss is good and binomial deviance is better (less penalty for large −yf )
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Pros and Cons
+
+Where it is good
+
+AdaBoost improve the classiﬁcation performance comparing to weak classiﬁers
+
+Many choices for weak classiﬁers : trees, SVMs, kNNs, etc. • Only one tuning parameter M : # of weak classiﬁers • prevent overﬁtting suﬀered by single weak classiﬁers (e.g. complex decision tree)
+
+Disadvantage
+
+Weak interpretability • Overﬁtting when using very bad weak classiﬁers • Sensitive to outliers • Not easy for parallel computing
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Outlines
+
+Introduction
+
+Bagging and Random Forest
+
+Boosting and AdaBoost
+
+Gradient Boosting Decision Tree
+
+XGBoost (Optional)
+
+References
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Boosting Tree
+
+Using classiﬁcation trees or regression trees as base learners
+
+fM(x) =
+
+M (cid:80) m=1
+
+T(x;Θm) where T(x;Θ) =
+
+J (cid:80) j=1
+
+γjI(x ∈ Rj)
+
+Parameter set Θ = {Rj,γj}J • Parameter ﬁnding : minimizing the empirical risk j=1
+
+ˆΘ = argmin Θ
+
+J (cid:88)
+
+j=1
+
+(cid:88)
+
+xi∈Rj
+
+L(yi,γj)
+
+(Combinatorial optimization)
+
+Approximate suboptimal solutions : 1. Finding γj given Rj : γj = ¯yj = 1 |Rj| (cid:80) yi∈Rj
+
+yi for L2 loss; and
+
+γj = modal class in Rj for misclassiﬁcation loss
+
+2. Finding Rj given γj : Diﬃcult, need to estimate γj as well; greedy, top-down recursive partitioning algorithm
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Boosting Tree as Forward Stagewise Algorithm
+
+N (cid:80) i=1 1. ˆγjm = argmin γjm
+
+ˆΘm = argmin Θm
+
+L(yi,fm−1(xi) + T(xi;Θm))
+
+(cid:80) xi∈Rjm
+
+L(yi,fm−1(xi) + γjm)
+
+2. Finding Rjm is more diﬃcult than for a single tree in general.
+
+Squared-error loss : ﬁt a tree to the residual L(yi,fm−1(xi) + T(xi;Θm)) = (yi − fm−1(xi) (cid:125) (cid:123)(cid:122) residual
+
+−T(xi;Θm))2
+
+Two-class classiﬁcation and exponential loss : AdaBoost for
+
+trees, ˆΘm = argmin Θm
+
+(cid:80)
+
+1. ˆγjm = log
+
+(cid:80)
+
+xi ∈Rjm
+
+xi ∈Rjm
+
+N (cid:80) i=1 w(m) i w(m) i
+
+w(m) i
+
+exp[−yiT(xi;Θm)]
+
+I(yi=1)
+
+I(yi=−1)
+
+Absolute error or the Huber loss : robust but slow
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Gradient Descent for General Loss
+
+Supervised learning is equivalent to the optimization problem
+
+min f
+
+L(f ) = min
+
+f
+
+N (cid:88)
+
+i=1
+
+L(yi,f (xi))
+
+Numerical optimization : ˆf = argmin f
+
+Numerical optimization : ˆf = argmin f
+
+f = {f (x1),f (x2),...,f (xN)},
+
+M (cid:80) m=0 • Gradient descent method : fm = fm−1 − ρmgm, where
+
+Approximate ˆf by fM =
+
+hm, where f0 = h0 is initial guess
+
+gim =
+
+(cid:104)∂L(yi,f (xi)) ∂f (xi)
+
+(cid:105)
+
+f (xi)=fm−1(xi)
+
+, and hm = −ρmgm
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Gradient Boosting Decision Tree (GBDT)
+
+Find a tree T(x;Θm) by minimization problem
+
+˜Θm = argmin Θm
+
+N (cid:88)
+
+i=1
+
+(−gim − T(xi;Θm))2
+
+In general ˜Rjm (cid:54)= Rjm
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+GBDT Algorithm
+
+Input : training set D = {(x1,y1),...,(xN,yN)}, loss function L(y,f (x))
+
+Output : boosting tree ˆf (x)
+
+1. Initialize f0(x) = argmin γ
+
+N (cid:80) i=1
+
+L(yi,γ)
+
+2. For m = 1 to M :
+
+2.1 For i = 1,2,...,N compute rim =
+
+(cid:104)∂L(yi,f (xi)) ∂f (xi)
+
+(cid:105)
+
+f =fm−1
+
+2.2 Fit a regression tree to the target (residual) rim, giving
+
+terminal regions Rjm, j = 1,...,Jm
+
+2.3 For j = 1,...,Jm, compute
+
+(cid:80) xi∈Rjm
+
+γjm = argmin
+
+L(yi,fm−1(xi) + γ)
+
+γ
+
+2.4 Update fm(x) = fm−1(x) +
+
+Jm(cid:80) j=1
+
+γjmI(xi ∈ Rjm)
+
+3. ˆf (x) = fM(x)
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Regularization Techniques
+
+Shrinkage : the step 2.4 is modiﬁed as fm(x) = fm−1(x) +
+
+ν
+
+Jm(cid:80) j=1
+
+γjmI(xi ∈ Rjm)
+
+Subsampling : at each
+
+iteration, sample a fraction η of the training set and grow the next tree using the subsample
+
+Shrinkage + subsampling : best performance
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Feature importance and Partial Dependence Plots
+
+Feature importance
+
+When ﬁtting a single tree T, at each node t, one feature Xv(t) and one separate value Xv(t) = cv(t) are chosen to improve a certain quantity of criterion (e.g. GINI, entropy, squared error, etc.)
+
+Sum all these improvements it brought by each feature Xk over J−1 (cid:80) t=1 • Average the improvements of all trees ⇒ importance of that Ik(Tm)
+
+Partial Dependence Plots
+
+Partial dependence of f (X) on XS : fS(XS) = EXCf (XS,XC) • Estimate by empirical mean : ¯fS(XS) = 1 N N (cid:80) i=1
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Pros and Cons
+
+Where it is good
+
+For all regression problems • Better for two-class classiﬁcation, possible for multi-class problems (not suggested)
+
+Various nonlinearity, strong representability
+
+Disadvantage
+
+Sequential process, inconvenient for parallel computing • High computational complexity, not suitable for high-dimensional problems with sparse features
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Outlines
+
+Introduction
+
+Bagging and Random Forest
+
+Boosting and AdaBoost
+
+Gradient Boosting Decision Tree
+
+XGBoost (Optional)
+
+References
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Introduction
+
+Developed by Tianqi Chen
+
+(http ://homes.cs.washington.edu/∼tqchen/)
+
+Distributed gradient boosting : can be parallelized
+
+Highly eﬃcient
+
+Good performance
+
+Out-of-Core Computing for big dataset
+
+Cache Optimization of data structures and algorithms
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Cost Functions
+
+Cost function : N (cid:80) i=1
+
+F(Θm) =
+
+L(yi,fm−1(xi) + T(xi;Θm)) + R(Θm), where
+
+R(Θ) is regularization term (L0, L1 or L2 penalties)
+
+Taylor expansion up to second order : L(yi,fm−1(xi)) + g(m) N (cid:80) i=1 ii T(xi;Θm)2(cid:105) 2h(m) (cid:104)∂L(yi,f (xi)) g(m) i = ∂f (xi) function, and h(m)
+
+Taylor expansion up to second order : L(yi,fm−1(xi)) + g(m) F(Θm) ≈
+
+i T(xi;Θm) +
+
++ R(Θm), where (cid:105)
+
+is the gradient of loss (cid:105)
+
+f (xi)=fm−1(xi) (cid:104)∂2L(yi,f (xi)) ∂f (xi)2 of the Hessian of loss function (oﬀ-diagonals are zeros).
+
+ii =
+
+is the diagonal
+
+f (xi)=fm−1(xi)
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Penalties
+
+Take regression trees as examples : Let Jm be the number of leaf nodes (number of rectangles in the partition), γjm is the approximate constant (weight w) in the leaf node (region) Rjm
+
+The complexity of tree is the sum of L0 and L2 norm of {γjm} : R(Θm) = 2λ(cid:80)Jm 1 j=1 γ2 jm + µJm
+
+R =
+
+1 2
+
+λ(4 + 0.01 + 1) + 3µ
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Optimal solutions
+
+Reformulation of approximated cost function : N (cid:80) i=1
+
+Reformulation of approximated cost function : (cid:17)
+
+Reformulation of approximated cost function : Jm(cid:80) j=1 + µJm = (cid:105)
+
+g(m) i
+
+L(yi,fm−1(xi)) +
+
+F(Θm) ≈ (cid:16)(cid:80)
+
+γjm +
+
+(cid:17) h(m) ii + λ
+
+(cid:105)
+
+1 2 Jm(cid:80) j=1 j = (cid:80) G(m)
+
+xi∈Rjm
+
+(cid:104) G(m) j
+
+2(H(m) g(m) i
+
+γjm + 1
+
+j + λ)γ2 jm
+
++ µJm + constant, where
+
+and H(m)
+
+j = (cid:80)
+
+h(m) ii
+
+xi∈Rjm
+
+xi∈Rjm
+
+By diﬀerentiation w.r.t. γjm, we have the optimal solution : G(m) j H(m) j +λ • Simpliﬁed cost function :
+
+By diﬀerentiation w.r.t. γjm, we have the optimal solution : G(m) j H(m) j +λ • Simpliﬁed cost function :
+
+F(Θm) = −1 2
+
+Jm(cid:80) j=1
+
+(G(m) j H(m) j +λ
+
+)2
+
++ µJm + constant
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Structure Score
+
+Neglecting the constant term, we obtain the structure score : (G(m) j H(m) j +λ
+
+Neglecting the constant term, we obtain the structure score : (G(m) j H(m) j +λ
+
++ µJm
+
+It is similar to information gain : minimizing the structure score leads to the best tree
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Node Splitting - Greedy Algorithm
+
+When splitting a node into left (L) and right (R) child nodes, (cid:104) G2 HL+λ + G2 L R
+
+When splitting a node into left (L) and right (R) child nodes, (cid:104) G2 HL+λ + G2 L R
+
+left to right
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Greedy Algorithm for split ﬁnding
+
+Input : training set D = {(x1,y1),...,(xN,yN)}, loss function L(y,f (x)), the index set I = {i|xi ∈ Rjm} of current node Rjm, feature dimension d
+
+Output : best split
+
+1. Initialize gain = 0, G = (cid:80) 2. For k = 1 to K : 2.1 GL = 0, HL = 0 2.2 For j in sorted(I, by xjk), do
+
+1. Initialize gain = 0, G = (cid:80) 2. For k = 1 to K : 2.1 GL = 0, HL = 0 2.2 For j in sorted(I, by xjk), do
+
+i∈I gi, H = (cid:80)
+
+2.2.1 GL = GL + gj, HL = HL + hjj, GR = G − GL, HR = H − HL 2.2.2 score = max(score, G2 HL+λ + G2 3. Output split with max score
+
+HR+λ − G2
+
+L
+
+R
+
+H+λ)
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Loss Functions
+
+Square loss L(y,f ) = (y − f )2 : i = 2(fi − yi) = 2 × residue, h(m) g(m)
+
+ii = 2
+
+Logistic loss L(y,f ) = y ln(1 + e−f ) + (1 − y)ln(1 + ef ) : 1+e−fm−1(xi) + (1 − yi) ii = e−fm−1(xi) 1
+
+(cid:16)
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+Outlines
+
+Introduction
+
+Bagging and Random Forest
+
+Boosting and AdaBoost
+
+Gradient Boosting Decision Tree
+
+XGBoost (Optional)
+
+References
+
+Introduction Bagging and Random Forest Boosting and AdaBoost Gradient Boosting Decision Tree XGBoost (Optional) References
+
+References
+
+Œ(cid:226)'(cid:219)(cid:19)(cid:216)§˘(cid:228)(cid:140)Œ(cid:226)˘(cid:19) • –(cid:147)u§¯(cid:236)˘S§2016 • T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning : Data mining, Inference, and Prediction, 2nd Edition, 2009
+

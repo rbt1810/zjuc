@@ -1,0 +1,1512 @@
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Introduction to Big Data Analysis Clustering Analysis
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Clustering
+
+Also called data
+
+segmentation, group a collection of objects into subsets or /clusters0 • Results : objects in each
+
+cluster are more similar to one another than objects in diﬀerent clusters.
+
+Example : applications in consumption analysis
+
+Can be used in data preprocessing
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Concepts in Clustering
+
+Diﬀerent from classiﬁcation : it is unsupervised learning; no outputs or labels
+
+Central goal : Optimize the similarity (or dissimilarity) between the individual objects being clustered : • Obtain great similarity of samples within cluster • Obtain small similarity of samples between clusters
+
+Cost functions : not related to the outputs, but related to the similarity
+
+Two kinds of input data :
+
+n × n similarity (dissimilarity) matrix D : only depends on the distances between pairs of samples; may lose some information on data
+
+Original data with features X ∈ Rn×d
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Clustering Methods
+
+Clustering process :
+
+data preprocessing,
+
+especially standadization
+
+Similarity matrix • Clustering Methods • Determine the best number of clusters • Clustering methods :
+
+Partitional clustering :
+
+K-means • K-Medoids • Spectral clustering • DBSCAN
+
+Hierarchical clustering
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Introduction
+
+K-means clustering originates from signal processing, it is quite popular in image processing (segmentation)
+
+Group n samples to k clusters, making each sample belong to the nearest cluster
+
+In an image, each pixel is a sample
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Idea
+
+Data set {xi}n • Representatives : Mass center of kth-cluster Ck is ck, k = 1,...,K
+
+Sample xi belongs to cluster k if d(xi,ck) < d(xi,cm) for m (cid:54)= k, where d(xi,xj) is dissimilarity function
+
+Make the mass centers well-located so that the average distance between each sample to its cluster center is as small as possible
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Optimization Problem
+
+Let C : {1,...,n} → {1,...,k} be the assignment from the data indices to the cluster indices. C(i) = k means xi ∈ Ck n (cid:80) i=1 dij + (cid:80) C(j)(cid:54)=k 1 2
+
+Total point scatter : T = 1 2
+
+Loss function : within-cluster point scatter K (cid:80) k=1 K (cid:80) k=1
+
+Loss function : within-cluster point scatter K (cid:80) k=1 K (cid:80) k=1
+
+(cid:80)
+
+(cid:80)
+
+W(C) = 1 2
+
+dij ; between-cluster point scatter
+
+C(i)=k
+
+C(j)=k
+
+(cid:80)
+
+(cid:80)
+
+dij
+
+C(j)(cid:54)=k • Minimize W(C) is equivalent to maximize B(C)
+
+C(i)=k
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Dissimilarities
+
+Proximity matrices : n × n symmetric matrix D with nonnegative entries and zero diagonal elements provides information about dissimilarity between a pair of samples, this is not distance in general
+
+Dissimilarities based on attributes :
+
+d(xi,xj) = (cid:80)p dk(xik,xjk) = (xik − xjk)2, absolute distance dk(xik,xjk) = |xik − xjk|
+
+k=1 dk(xik,xjk); dk can be squared distance
+
+Weighted average : d(xi,xj) = (cid:80)p (cid:80)p ¯dk = 1 i=1 n2 inﬂuence to all features
+
+k=1 wkdk(xik,xjk) where
+
+(cid:80)n
+
+(cid:80)n
+
+j=1 dk(xik,xjk) = 2(cid:100)Var(Xk) will assign equal
+
+Dissimilarities based on correlation : d(xi,xj) ∝ 1 − ρ(xi,xj)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+K-Means (as Central Voronoi Tessellation)
+
+Minimizing W(C) is in general infeasible since this is a greedy algorithm that only works for small data sets
+
+Taking squared dissimilarity, W(C) = nk
+
+Taking squared dissimilarity, W(C) = nk
+
+(cid:80)
+
+(cid:107)xi − ¯xk(cid:107)2,
+
+C(i)=k
+
+n (cid:80) i=1
+
+where nk =
+
+I(C(i) = k) is the number of samples in
+
+(cid:80)
+
+(cid:80)
+
+cluster k, ¯xk = 1 nk
+
+(cid:107)xj − mk(cid:107)2
+
+xj = argmin mk
+
+C(j)=k
+
+C(j)=k
+
+min C
+
+W(C) ⇐⇒ min C,mk
+
+K (cid:80) k=1
+
+nk
+
+(cid:80)
+
+C(i)=k
+
+(cid:107)xi − mk(cid:107)2
+
+Alternating minimization :
+
+1. Given C, solve for mk =⇒ m∗ 2. Given mk, solve for C =⇒ C(i) = arg min 1(cid:54)k(cid:54)K
+
+k = ¯xk (choose representatives)
+
+(cid:107)xi − mk(cid:107)2
+
+(partitioning, equivalent to Voronoi tessellation for given center mk)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+K-Means Iterations
+
+The alternating iterations can stop when the mass centers {¯xk}K k=1 do not change
+
+Initial guess :
+
+Random guess, try the best one with smallest W(C)
+
+Base on other clustering methods (e.g., hierarchical clustering), choose the cluster centers as initial guess
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+How to choose K
+
+Minimizing Bayesian Information Criterion (BIC) :
+
+BIC(M|X) = −2logPr(X|ˆΘ,M) + p log(n), where M indicates the model, ˆΘ is the MLE of the model parameters in M, Pr(X|M) is the likelihood function, and p is the number of parameters in model M; trade-oﬀ between log-likelihood and model complexity
+
+Based on Minimum Description Length (MDL) : starting from large K, decreases K until the description length −logPr(X|ˆΘ,M) − logPr(Θ|M) achieves its minimum (similar to MAP)
+
+Based on Gaussian distribution assumption : starting from K = 1, increases K until the points in every cluster follow Gaussian distribution
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Pros and Cons
+
+Where it is good
+
+Intuitive, easy to implement • Low computational complexity, O(tnpK), where t is the number of iterations
+
+Disadvantage
+
+Need to specify K ﬁrst (K is tuning parameter) • Strong dependence on the initial guess of cluster center • Easy to stuck at local minimum • Naturally assume ball-shaped data, hard to deal with data which are not ball-shaped
+
+Sensitive to outliers
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Variant : Bisecting K-means
+
+Invented to deal with initial guess of center selection • Idea : sequentially divide the poorest cluster into two sub-clusters
+
+1. Initially gather all data into one cluster 2. Repeat :
+
+2.1 Select the cluster k that maximizes the within-cluster point
+
+scatter (cid:80)
+
+(cid:80)
+
+(cid:107)xi − xj(cid:107)2
+
+C(i)=k
+
+C(j)=k
+
+2.2 Use 2-means to divide cluster k into two sub-clusters, with
+
+random initial guess of two centers
+
+2.3 Repeat step 2.2 p times, choose the best pair of clusters that
+
+minimizes the within-cluster point scatter
+
+3. Stop when there are K clusters (Or you can stop any time you like to have a satisfactory clustering result)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Variant : K-medoids
+
+Invented to overcome the inﬂuence of outliers
+
+Can deal with data of general type, assuming general dissimilarity d(xi,xj)
+
+Idea : centers for each cluster are restricted to be one of the observations assigned to that cluster
+
+Alternating minimization :
+
+1. Given C, solve for mk = xi∗ k
+
+1. Given C, solve for mk = xi∗ k
+
+1. Given C, solve for mk = xi∗ k = arg min
+
+(cid:80)
+
+d(xi,xj) (choose the
+
+C(j)=k
+
+2. Given mk, solve for C =⇒ C(i) = arg min 1(cid:54)k(cid:54)K
+
+d(xi,mk)
+
+More robust than K-means
+
+More computational eﬀort when solving for the center in step k) comparing to O(nk) in K-means
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Other Variants
+
+K-medians : use Manhattan distance (L1-distance) instead in K-means; then the centers are not means, but medians
+
+K-means++ : designed to select good initial centers that are far away from each other
+
+Rough-set-based K-means : each sample could be assigned to more than one cluster
+
+Figure: K-medoids
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Hierarchical Clustering
+
+Clustering in diﬀerent
+
+hierarchies, generating tree structure
+
+Two approaches :
+
+Agglomerate clustering : bottom-up
+
+Figure: Agglomerate clustering
+
+Divisive clustering : top-down
+
+Limitation : once merged or divided, the operation cannot be modiﬁed
+
+Figure: Divisive clustering
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Agglomerate Clustering
+
+Given n samples and proximity matrix, do the following steps :
+
+1. Let every observation represent a singleton cluster 2. Merge the two closest clusters into one single cluster 3. Calculate the new proximity matrix (dissimilarity between two clusters)
+
+4. Repeat step 2 and 3, until all samples are merged into one cluster
+
+Three methods for computing intergroup dissimilarity :
+
+Single linkage (SL) • Complete linkage (CL) • Average linkage (AL)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Intergroup Dissimilarity
+
+Single linkage : Greatest similarity or least dissimilarity dSL(Ci,Cj) = d(x,y)
+
+min x∈Ci,y∈Cj
+
+Complete linkage : Least similarity or greatest dissimilarity dSL(Ci,Cj) = d(x,y) max x∈Ci,y∈Cj
+
+Average linkage : Average similarity or dissimilarity dAL(Ci,Cj) = d(x,y)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Generalized Agglomerative Scheme
+
+Input : training set D = {(x1),...,(xn)}, dissimilarity function d(Ci,Cj)
+
+Output : A dendrogram containing {Rt}n−1 clustering result at time t
+
+Output : A dendrogram containing {Rt}n−1 clustering result at time t
+
+1. Initialize the clustering result R0 = {{x1},{x2},...,{xn}}, t = 0
+
+2. Do iterations : 2.1 t = t + 1 2.2 Choose (Ci,Cj) from Rt−1 so that d(Ci,Cj) = min (r,s) d(Cr,Cs)
+
+3. Stop at t = n − 1 when |Rn−1| = 1, return {Rt}n−1 t=0
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Generalized Divisive Scheme
+
+Input : training set D = {(x1),...,(xn)}, dissimilarity function d(Ci,Cj)
+
+Output : A dendrogram containing {Rt}n−1 i=1 is the clustering result at time t
+
+1. Initialize R0 = {X}, t = 0 2. Do iterations : 2.1 t = t + 1 2.2 For i = 1 to t, do : 2.2.1 Choose (C1 t−1,i,C2 d(C1 t−1,i,C2 t−1,i) =
+
+t−1,i) from Ct−1,i so that
+
+max G (cid:83) H=Ct−1,i
+
+d(G,H)
+
+2.3 Choose it−1 so that it−1 = argmax 2.4 Rt = (Rt−1 \ {Ct−1,it−1})(cid:83){C1
+
+d(C1 i t−1,i,C2
+
+t−1,i,C2 t−1,i})
+
+t−1,i)
+
+3. Stop at t = n − 1 when |Rn−1| = n, return {Rt}n−1 t=0
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Pros and Cons
+
+Where it is good
+
+Hierarchical clustering computes tree structure of the whole clustering process in one stroke
+
+SL and CL are sensitive to outliers, while AL gives a compromise
+
+As n → ∞, dAL(Ci,Cj) → (cid:82) (cid:82) d(x,y)pi(x)pj(y)dxdy, the
+
+expected dissimilarity w.r.t. the two densities pi(x) and pj(x) • In contrast, dSL(Ci,Cj) → 0 and dCL(Ci,Cj) → ∞ independent
+
+of pi(x) and pj(x)
+
+Disadvantage
+
+Computationally intensive • Once a sample is incorrectly grouped into a branch, it will stay in the clusters corresponding to that branch no matter how you threshold the tree
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Density-based Clustering
+
+Limitations of hierarchical clustering and K-means clustering : tend to discover convex clusters
+
+Density-based Clustering : looks for high-density regions separated by low-density regions, could discover clusters of any shape
+
+Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Concepts
+
+Three types of points :
+
+Core point : # of samples in its (cid:15)-neighborhood (cid:62) MinPts • Boundary point : it lies in the (cid:15)-neighborhood of some core point, # of samples in its (cid:15)-neighborhood < MinPts
+
+Noise point : neither core point nor boundary point, it lies in the sparse region
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Concepts
+
+(cid:15)-neighborhood : for each sample xi ∈ D, N(cid:15)(xi) = {xj ∈ D|d(xi,xj) (cid:54) (cid:15)}
+
+Directly density-reachable : if the sample xj ∈ N(cid:15)(xi), and xi is core point, then xj is directly density-reachable from xi
+
+Density-reachable : for xi and xj, if there exist p1,...,pm, s.t. p1 = xi,pm = xj, and pk+1 is directly density-reachable from pk, then xj is density-reachable from xj
+
+Density-connected : if there exists p, s.t. both xi and xj are density-reachable from p, then xi and xj are density-connected
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+DBSCAN Algorithm
+
+Input : training set D = {(x1),...,(xn)}, dissimilarity function
+
+d(Ci,Cj), parameters MinPts,(cid:15) • Output : a set of clusters {Ct}
+
+1. Mark all samples in D as non-processed 2. For each sample p ∈ D, do :
+
+2.1 If p has been grouped into some cluster or marked as noise
+
+point, go to check next sample
+
+2.2 Else, if |N(cid:15)(p)| < MinPts, then mark p as boundary point or
+
+noise point
+
+2.3 Else, mark p as core point, construct cluster C = N(cid:15)(p). For
+
+each q ∈ N(cid:15)(p), do : 2.3.1 If |N(cid:15)(q)| (cid:62) MinPts, then put all un-clustered points in N(cid:15)(q)
+
+into C
+
+3. Stop when all samples in D have been clustered
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Examples ((cid:15) = 0.11, MinPts = 5)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+DBSCAN vs. K-means
+
+DBSCAN
+
+K-Means
+
+The clustering result is not a complete partition of original dataset (noise points are excluded)
+
+Could deal with clusters with any shape and size
+
+The clustering result is a complete partition of original dataset
+
+The clusters are nearly ball-shaped
+
+Sensitive to outliers
+
+Could deal with noise points and outliers
+
+The deﬁnition of cluster centers must be meaningful
+
+The deﬁnition of density must be meaningful
+
+Eﬃcient to deal with high-dimensional data
+
+Not eﬃcient when dealing with high-dimensional data • No implicit assumptions on the sample distribution
+
+The samples implicitly follow the Gaussian distribution assumption
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Pros and Cons
+
+Computational complexity O(n × T), where t is the time for searching (cid:15)-neighborhood); in the worst case, O(n2)
+
+In low-dimensional space, could be improved as O(nlogn) by KD-tree
+
+Where it is good
+
+Fast for clustering • Better to deal with noise points • Eﬀective for clusters of any shape
+
+Disadvantage
+
+Need large memory • Bad performance when the density is not well-distributed and the between-cluster distances are large
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Gaussian Mixture Models
+
+We want to estimate the density of given data set. This is an unsupervised learning problem.
+
+Commonly used approach is the parametric estimation, such as maximum likelihood estimate (MLE). • Consider the following set of data points :
+
+0.39 0.06
+
+0.12 0.48
+
+0.94 1.01
+
+1.67 1.68
+
+1.76 1.80
+
+2.44 3.25
+
+3.72 4.12
+
+4.28 4.60
+
+4.92 5.28
+
+5.53 6.22
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Latent Variables
+
+A single Gaussian family would not be appropriate. A mixture of two Gaussian distributions seems good.
+
+Z1 ∼ N(µ1,σ2
+
+1), Z2 ∼ N(µ2,σ2
+
+2), Z = (1 − Y)Z1 + YZ2,
+
+where Y ∈ {0,1} with P(Y = 1) = c.
+
+In general, for mixture of K Gaussian distributions, we assume there is a latent variable Y indicating which distribution the data x is sampled from, i.e., P(Y = y) = cy with y ∈ {1,...,K}. Given Y = y, the random variable X follows the conditional distribution : (cid:17) .
+
+The density of X is then
+
+P(X = x) =
+
+K (cid:88)
+
+P(Y = y)P(X = x|Y = y)
+
+y=1
+
+=
+
+K (cid:88)
+
+y=1
+
+cy
+
+1
+
+(2π)d/2(Σy)1/2 exp
+
+(cid:16)
+
+−
+
+1 2
+
+(x − µy)TΣ−1
+
+y (x − µy)
+
+(cid:17)
+
+.
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+MLE of Gaussian Mixture
+
+Let θ = (cy,µy,Σy)K i=1 is
+
+Let θ = (cy,µy,Σy)K i=1 is
+
+L(θ) =
+
+n (cid:88)
+
+log Pθ(X = xi) =
+
+n (cid:88)
+
+log
+
+(cid:16) K (cid:88)
+
+Pθ(X = xi,Y = y)
+
+(cid:17)
+
+.
+
+i=1
+
+i=1
+
+y=1
+
+MLE : θ = arg max θ
+
+L(θ) is hard due to the summation inside the log.
+
+By Jensen’s inequality (log EX (cid:62) E log X),
+
+L(θ) =
+
+n (cid:88)
+
+i=1
+
+log
+
+(cid:16) K (cid:88)
+
+y=1
+
+Qi,y
+
+Pθ(X = xi,Y = y) Qi,y
+
+(cid:17)
+
+(cid:62)
+
+n (cid:88)
+
+(cid:16) K (cid:88)
+
+Qi,y log
+
+Pθ(X = xi,Y = y) Qi,y
+
+(cid:17)
+
+= G(Q,θ)
+
+i=1
+
+y=1
+
+=
+
+n (cid:88)
+
+K (cid:88)
+
+Qi,y log
+
+(cid:16)
+
+Pθ(X = xi,Y = y)
+
+(cid:17)
+
+−
+
+n (cid:88)
+
+K (cid:88)
+
+Qi,y log Qi,y.
+
+i=1
+
+y=1
+
+i=1
+
+y=1
+
+where Qi,y approximates the probability of P(Yi = y) with (cid:80)k and “=” iﬀ Pθ(X=xi,Y=y)
+
+y=1 Qi,y = 1,
+
+= C, ∀i,y ⇔ Qi,y = Pθ(Y = y|X = xi).
+
+Qi,y
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Expectation-Maximization (EM) Algorithm (Dempster, Laird, and Rubin, 1977’)
+
+Alternating update :
+
+1. E-Step : Given θ(m), solve for
+
+Q(m+1) = Eθ(m)(I(Y=y)|X = xi) = Pθ(m)(Y = y|X = xi);
+
+2. M-Step : Given Q(m+1), solve for θ(m+1) = argmax θ
+
+2. M-Step : Given Q(m+1), solve for θ(m+1) = argmax θ
+
+(assume this is tractable).
+
+Initial values of Q(0) and θ(0) are chosen randomly. • Terminate until satisfactory (not always converge to the maximum, but guaranteed convergent).
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Illustrative Example (Algorithm)
+
+EM Algorithm for two-component Gaussian Mixture :
+
+1. Take initial guesses for the parameters ˆθ1 = (ˆµ1, ˆσ2 ˆcφ ˆθ2
+
+2. E-Step : ˆqi = P(Yi = 1|Z = zi, ˆθ1, ˆθ2) = (1−ˆc)φ ˆθ1
+
+2. E-Step : ˆqi = P(Yi = 1|Z = zi, ˆθ1, ˆθ2) = (1−ˆc)φ ˆθ1
+
+1), ˆθ2 = (ˆµ2, ˆσ2 (zi) (zi)+ˆcφ ˆθ2
+
+2), ˆc ;
+
+i = 1,2,...,n ;
+
+3. M-Step : Compute the weighted means and variances :
+
+ˆµ1 =
+
+ˆµ2 =
+
+(cid:80)n (cid:80)n
+
+i=1(1 − ˆqi)zi i=1(1 − ˆqi) i=1 ˆqizi i=1 ˆqi
+
+(cid:80)n (cid:80)n
+
+ˆσ2 1 =
+
+ˆσ2 2 =
+
+(cid:80)n
+
+i=1(1 − ˆqi)(zi − ˆµ1)2 i=1(1 − ˆqi) i=1 ˆqi(zi − ˆµ2)2 i=1 ˆqi
+
+(cid:80)n
+
+(cid:80)n
+
+(cid:80)n
+
+and the mixing probability ˆc = 1 n
+
+(cid:80)n
+
+i=1 ˆqi ;
+
+4.
+
+Iterate between E-Step and M-Step until convergence.
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Illustrative Example (Result)
+
+Iteration ˆc
+
+1 0.485
+
+5 0.493
+
+10 0.523
+
+15 0.544
+
+20 0.546
+
+The ﬁnal MLEs are ˆµ1 = 4.62, ˆσ2 ˆc = 0.546.
+
+1 = 0.87, ˆµ2 = 1.06, ˆσ2
+
+2 = 0.77,
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+EM as Maximization-Maximization
+
+Introduce entropies as penalty to the modiﬁed objective function :
+
+G(Q,θ) = F(Q,θ) −
+
+n (cid:88)
+
+K (cid:88)
+
+Qi,y log Qi,y,
+
+i=1
+
+y=1
+
+where Q ∈ Q = {Q ∈ [0,1]n,K : (cid:80)K
+
+y=1 Qi,y = 1,∀i}
+
+M-Step is equivalent to : θ(m+1) = argmax θ
+
+G(Q(m+1),θ)
+
+E-Step is equivalent to : Q(m+1) = argmax Q∈Q conditional maximization) : by Jensen’s inequality,
+
+E-Step is equivalent to : Q(m+1) = argmax Q∈Q conditional maximization) : by Jensen’s inequality,
+
+G(Q,θ(m)) =
+
+(cid:54)
+
+n (cid:88)
+
+i=1
+
+n (cid:88)
+
+i=1
+
+(cid:16) K (cid:88)
+
+Qi,y log
+
+y=1 (cid:16) K (cid:88)
+
+log
+
+Qi,y
+
+y=1
+
+Pθ(m)(X = xi,Y = y) Qi,y
+
+Pθ(m)(X = xi,Y = y) Qi,y
+
+(cid:17)
+
+(cid:17)
+
+= L(θ(m))
+
+where “=” iﬀ
+
+P
+
+θ(m)(X=xi,Y=y) Qi,y
+
+= C, ∀i,y ⇔ Qi,y = Pθ(m)(Y = y|X = xi).
+
+• Monotonicity : L(θ(m+1)) (cid:62) L(θ(m))
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+EM for Gaussian Mixture as Soft K-Means
+
+For simplicity, assume Σy = I for any y. • E-Step (Partition-Step in K-Means) : Pθ(m)(Y = y|X = xi) = 1 Zi where Zi is a normalization factor. (cid:80)n
+
+(cid:16)
+
+y (cid:107)2(cid:17)
+
+c(m) y
+
+2(cid:107)xi − µ(m)
+
+− 1
+
+exp
+
+(cid:16)
+
+(cid:80)K
+
+log cy − 1
+
+M-Step : max cy,µy leads to
+
+M-Step : max cy,µy leads to
+
+y=1 Pθ(m)(Y = y|X = xi)
+
+i=1
+
+,
+
+µy =
+
+n (cid:88)
+
+Pθ(m)(Y = y|X = xi)xi
+
+(Mean-Step in K-Means)
+
+i=1
+
+cy =
+
+(cid:80)n
+
+i=1 Pθ(m)(Y = y|X = xi) (cid:80)n
+
+(cid:80)K
+
+i=1 Pθ(m)(Y = y(cid:48)|X = xi)
+
+y(cid:48)=1
+
+(for partition in next step)
+
+“Soft” because the partition is done in probabilistic sense instead of deterministic sense and the average is weighted according to the probability.
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Summary of EM Algorithm
+
+EM is unsupervised learning, an approach to perform MLE for mixture models with latent variables
+
+EM is an alternating optimization • EM can be viewed as soft K-Means • EM can deal with problems including missing data (treat missing data as latent variables and use Bayes formula, see Section 8.5.2 in the book “Elements of Statistical Learning” for general EM algorithm).
+
+EM can be used in the framework of Bayesian reasoning (MAP), e.g., Variational Bayesian EM algorithm
+
+EM is related to generative model, e.g., EM for Gaussian mixture is a population approach to learning the sample distributions, analogous to Gibbs sampling which is sampling approach to learning the distribution. • EM is a general methodology, even used in natural language processing (e.g., latent dirichlet allocation), deep learning (e.g., restricted Boltzmann machine, deep belief network)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Graphs
+
+A set of data points {x1,...,xn}, similarity sij or distance dij • Graph G = (V,E), where V = {vi}n representing a sample xi
+
+vi and vj are connected (wij > 0) if sij > (cid:15) where (cid:15) (cid:62) 0 is a threshold; then the edge is weighted by wij = sij
+
+Undirected graph wij = wji, adjacency matrix W = {wij} • Degree of vi : di = (cid:80)n j=1 wij ; D = diag(d1,...,dn)
+
+W =
+
+
+
+       
+
+0 1 1 0 0 0 0
+
+1 0 1 0 0 0 0
+
+1 1 0 1 1 0 0
+
+0 0 1 0 0 1 1
+
+0 0 1 0 0 0 0
+
+0 0 0 1 0 0 0
+
+0 0 0 1 0 0 0
+
+
+
+       
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Similarity Graphs
+
+(cid:15)-neighborhood graph : vi and vj are connected if
+
+d(xi,xj) < (cid:15); unweighted graph; (cid:15) ∼ (logn/n)p ; diﬃcult to choose (cid:15) for data on diﬀerent scales
+
+k-nearest neighbor graph : connect vi to vj if vj is among the k-nearest neighbors of vi, directed graph; connect vi and vj if vi and vj are among the k-nearest neighbors of each other, mutual k-nearest neighbor graph, undirected; k ∼ logn
+
+Fully connected graph : connect all points with positive similarity with each other; model local neighborhood relationships; Gaussian similarity function s(xi,xj) = exp(−(cid:107)xi − xj(cid:107)2/(2σ2)), where σ controls the width of neighborhoods; adjacency matrix is not sparse; σ ∼ (cid:15)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Graph Laplacian
+
+Unnormalized graph Laplacian : L = D − W
+
+Has 1 as an eigenvector corresponding to the eigenvalue 0 • Symmetric and positive deﬁnite : fTLf = 1 2 • Non-negative, real-valued eigenvalues 0 = λ1 (cid:54) λ2 (cid:54) ··· (cid:54) λn • The eigenspace of eigenvalue 0 is spanned by the indicator vectors 1A1,...,1Ak, where A1,...,Ak are k connected components in the graph (cid:80)
+
+Normalized graph Laplacians :
+
+Symmetric Laplacian : Lsym = D−1/2LD−1/2 • Random walk Laplacian : Lrw = D−1L • Both have similar properties as L
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Spectral Clustering
+
+Graph cut : segment G into K clusters A1,...,AK, where Ai ⊂ V, this is equivalent to minimize the graph cut function
+
+cut(A1,...,AK) =
+
+1 2
+
+K (cid:88)
+
+k=1
+
+W(Ak, ¯Ak)
+
+where W(A,B) = (cid:80) singleton and its complement
+
+i∈A,j∈B wij. Trivial solution consists of a
+
+RatioCut : RatioCut(A1,...,AK) = 1 2
+
+K (cid:80) k=1
+
+W(Ak,¯Ak) |Ak|
+
+, where |A|
+
+is the number of vertices in A
+
+Normalized cut : Ncut(A1,...,AK) = 1 2 vol(A) = (cid:80)
+
+i∈A di ; it is NP-hard
+
+K (cid:80) k=1
+
+W(Ak,¯Ak) vol(Ak) , where
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Relaxation of RatioCut to Eigenvalue Problems with K = 2
+
+min A⊂V
+
+RatioCut(A, ¯A)
+
+Binary vector f = (f1,...,fn)T as indicator function : if vi ∈ A
+
+Binary vector f = (f1,...,fn)T as indicator function : |¯A|/|A|, (cid:112)
+
+Binary vector f = (f1,...,fn)T as indicator function : if vi ∈ A
+
+||A|/¯A|,
+
+if vi ∈ ¯A
+
+f TLf = |V| · RatioCut(A, ¯A),
+
+n (cid:80) i=1
+
+fi = 0, and (cid:107)f (cid:107)2
+
+2 = n
+
+Relax f to be real-valued : min f ∈Rn n
+
+f TLf , subject to f ⊥ 1 and
+
+By Rayleigh-Ritz theorem, the solution f is the eigenvector corresponding to the second smallest eigenvalue of L
+
+Cluster {fi}n else vi ∈ ¯A
+
+i=1 to two groups C and ¯C : vi ∈ A if fi ∈ C, and
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Relaxation of RatioCut and Ncut with general K
+
+RatioCut
+
+Binary vector hj = (h1j,...,hnj)T, j = 1,...,K, as indicator if vi ∈ Aj
+
+Binary vector hj = (h1j,...,hnj)T, j = 1,...,K, as indicator if vi ∈ Aj
+
+j Lhj = Cut(Aj, ¯Aj)/|Aj|, H = (h1,...,hK) ∈ Rn×K, RatioCut(A1,...,AK) = Tr(HTLH), HTH = I
+
+hT
+
+Relax H : min H∈Rn×K
+
+Tr(HTLH), subject to HTH = I
+
+Solution : the ﬁrst K eigenvectors of L as columns • Cluster the rows of H to K groups
+
+Ncut
+
+Replacing |Aj| by vol(Aj), the same argument for the Tr(HTLH), subject to HTDH = I
+
+Replacing |Aj| by vol(Aj), the same argument for the relaxation of Ncut : min
+
+Solution : the ﬁrst K eigenvectors of Lrw as columns
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Spectral Clustering Algorithm
+
+Input : Similarity matrix S ∈ Rn×n, number k of clusters • Output : Clusters A1,...,AK of indices of vertices • Algorithm :
+
+1. Construct a similarity graph G = (V,E) with weighted adjacency matrix W
+
+2. Compute the unnormalized graph Laplacian L or normalized graph Laplacian Lsym or Lrw
+
+3. Compute the ﬁrst K eigenvectors U = [u1,...,uK] ∈ Rn×K 4. In the case of Lsym, normalize the rows of U to norm 1; for the other two cases, skip this step
+
+5. Let yi ∈ RK be the i-th row of U, use K-means to cluster the i=1 into clusters C1,...,CK
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Mixture of 4 Gaussians on R :
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Interpretations
+
+Usually better than K-means
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Two Types of Indices
+
+External indices : validate against ground truth (labels), or compare two clusters (how similar)
+
+Purity • Jaccard coeﬃcient and Rand index
+
+Mutual information • Internal indices : validate without external info, based on the within-cluster similarity and between-cluster distance • Davies-Bouldin index
+
+(DBI)
+
+Silhouette coeﬃcient (SI)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Purity
+
+Let nij be the number of samples that belong to label j but were assigned to cluster i
+
+Then ni = (cid:80)C • pij = nij/ni is the probability distribution in cluster i • Purity of cluster i : pi (cid:44) max • Total purity (cid:44) (cid:80) i j
+
+j=1 is the total number of samples in cluster i
+
+100%
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Confusion Matrix
+
+SS (True Positive or TP) :
+
+# of pairs of samples belonging to the same cluster in both models
+
+DD (True Negative or TN) : # of pairs of samples belonging to diﬀerent clusters in both models
+
+DS (False Negative or FN) : # of pairs of samples belonging to diﬀerent clusters in clustering model, but the same cluster in reference model
+
+SD (False Positive or FP) : # of pairs of samples belonging to the same cluster in clustering model, but diﬀerent clusters in reference model
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Jaccard Coeﬃcient and Rand Index
+
+Rand index (RI) : RI =
+
+SS+DD
+
+SS+SD+DS+DD ∈ [0,1], similar to the
+
+accuracy in classiﬁcation problems
+
+Jaccard coeﬃcient (JC) : JC =
+
+SS
+
+SS+SD+DS ∈ [0,1], compare
+
+the similarity and diversity of the samples
+
+Example : # of pairs in the same cluster in clustering model 6 + C2 +C2 (cid:124)
+
+Example : # of pairs in the same cluster in clustering model 5 = 40, and
+
+= 20, so SD = 20; # of
+
+pairs in the same cluster in clustering model =DS + DD = 6 × 6 + 6 × 5 + 6 × 5 = 96, and +1 × 5 + 1 × 2 + 5 × 2 DS = 4 × 1 (cid:124) (cid:123)(cid:122) (cid:125) (cid:123)(cid:122) (cid:125) A B DD = 72.
+
++1 × 3 (cid:124) (cid:123)(cid:122) (cid:125) C
+
+(cid:124)
+
+= 24, so
+
+RI =
+
+20 + 72 20 + 20 + 24 + 72
+
+= 0.68,
+
+JC =
+
+20 20 + 20 + 24
+
+= 0.31
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Mutual Information (Wikipedia)
+
+Mutual information (MI) measures the uncertainty decrement of one random variable given another random variable
+
+Entropy : H(X) = −(cid:80) x
+
+Conditional entropy :
+
+p(x)log p(x)
+
+Probability that a sample belongs to both cluster ui and vj : pUV(i,j) =
+
+(cid:84) vj| n
+
+|ui
+
+H(X|Y) =
+
+(cid:88)
+
+=
+
+(cid:88)
+
+y p(y)(cid:0) −
+
+p(y)H(X|Y = y)
+
+(cid:88)
+
+p(x|y)log p(x|y))(cid:1)
+
+Its marginal probabilities are : vj n
+
+Mutual information : I(U,V) = C (cid:80) j=1
+
+pUV(i,j)log pUV (i,j) pU(i)pV (j)
+
+y
+
+x
+
+MI : I(X;Y) = H(X) − H(X|Y)
+
+MI attains its maximum
+
+min{H(U),H(V)} only when we have many small clusters
+
+Normalized MI : NMI(U,V) =
+
+I(U,V) (H(U)+H(V))/2
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Davies-Bouldin Index and Silhouette Coeﬃcient
+
+Davies-Bouldin index (DBI) measures both the within-cluster divergence and between-clusters distance
+
+DBI = 1 k
+
+k (cid:80) i=1
+
+max j(cid:54)=i
+
+(cid:16)div(ci)+div(cj) d(µi,µj)
+
+(cid:17)
+
+where div(ci) represents the
+
+average distance of samples within cluster ci, µi is the center of cluster ci
+
+Silhouette Coeﬃcient (SC) : SC = bi−ai
+
+max(ai,bi), where ai is average distance between the i-th sample and every other sample in the same cluster, bi is the minimal distance from the i-th sample to the other clusters; range is [−1,1]
+
+The smaller the DBI, or the larger the SC, the better the clustering results
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Outlines
+
+Introduction
+
+K-Means Clustering
+
+Hierarchical Clustering
+
+DBSCAN
+
+Expectation-Maximization Algorithm
+
+Spectral Clustering
+
+Model Assessment
+
+Case Study
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Case Study
+
+Use clustering to group the cars with similar performance based on parameters of the cars
+
+Dataset comes from “Auto” in the R package ISLR.
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Hierarchical Clustering
+
+Scaling of the feature values : Auto Scaled
+
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+Construct linkage matrix : Z = linkage(Auto Scaled, method = ’complete’, metric = ’euclidean’), possible choice for metric could be ’euclidean’, ’cityblock’, ’minkowski’, ’cosine’, ’correlation’, ’hamming’, ’jaccard’, etc.
+
+Data structure of linkage matrix : in the t-th iteration, clusters Ci with index “Z[i, 0]” and Cj with index “Z[i, 1]” are combined to form cluster Cq with index “n + i”; “Z[i, 2]” is the distance between Ci and Cj ; “Z[i, 3]” is the number of samples in Cq
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+Dendrogram
+
+dendrogram(Z, no labels = True)
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+K-Means Clustering
+
+from sklearn.cluster import KMeans
+
+clf = KMeans(n clusters=3, n init=1, verbose=1)
+
+clf.ﬁt(Auto Scaled)
+
+Cluster 1 : (economy or compact vehicles) high mpg, low horsepower, low weight; cluster 2 : (luxury vehicles) low mpg, high horsepower, high weight; cluster 0 : intermediate performance
+
+Introduction K-Means Clustering Hierarchical Clustering DBSCAN Expectation-Maximization Algorithm Spectral Clustering Model Assessment Case Study
+
+References
+
+Œ(cid:226)'(cid:219)(cid:19)(cid:216)§˘(cid:228)(cid:140)Œ(cid:226)˘(cid:19) • –(cid:147)u§¯(cid:236)˘S§2016 • T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning : Data mining, Inference, and Prediction, 2nd Edition, 2009
+
+Arthur, D., Vassilvitskii, S. “k-means++ : the advantages of careful seeding”. Proceedings of the eighteenth annual ACM-SIAM symposium on Discrete algorithms, Society for Industrial and Applied Mathematics Philadelphia, PA, USA. pp. 1027ı1035, 2007
+
+Lingras P, West C, Interval Set Clustering of Web Users with Rough Kmeans, Journal of Intelligent Information Systems 23(1) :5ı16, 2004
+

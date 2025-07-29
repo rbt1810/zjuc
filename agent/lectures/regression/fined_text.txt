@@ -1,0 +1,968 @@
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Introduction to Big Data Analysis Regression
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+References
+
+Introduction
+
+Linear Regression
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Regularizations
+
+Outlines
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Regression
+
+Proposed by Francis Galton (left) and Karl Pearson (right), in the publication “Regression towards mediocrity in hereditary ”
+
+The characteristics (e.g., height) in the oﬀspring regress towards a mediocre point (mean) of that of their parents • Generalization : predict the dependent variables y from the independent variables x : y = f (x) or y = E[y|x]
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Applications
+
+Predict medical expenses from the individual proﬁles of the patients
+
+Predict the scores on Douban from the quality of the movies
+
+Predict the tips from the total expenses
+
+References
+
+Introduction
+
+Linear Regression
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Regularizations
+
+Outlines
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Univariate Linear Model
+
+Linear model : y = w0 + w1x + (cid:15), where w0 and w1 are regression coeﬃcients, (cid:15) is the error or noise
+
+Assume (cid:15) ∼ N(0,σ2), where σ2 is a ﬁxed but unknown variance; then y|x ∼ N(w0 + w1x,σ2)
+
+Assume the samples {xi,yi}n
+
+i=1 are generated from this conditional distribution, i.e., yi|xi ∼ N(w0 + w1xi,σ2)
+
+Intuitively, ﬁnd the best straight line (w0 and w1) such that the sample points ﬁt it well, i.e., the residuals are minimized, n (cid:88)
+
+Intuitively, ﬁnd the best straight line (w0 and w1) such that the sample points ﬁt it well, i.e., the residuals are minimized, n (cid:88)
+
+(yi − w0 − w1xi)2
+
+i=1
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Multivariate Linear Model
+
+Linear model : y = f (x) + (cid:15) = w0 + w1x1 + ··· + wpxp + (cid:15), where w0,w1,...,wp are regression coeﬃcients, x = (x1,...,xp)T is the input vector whose components are independent variables or attribute values, (cid:15) ∼ N(0,σ2) is the noise
+
+For the size n samples {(xi,yi)}n
+
+i=1, let y = (y1,...,yn)T be the response
+
+or dependent variables, w = (w0,w1,...,wp)T, X = [1n,(x1,...,xn)T] ∈ Rn×(p+1), and ε = ((cid:15)1,...,(cid:15)n)T ∼ N(0,σ2In).
+
+y = Xw + ε 
+
+1 x11 1 x21 ... ... 1 xn1
+
+   
+
+X =
+
+··· ··· ... ···
+
+x1p x2p ... xnp
+
+
+
+   
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Least Square (LS)
+
+Minimize the total residual sum-of-squares : RSS(w) = (cid:80)n
+
+i=1(yi − w0 − w1x1 − ··· − wpxp)2 = (cid:107)y − Xw(cid:107)2 2
+
+When XTX is invertible, the minimizer ˆw satisﬁes
+
+∇wRSS(ˆw) = 0 ⇒ ˆw = (XTX)−1XTy
+
+The prediction ˆy = X(XTX)−1XTy = Py is a projection of y onto the linear space spanned by the column vectors of X; P = X(XTX)−1XT is the projection matrix satisfying P2 = P
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Maximal Likelihood Estimate (MLE)
+
+A probabilistic viewpoint :
+
+y|x ∼ N(w0 + w1x1 + ··· + wpxp,σ2)
+
+Likelihood function :
+
+L(w;X,y) = P(y|X,w) = Πn
+
+i=1P(yi|xi,w) with
+
+P(yi|xi,w) = 1√
+
+2πσ
+
+e−
+
+(yi−w0−w1xi1−···−wpxip)2 2σ2
+
+Maximal likelihood estimate : given the samples from some unknown parametric distribution, ﬁnd the parameters such that the samples the most probably seem to be drawn from that distribution, i.e., ˆw = argmaxw L(w;X,y) • Equivalent to maximize the log-likelihood function i=1(yi − w0 − w1xi1 − ··· − wpxip)2
+
+The same minimizer as LS : ˆw = (XTX)−1XTy
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Projection by Orthogonalization
+
+Another useful formulation : let ¯y = 1 n (cid:80)n
+
+Another useful formulation : let ¯y = 1 n ¯x = 1 n centralized data {˜xi, ˜yi}n RSS(˜w) = (cid:80)n with ˆw0 = ¯y − ˆ˜wT¯x
+
+i=1 xi, then OLS can be formulated by using the
+
+i=1 = {xi − ¯x,yi − ¯y}n i=1(˜yi − w1˜xi1 − ··· − wp˜xip)2 = (cid:107)˜y − ˜X˜w(cid:107)2 2,
+
+i=1,
+
+Ordinary least square (OLS) prediction ˆy = Py is the projection of y on the linear space spanned by the columns of X, i.e., X = Span{x·,0,x·,1,...,x·,p}, recall that x·,0 = 1n • If {x·,0,x·,1,...,x·,p} forms a set of orthonormal basis, then
+
+ˆy = (cid:80)p
+
+i=0 < y,x·,i > x·,i
+
+If not, we can ﬁrst do orthogonalization by Gram-Schmidt procedure for the set {x·,0,x·,1,...,x·,p}
+
+Similar orthogonalization procedures can be done by QR decomposition or SVD of the matrix XTX (classic topics in numerical linear algebra)
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Regression by Successive Orthogonalization
+
+The expansion of y on the standard orthonormal basis after Gram-Schmidt procedure can be summarised in the following algorithm :
+
+1. Initialize z0 = x0 = 1n 2. For j = 1,...,p :
+
+Regress xj on {z0,...,zj−1} to produce coeﬃcients ˆγlj =< zl,xj > / < zl,zl > with l = 0,...,j − 1 and residual vectors zj = xj − (cid:80)j−1
+
+k=0 ˆγkjzk 3. Regress y on the residual zp to give the estimate ˆwp • If xp is highly correlated with some of the other xk’s, the
+
+residual vector zp will be close to zero; in such situation, the coeﬃcient ˆwp with small Z-score ˆwp ˆσp is an estimate of Var(ˆwp) = σ2 where ˆσ2 (cid:107)zp(cid:107)2 2
+
+could be thrown out,
+
+p = ˆσ2 (cid:107)zp(cid:107)2 2
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Shortcomings of Fitting Nonlinear Data
+
+Evaluating the model by Coeﬃcient of Determination R2 : R2 := 1 − SSres for linear regression), where SStot SStot = (cid:80)n i=1(yi − ¯y)2 is the total sum of squares, SSreg = (cid:80)n i=1(ˆyi − ¯y)2 is the regression sum of squares, and SSres = (cid:80)n i=1(yi − ˆyi)2 is the residual sum of squares.
+
+The larger the R2, the better the model
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Multicolinearity
+
+If the columns of X are almost linearly dependent, i.e., multicolinearity, then det(XTX) ≈ 0, the diagonal entries in (XTX)−1 is quite large. This implies the variances of ˆw get large, and the estimate is not accurate
+
+Eg : 10 samples are drawn from the true model
+
+y = 10 + 2x1 + 3x2 + (cid:15); the LS estimator is ˆw0 = 11.292, ˆw1 = 11.307, ˆw2 = −6.591, far from the true coeﬃcients; correlation coeﬃcient is r12 = 0.986
+
+Remedies : ridge regression, principal component regression, partial least squares regression, etc.
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Overﬁtting
+
+Easily to be overﬁtted when introducing more variables, e.g., regress housing price with housing size
+
+The high degree model also ﬁts the noises in the training data, so generalizes poorly to new data
+
+Remedy : regularization
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Bias-Variance Decomposition
+
+Bias-variance decomposition of generalization error in L2 loss :
+
+EtrainRexp(ˆf (x)) = EtrainEP[(y−ˆf (x))2|x] = Var(ˆf (x)) (cid:125) (cid:123)(cid:122) (cid:124) variance
+
++Bias2(ˆf (x)) (cid:123)(cid:122) (cid:125) bias
+
+(cid:124)
+
+where P = P(y|x) is the conditional probability of y given x
+
+Bias : Bias(ˆf (x)) = Etrainˆf (x) − f (x) is the average accuracy of prediction for the model (deviation from the truth)
+
+Variance : Var(ˆf (x)) = Etrain(ˆf (x) − Etrainˆf (x))2 is the variability of the model prediction due to diﬀerent data set (stability)
+
+References
+
++ σ2 (cid:124)(cid:123)(cid:122)(cid:125) noise
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Bias-Variance Decomposition (Derivation)
+
+Model y = f (x) + (cid:15), with E((cid:15)) = 0 and Var((cid:15)) = σ2 (system error)
+
+EtrainRexp(ˆf (x)) =EP[(y − f (x))2|x] + Etrain[(f (x) − ˆf (x))2]
+
++ 2EtrainEP[(y − f (x))(f (x) − ˆf (x))|x] (cid:125)
+
+(cid:124)
+
+(cid:123)(cid:122) vanishes since EP(y−f (x)|x)=0
+
+=σ2 + Etrain[(f (x) − Etrainˆf (x))2] + Etrain[(Etrainˆf (x) − ˆf (x))2]
+
++ 2Etrain[(f (x) − Etrainˆf (x))(Etrainˆf (x) − ˆf (x))] (cid:125)
+
+(cid:124)
+
+(cid:123)(cid:122)
+
+vanishes since Etrain[Etrain
+
+ˆf (x)−ˆf (x)])=0
+
+=σ2 + Bias2(ˆf (x)) + Var(ˆf (x))
+
+The more complicated the model, the lower the bias, but the higher the
+
+variance.
+
+References
+
+Introduction
+
+Linear Regression
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Regularizations
+
+Outlines
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Regularization by Subset Selection
+
+In high dimensions, the more the input attributes, the larger the variance
+
+Shrinking some coeﬃcients or setting them to zero can reduce the overﬁtting
+
+Using less input variables also help interpretation with the most important variables
+
+Subset selection(cid:181)retaining only a subset of the variables, while eliminating the rest variables from the model
+
+Best-subset selection : ﬁnd for each k ∈ {0,1,...,p} the subset Sk ⊂ {1,...,p} of size k that gives the smallest RSS(w) = (cid:80)n j∈Sk
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Regularization by Penalties
+
+Add a penalty term, in general lq-norm
+
+n (cid:88)
+
+(yi − w0 − w1x1 − ··· − wpxp)2 + λ(cid:107)w(cid:107)q q
+
+i=1
+
+=(cid:107)y − Xw(cid:107)2
+
+2 + λ(cid:107)w(cid:107)q q
+
+q = 2 : ridge regression • q = 1 : LASSO regression
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Ridge Regression
+
+The optimization problem turns to be
+
+ˆw =argmin
+
+w
+
+=argmin
+
+w
+
+n (cid:88)
+
+(yi − w0 − w1x1 − ··· − wpxp)2 + λ(cid:107)w(cid:107)2 2
+
+i=1 (cid:107)y − Xw(cid:107)2
+
+2 + λ(cid:107)w(cid:107)2 2
+
+λ (cid:62) 0 is a ﬁxed parameter which has to be tuned by cross-validation
+
+Equivalent to the constraint minimization problem :
+
+ˆw = argmin
+
+w
+
+(cid:107)y − Xw(cid:107)2 2,
+
+subject to
+
+(cid:107)w(cid:107)2 (cid:54) µ,
+
+where µ (cid:62) 0 is a prescribed threshold (tuning parameter)
+
+The large λ corresponds to the small µ.
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Solving Ridge Regression
+
+Easy to show that ˆwridge = (XTX + λIp+1)−1XTy • The estimator is also a projection of y : ˆyridge = X(XTX + λIp+1)−1XTy
+
+X can be diagonalized by SVD : X = PDQ with
+
+D = diag(ν1,...,νp+1), and P ∈ Rn×(p+1), Q ∈ R(p+1)×(p+1) being orthogonal matrices (PTP = Ip+1)
+
+ν2 p+1 ν2 p+1+λ • In the spectral space, the ridge regression estimator is a
+
+ˆyridge = Pdiag( ν2 1 ν2 1+λ
+
+)PTy, while ˆyOLS = PPTy
+
+,...,
+
+shrinkage of the OLS estimator (λ = 0)
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Bayesian Viewpoint of Ridge Regression
+
+Given X and w, the conditional distribution of y is 2σ2 (y − Xw)T(y − Xw)(cid:1)
+
+In addition, assume w has a prior distribution 2(w − µ0)TΛ−1 P(w) = N(µ0,Λ0) ∝ exp(cid:0) − 1
+
+0 (w − µ0)(cid:1)
+
+By Bayes theorem, the posterior distribution of w given the data X and y is
+
+P(w|X,y) ∝ P(y|X,w)P(w)
+
+1 2σ2 (wTXTXw − 2yTXw) (wTΛ−1
+
+∝ exp(cid:0) −
+
+1 2 ∝ exp(cid:0) −
+
+0 w)(cid:1)
+
+0 w − 2µT
+
+0 Λ−1
+
+−
+
+1 2 σ2 XTX + Λ−1
+
+m (w − µm)(cid:1)
+
+(w − µm)TΛ−1
+
+0 )−1 and µm = Λm( 1
+
+where Λm = ( 1
+
+σ2 XTy + Λ−1
+
+0 µ0)
+
+If µ0 = 0 and Λ0 = σ2
+
+λ Ip+1, then ˆw = µm = (XTX + λIp+1)−1XTy
+
+maximizes the posterior probability P(w|X,y)
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Ridge Trace
+
+The functional plot of ˆwridge(λ) with λ is called ridge trace
+
+The large variations in ridge trace indicate the multicolinearity in variables
+
+When λ ∈ (0,0.5), the ridge traces have large variations, it suggests to choose λ = 1
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+LASSO Regression
+
+Proposed by R. Tibshirani, short for “Least Absolute Shrinkage and Selection Operator”
+
+Can be used to estimate the coeﬃcients and select the important variables simultaneously
+
+Reduce the model complexity, avoid overﬁtting, and improve the generalization ability
+
+Also improve the model interpretability
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+LASSO Formulation
+
+The optimization problem
+
+ˆw = arg min
+
+E(w)
+
+w E(w) = (cid:107)y − Xw(cid:107)2
+
+2 + λ(cid:107)w(cid:107)1
+
+Equivalent to the constraint minimization problem :
+
+ˆw = arg min
+
+w subject to
+
+(cid:107)y − Xw(cid:107)2 2,
+
+(cid:107)w(cid:107)1 (cid:54) µ,
+
+The large λ corresponds to the small µ.
+
+The optimal solution is sparse with ˆw2 = 0
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Solving LASSO Regression
+
+Assume XTX = Ip+1, then ˆwOLS = XTy • ∂wE(w) = w − XTy + λ(∂|w0| × ··· × ∂|wp|) • 0 ∈ ∂wE(ˆwlasso) implies 0 ∈ ˆwlasso • If ˆwlasso > 0, ∂|ˆwlasso i ˆwOLS i • If ˆwlasso i ˆwOLS i • If ˆwlasso i i • In summary, ˆwlasso )
+
+Assume XTX = Ip+1, then ˆwOLS = XTy • ∂wE(w) = w − XTy + λ(∂|w0| × ··· × ∂|wp|) • 0 ∈ ∂wE(ˆwlasso) implies 0 ∈ ˆwlasso • If ˆwlasso > 0, ∂|ˆwlasso i ˆwOLS i • If ˆwlasso i ˆwOLS i • If ˆwlasso i i • In summary, ˆwlasso |
+
+Assume XTX = Ip+1, then ˆwOLS = XTy • ∂wE(w) = w − XTy + λ(∂|w0| × ··· × ∂|wp|) • 0 ∈ ∂wE(ˆwlasso) implies 0 ∈ ˆwlasso • If ˆwlasso > 0, ∂|ˆwlasso i ˆwOLS i • If ˆwlasso i ˆwOLS i • If ˆwlasso i i • In summary, ˆwlasso = ˆwOLS i
+
+− ˆwOLS i i | = {1}, and ˆwlasso
+
+References
+
+Introduction
+
+ˆwlasso i ˆwOLS i
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Shrinkage and Selection Property of LASSO
+
+= (|ˆwOLS i i , where (a)+ = max(a,0) is the positive part of a
+
+| − λ)+sign(ˆwOLS
+
+) is called soft thresholding of
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Maximum A Posteriori (MAP) Estimation
+
+Given θ, the conditional distribution of y is P(y|θ) • In addition, assume the parameter θ has a prior distribution P(θ) • The posterior distribution of θ given the data y is P(θ|y) ∝ P(y|θ)P(θ) • MAP choose the point of maximal posterior probability : (cid:0)log P(y|θ) + log P(θ)(cid:1)
+
+Given θ, the conditional distribution of y is P(y|θ) • In addition, assume the parameter θ has a prior distribution P(θ) • The posterior distribution of θ given the data y is P(θ|y) ∝ P(y|θ)P(θ) • MAP choose the point of maximal posterior probability : ˆθMAP = arg max
+
+Given θ, the conditional distribution of y is P(y|θ) • In addition, assume the parameter θ has a prior distribution P(θ) • The posterior distribution of θ given the data y is P(θ|y) ∝ P(y|θ)P(θ) • MAP choose the point of maximal posterior probability : P(θ|y) = arg max
+
+If θ = w, and we choose the log-prior proportional to λ(cid:107)w(cid:107)2 normal prior N(0, σ2
+
+λ I)), we recover the ridge regression
+
+If the log-prior is proportional to λ(cid:107)w(cid:107)1, i.e., the prior is the tensor
+
+product of Laplace (or double exponential) distribution Laplace(0, 2σ2 λ ) • Diﬀerent log-prior lead to diﬀerent penalties (regularization), but this is not the case in general : some penalties may not be the logarithms of probability distributions, some other penalties depend on the data (prior is independent of the data)
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+LASSO Path
+
+When λ varies, the values of the coeﬃcients form paths (regularization paths)
+
+The paths are piecewise linear with the same change points, may cross the x-axis many times
+
+In practice, choose λ by cross-validation
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Hyper-parameter Tuning
+
+Regularization : min f ∈F 1 n
+
+n (cid:80) i=1
+
+L(yi,f (xi)) + λJ(f )
+
+In linear regression, L(y,f ) = (y − f )2, f (x) = wTx, f ∈ F ⇔ w ∈ Rp+1
+
+(cid:40)
+
+(cid:107)w(cid:107)2 (cid:107)w(cid:107)1,
+
+2, Ridge regression Lasso regression
+
+Model complexity : J(f ) =
+
+Cross-validation (CV) : training set = training subset + validation subset
+
+Simple CV : randomly split once into two subsets • K-fold CV : randomly split the data into K disjoint subsets with the same size, treat the union of K − 1 subsets as training set, the other one as validation set, do this repeatedly and select the best λ L(yi,ˆf −κ(i)(xi,λ)), with smallest validation error : CV(ˆf ,λ) = 1 N where κ : {1,...,N} → {1,...,K} is a partition index map
+
+Leave-one-out CV : K = n in the previous case
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+LARS (Optional) : (by Hastie and Efron) a Package for Solving LASSO
+
+1. Start with all coeﬃcients wi equal to zero 2. Find the predictor xi most correlated with y 3.
+
+Increase the coeﬃcient wi in the direction of the sign of its correlation with y. Take residuals r = y − ˆy along the way. Stop when some other predictor xk has as much correlation with r as xi has Increase (wi,wk) in their joint least squares direction, until some other predictor xm has as much correlation with the residual r
+
+4.
+
+5. Continue until all predictors are in the model
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Other Solvers
+
+“glmnet” by Friedman, Hastie and Tibshirani, implemented by coordinate descent, can be used in linear regression, logistic regression, etc., with LASSO (l1), ridge (l2) and elastic net (l1 + l2) regularization terms
+
+Why LASSO seeks the sparse solution in comparison with ridge?
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Related Regularization Models
+
+Elastic net : ˆw = argminw (cid:107)y − Xw(cid:107)2 • Group LASSO : ˆw = argminw (cid:107)y − Xw(cid:107)2 2 + λ1(cid:107)w(cid:107)2 2 + (cid:80)G
+
+Elastic net : ˆw = argminw (cid:107)y − Xw(cid:107)2 • Group LASSO : ˆw = argminw (cid:107)y − Xw(cid:107)2 w = (w1,...,wG) is the group partition of w
+
+Dantzig Selector : minw (cid:107)w(cid:107)1, subject to (cid:107)XT(y − Xw)(cid:107)∞ (cid:54) µ • Smoothly clipped absolute deviation (SCAD) penalty by Fan and Li i=0 |wi| by (cid:80)p
+
+Dantzig Selector : minw (cid:107)w(cid:107)1, subject to (cid:107)XT(y − Xw)(cid:107)∞ (cid:54) µ • Smoothly clipped absolute deviation (SCAD) penalty by Fan and Li i=0 Ja(wi,λ), where Ja(x,λ) (a−1)λ I(|x| > λ)
+
+Dantzig Selector : minw (cid:107)w(cid:107)1, subject to (cid:107)XT(y − Xw)(cid:107)∞ (cid:54) µ • Smoothly clipped absolute deviation (SCAD) penalty by Fan and Li (2005) : replace the penalty λ(cid:80)p satisﬁes (for a (cid:62) 2) : dJa
+
+(cid:16)
+
+(cid:17)
+
+Adaptive LASSO : weighted penalty (cid:80)p
+
+i=0 µi|wi| where µi =
+
+1 |ˆwOLS i
+
+|ν with
+
+ν > 0, as an approximation to |wi|1−ν, non-convex penalty
+
+Introduction
+
+Linear Regression
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Regularizations
+
+Outlines
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Errors and R2
+
+(cid:80)n
+
+Mean absolute error (MAE) : MAE = 1 n (cid:80)n • Mean square error (MSE) : MSE = 1 n • Root mean square error (RMSE) : (cid:80)n i=1(yi − ˆyi)2 • Coeﬃcient of Determination R2 : R2 := 1 − SSres SStot
+
+i=1 |yi − ˆyi| i=1(yi − ˆyi)2
+
+, where SStot = (cid:80)n i=1(yi − ¯y)2 is the total sum of squares, and SSres = (cid:80)n i=1(yi − ˆyi)2 is the residual sum of squares; R2 ∈ [0,1] (might be negative); the larger the R2, the smaller the ratio of SSres to SStot, thus the better the model
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+Adjusted Coeﬃcient of Determination
+
+Adjusted coeﬃcient of determination : R2 n−p−1 • n is the number of samples, p is the dimensionality (or the number of attributes)
+
+The larger the R2 • When adding important variables into the model, R2 larger and SSres is reduced
+
+When adding unimportant variables into the model, R2 gets smaller and SSres may increase
+
+adj = ˆσ2 S2, where (cid:80)n i=1(yi − ˆyi)2 and S2 = 1 n−1 n−p−1 and (n − 1)S2
+
+In fact, one can show that 1 − R2 ˆσ2 = 1 (n − p − 1) ˆσ2
+
+In fact, one can show that 1 − R2 (cid:80)n
+
+i=1(yi − ¯y)2 with n−1 if w = 0.
+
+σ2 ∼ χ2
+
+σ2 ∼ χ2
+
+References
+
+Introduction
+
+Linear Regression
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Regularizations
+
+Outlines
+
+Model Assessment
+
+References
+
+Introduction
+
+Linear Regression
+
+Regularizations
+
+Model Assessment
+
+References
+
+Œ(cid:226)'(cid:219)(cid:19)(cid:216) • –(cid:147)u§¯(cid:236)˘S§2016 • T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning : Data mining, Inference, and Prediction, 2nd Edition, 2009
+
+References
+

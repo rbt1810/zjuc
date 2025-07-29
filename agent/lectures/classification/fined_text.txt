@@ -1,0 +1,1314 @@
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Introduction to Data Science Classiﬁcation and nonlinear models
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Why We Need Classiﬁcation
+
+Knowing the classes of the data, we could easily manage the data and react to the possible outcomes
+
+Predict whether users would default in the future based on their basic information and historical transaction records
+
+Predict whether a tumor is benign or malignant based on their physical and geometrical features
+
+Predict the users’ interests in the new products based on their historical purchasing records and behaviorial preferences
+
+Separate spams and advertisements from emails
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+What is Classiﬁcation
+
+Supervised learning: predict label y from features x • Training stage: Given a data set D = {(x,y)}, including both (cid:83)Dtest, ﬁnd a classiﬁer features and labels, split D = Dtrain (function y = f (x)) that best relates ytrain with xtrain, then evaluate how close f (xtest) is to ytest
+
+Predicting stage: apply the predictor to the unlabeled data xpred (only features) to ﬁnd the proper labels ypred = f (xpred)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Classiﬁcation Methods
+
+Diﬀerent assumptions on f lead to diﬀerent models • Basic classiﬁcation models • Logistic regression • k-nearest neighbor (kNN) • Decision trees • Naive Bayes • Linear discriminant analysis (LDA) • Support vector machines (SVM) • Artiﬁcial neural network (ANN) • ...
+
+Ensemble learning: Random forest and Adaboost
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Logistic Regression
+
+Not regression, but a classiﬁcation method
+
+Connection with linear regression: y = w0 + w1x + (cid:15), y is binary (0 or 1); then E(y|x) = P(y = 1|x) = w0 + w1x; but w0 + w1x may not be a probability
+
+Find a function to map it back to [0,1]: Sigmoid function g(z) = 1 1+e−z with z = w0 + w1x1 + ... + wdxd
+
+Equivalently, log P(y=1|x) w0 + w1x1 + ... + wdxd, logit transform logit(z) = log z 1−z
+
+1−P(y=1|x) =
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+MLE for Logistic Regression
+
+The prob. distribution for two-class logistic regression model is
+
+Pr(y = 1|X = x) =
+
+Pr(y = 0|X = x) =
+
+exp(wTx) 1 + exp(wTx) 1 1 + exp(wTx)
+
+,
+
+.
+
+Let P(y = k|X = x) = pk(x;w), k = 0 or 1. The likelihood n (cid:81) i=1 • MLE estimate of w: ˆw = argmax
+
+Let P(y = k|X = x) = pk(x;w), k = 0 or 1. The likelihood n (cid:81) i=1 • MLE estimate of w: ˆw = argmax
+
+pyi(xi;w)
+
+L(w)
+
+w
+
+Solve ∇w logL(w) = 0 by Newton-Raphson method
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+K-class Logistic Regression
+
+Extend the relative ratio of probabilities to K-class:
+
+log
+
+log
+
+log
+
+P(y = 1|X = x) P(y = K|X = x) P(y = 2|X = x) P(y = K|X = x) ... P(y = K − 1|X = x) P(y = K|X = x)
+
+= wT
+
+1 x
+
+= wT
+
+2 x
+
+= wT
+
+K−1x
+
+Probabilistic model:
+
+P(y = 1|X = x) =
+
+ewT 1 x 1 + (cid:80)K−1 k=1 ewT k x
+
+...
+
+P(y = K − 1|X = x) =
+
+ewT K−1x 1 + (cid:80)K−1 k=1 ewT k x
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Introduction
+
+k-nearest neighbor (kNN) is the simplest supervised learning method, especially useful when prior knowledge on the data is very limited
+
+Do training and test simultaneously
+
+When classifying a test sample x, scan the training set and ﬁnd the closest k samples Dk = {x1,...,xk} to the test sample; make vote based on the labels of the samples in Dk; the majority vote is the label of the test sample
+
+Low bias, high variance
+
+Advantages: not sensitive to outliers, easy to implement and parallelize, good for large training set
+
+Drawbacks: need to tune k, take large storage, computationally intensive
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Algorithm
+
+Input: training set Dtrain = {(x1,y1),...,(xN,yN)}, a test sample x without label y, k and distance metric d(x,y)
+
+Output: predicted label ypred for x
+
+1. Compute d(x,xj) for each (xj,yj) ∈ Dtrain 2. Sort the distances in an ascending order, choose the ﬁrst k samples (x(1),y(1)),...,(x(k),y(k))
+
+3. Make majority vote ypred = Mode(y(1),...,y(k))
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Distance Metrics
+
+(cid:115) • Minkowski distance: dh(x1,x2) = h
+
+d (cid:80) i=1
+
+(x1i − x2i)h; h = 2,
+
+Euclidean distance; h = 1, Manhattan distance
+
+Mahalanobis distance: (cid:113)
+
+(x1 − x2)T ˆΣ−1(x1 − x2), where ˆΣ is the
+
+d(x1,x2) = covariance matrix of sample set; introduce correlations, could be applied to the non-scaling data
+
+Hamming distance: Hamming(x1,x2) = d −
+
+d (cid:80) i=1
+
+I(x1i = x2i);
+
+used to compare two strings, e.g., Hamming((cid:48)toned(cid:48),(cid:48) roses(cid:48)) = 3, Hamming((cid:48)101110(cid:48),(cid:48) 101101(cid:48)) = 2
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Distance Metrics - Similarity and Divergence
+
+Cosine similarity: cos(x1,x2) = xT 1 x2 |x1||x2| =
+
+d (cid:80) i=1
+
+x1ix2i (cid:115) d (cid:80) i=1
+
+(cid:115) d (cid:80) i=1
+
+x2 1i
+
+x2 2i
+
+; its
+
+range is [−1,1]; the greater the cosine similarity, the more similar (closer) the two samples; insensitive to absolute value, popular in measuring user rankings; it is related to Pearson correlation coeﬃcient
+
+Jaccard similarity for sets A and B: Jaccard(A,B) = |A(cid:84)B| |A(cid:83)B|, used in comparing texts
+
+(cid:2)log P(x) Q(x) measures the distance between two probability distributions P
+
+Kullback-Leibler (KL) divergence: dKL(P(cid:107)Q) = EP
+
+(cid:3)
+
+and Q; in discrete case, dKL(p(cid:107)q) =
+
+m (cid:80) i=1
+
+pi log pi qi
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Tuning k
+
+Diﬀerent values of k = 3 and k = 5 leads to diﬀerent classiﬁcation results
+
+M-fold Cross-validation
+
+(CV) to tune k: partition the dataset into M parts (M = 5 or 10), let κ : {1,...,N} → {1,...,M} be randomized partition index map, The CV estimate of prediction error is CV(ˆf ,k) =
+
+1 N
+
+N (cid:80) i=1
+
+L(yi,ˆf −κ(i)(xi,k))
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Bayes Classiﬁer (Oracle Classiﬁer)
+
+Assume Y ∈ Y = {1,2,...,C}, the classiﬁer f : X → Y is a piecewise constant function
+
+For 0-1 loss L(y,f ), the learning problem is to minimize
+
+E(f ) = EP(X,Y)L(Y,f (X)) = 1 − P(Y = f (X))
+
+(cid:90)
+
+= 1 −
+
+P(Y = f (X)|X = x)pX(x)dx
+
+X
+
+Bayes rule: f ∗(x) = argmaxc P(Y = c|X = x), “the most probable label under the conditional probability on x” • Bayes error rate: inff E(f ) = E(f ∗) = 1 − P(Y = f ∗(X)) • Bayes decision boundary: the boundary separating the K partition domains in X on each of which f ∗(x) ∈ Y is constant. For binary classiﬁcation, it is the level set on which P(Y = 1|X = x) = P(Y = 0|X = x) = 0.5.
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Decision Boundary
+
+The decision boundary of 15NN is smoother than that of 1NN
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Analysis
+
+1NN error rate is twice the Bayes error rate:
+
+Bayes error = 1 − pc∗(x) where c∗ = argmaxc pc(x) • Assume the samples are i.i.d., for any test sample x and small δ, there is always a training sample z ∈ B(x,δ) (the label of x is the same as that of z), then 1NN error is C (cid:88)
+
+Bayes error = 1 − pc∗(x) where c∗ = argmaxc pc(x) • Assume the samples are i.i.d., for any test sample x and small δ, there is always a training sample z ∈ B(x,δ) (the label of x is the same as that of z), then 1NN error is C (cid:88)
+
+Bayes error = 1 − pc∗(x) where c∗ = argmaxc pc(x) • Assume the samples are i.i.d., for any test sample x and small δ, there is always a training sample z ∈ B(x,δ) (the label of x is the same as that of z), then 1NN error is C (cid:88)
+
+p2 c(x)
+
+c=1
+
+c=1 (cid:54)1 − p2 c∗(x) (cid:54)2(1 − pc∗(x))
+
+(Remark: In fact, (cid:15) (cid:54) 2(1 − pc∗(x)) − C
+
+C−1(1 − pc∗(x))2)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+kNN Regression: Bias vs. Variance
+
+kNN can be used to do regression if the mode (majority vote) x(i)∈Nk(x) y(i)
+
+Generalization error of kNN regression is
+
+EtrainRexp(ˆf (x)) =σ2 + (f (x) −
+
+1 k
+
+(cid:88)
+
+x(i)∈Nk(x)
+
+f (x(i)))2
+
++ Etrain
+
+(cid:104)1 k
+
+(cid:88)
+
+(y(i) − f (x(i)))
+
+(cid:105)2
+
+(cid:124)
+
+x(i)∈Nk(x) (cid:123)(cid:122) 1 k σ2
+
+(cid:125)
+
+where we have used the fact that Etrainyi = f (xi) and Var(yi) = σ2.
+
+For small k, overﬁtting, bias (cid:38), variance (cid:37) • For large k, underﬁtting, bias (cid:37), variance (cid:38)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Decision Tree as Medical Diagnosis
+
+Diagnose whether it is ﬂu or cold • Rules:
+
+If headache = severe, then ﬂu
+
+If headache = mild and sore = yes, then ﬂu • If headache = mild and sore = no, then cold • If headache=no, cold
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Decision Tree Algorithm
+
+Tree structure: internal nodes indicate features, while leaf nodes represent classes
+
+Start from root, choose a suitable feature xi and its split point ci at each internal node, split the node to two child nodes depending on whether xi (cid:54) ci, until the child nodes are pure
+
+Equivalent to rectangular partition of the region
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+How to choose features and split points
+
+Impurity: choose the feature and split point so that after each slit the impurity should decrease the most
+
+Impurity(M0)-Impurity(M12) > Impurity(M0)-Impurity(M34), choose A as split node; otherwise choose B
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Impurity Measures - GINI Index
+
+Gini index of node t: Gini(t) = 1 − (cid:80)C
+
+c=1(p(c|t))2 where
+
+p(c|t) is the proportion of class-c data in node t
+
+Maximum at 1 − 1 • Minimum at 0, when p(c|t) = 1 for some c • Gini index of a split: Ginisplit = (cid:80)K k=1
+
+nk n Gini(k) where nk is
+
+the number of samples in the child node k, n = (cid:80)K k=1 nk • Choose the split so that Gini(t) − Ginisplit is maximized
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Impurity Measures - Information Gain
+
+Entropy at t: H(t) = −(cid:80)C • Maximum at log2 C, when p(c|t) = 1 C • Minimum at 0, when p(c|t) = 1 for some c • Information gain: InfoGainsplit = H(t) − (cid:80)K k=1
+
+nk n H(k) where k=1 nk
+
+nk is the number of samples in the child node k, n = (cid:80)K
+
+Choose the split so that InfoGainsplit is maximized (ID3 algorithm)
+
+Drawback: easy to generate too many child nodes and overﬁt
+
+Introduce information gain ratio: nk n log2
+
+Introduce information gain ratio: SplitINFO = −(cid:80)K (C4.5 algorithm)
+
+n , InfoGainRatio = InfoGainsplit nk
+
+SplitINFO
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Comparing Three Impurity Measures
+
+Information gain and Gini index are more sensitive to changes in the node probabilities than the misclassiﬁcation error • Consider a two-class problem with 400 observations in each class, (400, 400); two possible splits, A: (300, 100) + (100, 300), and B: (200, 400) + (200, 0); B should be preferred 4) = 3 8,
+
+Gini(A) = 1 Gini(B) = 3 • H(A) = 2 × 1 4(−1 H(B) = 3
+
+2Gini(A1) + 1 4Gini(A1) + 1 2(−3 4 log2 1 3 log2
+
+2Gini(A2) = 2 × 1 4Gini(A2) = 3 4 − 1 4 log2 2 3)) = 0.69 3 log2
+
+2(2 × 3 3 × 2
+
+4 × 1 3)) = 1
+
+4(2 × 1 1 4)) = 0.81,
+
+3
+
+3 − 2
+
+3
+
+Misclassiﬁcation error at t: Error(t) = 1 − maxc p(c|t); 4)) = 1 4,
+
+Misclassiﬁcation error at t: Error(t) = 1 − maxc p(c|t); Error(A) = 2 × 1 Error(B) = 3
+
+Misclassiﬁcation error at t: Error(t) = 1 − maxc p(c|t); 2(1 − max(3 3, 2
+
+4
+
+the tree
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Algorithms
+
+Iterative Dichotomiser 3 (ID3): by Ross Quinlan (1986), based on Occam’s Razor rule (be simple); information gain, choose feature values by enumeration
+
+C4.5 and C5.0: by R. Quinlan (1993), use information gain ratio instead, choose split thresholds for continuous features
+
+Classiﬁcation and Regression Tree (CART): by Leo Breiman etc. (1984); for classiﬁcation, use Gini index; for regression, use mean square error; binary split
+
+Algorithm ID3 C4.5 C5.0 CART
+
+Attribute Type Discrete Discrete, Continuous Discrete, Continuous Discrete, Continuous
+
+Impurity Measure Information Gain Information Gain Ratio Information Gain Ratio GINI Index
+
+# Split Nodes k ≥ 2 k ≥ 2 k ≥ 2 k = 2
+
+Target Type Discrete Discrete Discrete Discrete, Continuous
+
+Table: Comparison of Diﬀerent Decision Tree Algorithms
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+ID3 Algorithm
+
+Input: training set D = {(x1,y1),...,(xn,yn)},
+
+Y = {y1 ...,yn}, set of features F = {column variables of X = (x1 ...xn)T}
+
+Output: decision tree T
+
+1. Create a root node
+
+2. Check Y: if all are positive, then return a single node tree T with label “+”; if all are negative, then return a single node tree T with label “-”
+
+3. Check F: if empty, then return a single node tree T with label as majority vote of Y
+
+4. For each feature in F, compute information gain, choose the feature A ∈ F which maximizes information gain as root
+
+5. For A = i, let D(i) = {(xj,yj) ∈ D|xjA = i}:
+
+5.1 If D(i) = ∅, then create a leaf node and make majority vote of D as the
+
+label
+
+5.2 Else, let D = D(i), go back to step 1 iteratively
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Tree Pruning
+
+Too complex tree structure easily leads to overﬁtting • Prepruning: set threshold δ for impurity decrease in splitting a node; if ∆Impuritysplit > δ, do slitting, otherwise stop
+
+Postpruning: based on cost function |T| (cid:88)
+
+Postpruning: based on cost function |T| (cid:88)
+
+ntImpurity(t)
+
++α
+
+t=1 (cid:124)
+
+(cid:123)(cid:122) data ﬁdelity
+
+(cid:125)
+
+|T| (cid:124)(cid:123)(cid:122)(cid:125) model complexity
+
+Input: a complete tree T, α • Output: postpruning tree Tα
+
+1. Compute Impurity(t) for ∀t Iteratively merge child nodes 2. bottom-up: TA and TB are the trees before and after merging, do merging if Costα(TA) (cid:62) Costα(TB)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Pros and Cons
+
+Advantages
+
+Easy to interpret and visualize: widely used in ﬁnance, medical health, biology, etc.
+
+Easy to deal with missing values (treat as new data type) • Could be extended to regression: decision tree is a rectangular partition of the domain, the predictor can be written as
+
+f (x) =
+
+M (cid:80) m=1
+
+cmI(x ∈ Rm); for regression problems
+
+cm = ¯ym = 1 nm
+
+n (cid:80) i=1
+
+yiI(xi ∈ Rm) where nm =
+
+n (cid:80) i=1
+
+I(xi ∈ Rm)
+
+Drawbacks:
+
+Easy to be trapped at local minimum because of greedy algorithm
+
+Simple decision boundary: parallel lines to the axes
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Introduction
+
+Based on Bayes Theorem and conditional independency assumption on features
+
+Widely used in text analysis, spam ﬁltering, recommender systems, and medical diagnosis
+
+Bayes Theorem: let X and Y be a pair of random variables having joint probability P(X = x,Y = y); by deﬁnition, the condition probability of Y given X is P(Y|X) = P(X,Y) by symmetry, P(X|Y) = P(X,Y) P(X) ; then
+
+Bayes Theorem: let X and Y be a pair of random variables having joint probability P(X = x,Y = y); by deﬁnition, the condition probability of Y given X is P(Y|X) = P(X,Y) by symmetry, P(X|Y) = P(X,Y) P(X|Y)P(Y) P(X)
+
+P(Y) is prior prob. distribution, P(X|Y) is likelihood function, P(X) is evidence, P(Y|X) is posterior prob. distribution
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Naive Bayes
+
+The core problem of machine learning is to estimate P(Y|X) E[(cid:107)Y − f (X)(cid:107)2])
+
+The core problem of machine learning is to estimate P(Y|X) (or its moments E[Y|X] = argmin
+
+Let X = {X1,...,Xd}, for ﬁxed sample X = x, P(X = x) is independent of Y, by Bayes Theorem
+
+P(Y|X = x) ∝ P(X = x|Y)P(Y)
+
+Assume conditional independency of X1,...,Xd given Y = c:
+
+P(X = x|Y = c) =
+
+d (cid:89)
+
+P(Xi = xi|Y = c)
+
+i=1
+
+Naive Bayes model:
+
+ˆy = argmax
+
+c
+
+P(Y = c)
+
+d (cid:89)
+
+i=1
+
+P(Xi = xi|Y = c)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Maximum Likelihood Estimate (MLE)
+
+Estimate P(Y = c) and P(Xi = xi|Y = c) from the dataset D = {(x1,y1),...,(xn,yn)}
+
+n (cid:80) i=1
+
+I(yi=c)
+
+MLE for P(Y = c): P(Y = c) = • When Xi is discrete variable with range {v1,...,vK}, MLE for I(xi=vk,yi=c) I(yi=c)
+
+When Xi is continuous variable
+
+1. Do discretization, and go back to the above formula 2. Assume Xi follows some distribution (e.g., N(µ,σ2)):
+
+P(Xi = x|Y = c) =
+
+√
+
+1 2πσ
+
+e− (x−µ)2
+
+2σ2
+
+Then use MLE to estimate µ and σ2
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Pros and Cons
+
+Where it is good
+
+Spam ﬁlter: compute the posterior prob. distribution of frequently used words (convert to vector by word2vec)
+
+Stable: for outliers and miss values • Robust: for uncorrelated features; P(Xi|Y) is independent of Y and thus has no eﬀect on posterior probability
+
+May outperform far more sophisticated alternatives even if conditional independency assumption is not satisﬁed
+
+Disadvantage
+
+However, when conditional independency assumption is violated, performance of Naive Bayes can be poorer
+
+Depends heavily on how well the parameter estimates are
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Linear Discriminant Analysis (LDA)
+
+Bayes Classiﬁer amounts to know the class posteriors P(Y|X) for optimal classiﬁcation: k∗ = argmaxk P(Y = k|X)
+
+Let πk = P(Y = k) be the prior probability, fk(x) = P(X = x|Y = k) be the density function of samples in each class Y = k
+
+By Bayes theorem, P(Y|X = x) ∝ fk(x)πk (Recall naive Bayes) • Assume fk(x) is multivariate Gaussian: (2π)p/2|Σk|1/2 e− 1 k
+
+log
+
+P(Y = k|X = x) P(Y = l|X = x)
+
+1 2 + xTΣ−1(µk − µl)
+
+πk πl
+
+(µk + µl)TΣ−1(µk − µl)
+
+=log
+
+−
+
+for the decision boundary between class k and l
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Discriminant Rule
+
+Linear discriminant functions: δk(x) = xTΣ−1µk − 1
+
+2µT P(Y=l|X=x) = δk(x) − δl(x)
+
+k Σ−1µk + logπk
+
+Then log P(Y=k|X=x) • Decision rule: k∗ = argmaxk δk(x) • Sample estimate of unknowns: ˆπk = Nk/N, where yi=k xi, yi=k(xi − ˆµk)(xi − ˆµk)T
+
+Then log P(Y=k|X=x) • Decision rule: k∗ = argmaxk δk(x) • Sample estimate of unknowns: ˆπk = Nk/N, where N = (cid:80)K ˆΣ = 1
+
+Then log P(Y=k|X=x) • Decision rule: k∗ = argmaxk δk(x) • Sample estimate of unknowns: ˆπk = Nk/N, where k=1 Nk, ˆµk = 1 Nk
+
+(cid:80)K
+
+(cid:80)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Two-class LDA
+
+LDA rule classiﬁes to class 2 if
+
+(x −
+
+ˆµ1 + ˆµ2 2
+
+)T ˆΣ−1(ˆµ2 − ˆµ1) + log
+
+ˆπ2 ˆπ1
+
+> 0
+
+Discriminant direction: β = ˆΣ−1(ˆµ2 − ˆµ1) • Bayes misclassﬁcation rate = 1 − Φ(βT(µ2 − µ1)/(βTΣβ) where Φ(x) is the Gaussian distribution function
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Other Variants
+
+Quadratic discriminant analysis (QDA): 2(x − µk)TΣ−1 2 log |Σk| − 1 • Regularized discriminant analysis: ˆΣk(α) = αˆΣk + (1 − α)ˆΣ • Computations for LDA: k (x − µk) + log πk
+
+δk(x) = − 1
+
+1. Sphere the data with respect to ˆΣ = UDUT: X∗ = D− 1 Then the common covariance estimate of X∗ is Ip
+
+2. Classsify to the closest class centroid in the transformed space, taking into account of the class prior probabilities πk’s
+
+Reduced-Rank LDA: see dimensionality reduction
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Support Vector Machine (SVM)
+
+Use hyperplane to separate data: maximize margin • Can deal with low-dimensional data that are not linearly separated by using kernel functions
+
+Decision boundary only depends on some samples (support vectors)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Linear SVM
+
+Training data: {(x1,y1),...,(xn,yn)}, yi ∈ {−1,+1} • Hyperplane: S = wTx + b; decision function: f (x) = sign(wTx + b)
+
+f (xi) > 0 ⇔ yi = 1 f (xi) < 0 ⇔ yi = −1
+
+(cid:41)
+
+⇒ yif (xi) > 0
+
+Geometric margin between a point and hyperplane: ri = yi(wTxi+b)
+
+(cid:107)w(cid:107)2
+
+Margin between dataset and hyperplane: min ri
+
+Maximize margin: max w,b min i
+
+yi(wTxi+b) (cid:107)w(cid:107)2
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Formulation as Constrained Optimization
+
+Without loss of generality, let min i
+
+Without loss of generality, let min i
+
+yi(wTxi + b) = 1 (multiply
+
+Maximize margin is equivalent to
+
+max w,b
+
+1 (cid:107)w(cid:107)2
+
+,
+
+s.t. yi(wTxi + b) (cid:62) 1,i = 1,...,n
+
+Further reduce to
+
+min w,b
+
+1 2
+
+(cid:107)w(cid:107)2 2,
+
+s.t. yi(wTxi + b) (cid:62) 1,i = 1,...,n
+
+This is primal problem: quadratical programming with linear constraints, computational complexity is O(p3) where p is dimension
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Method of Lagrange Multipliers
+
+Introduce αi (cid:62) 0 as Lagrange multiplier of constraint
+
+yi(wTxi + b) (cid:62) 1 • Lagrange function: L(w,b,α) = 1 2(cid:107)w(cid:107)2
+
+2 −
+
+n (cid:80) i=1
+
+αi[yi(wTxi + b) − 1]
+
+Since
+
+max α
+
+L(w,b,α) =
+
+ 
+
+
+
+1 2 + ∞,
+
+(cid:107)w(cid:107)2 2,
+
+yi(wTxi + b) − 1 (cid:62) 0,∀i
+
+yi(wTxi + b) − 1 < 0,∃i
+
+Primal problem is equivalent to the minimax problem
+
+min w,b
+
+max α
+
+L(w,b,α)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Dual problem
+
+When slater condition is satisﬁed, minmax ⇔ maxmin • Dual problem: max min w,b
+
+∇wL = 0 =⇒ w∗ =
+
+(cid:88)
+
+αiyixi
+
+i
+
+∂L ∂b
+
+= 0 =⇒
+
+(cid:88)
+
+i
+
+αiyi = 0
+
+Plug into L: L(w∗,b∗,α) = (cid:80) i
+
+αi − 1 2
+
+(cid:80) i
+
+(cid:80) j
+
+αiαiyiyj(xT
+
+i xj)
+
+Dual optimization:
+
+min α
+
+1 2
+
+(cid:88)
+
+(cid:88)
+
+αiαjyiyj(xT
+
+i xj) −
+
+(cid:88)
+
+αi,
+
+j s.t. αi (cid:62) 0,i = 1,...,n,
+
+i
+
+(cid:88)
+
+i
+
+αiyi = 0
+
+i
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+KKT conditions
+
+Three more conditions from the equivalence of primal and minimax problems
+
+ 
+
+
+
+(cid:62) 0,
+
+α∗ i yi((w∗)Txi + b∗) − 1 (cid:62) 0, i [yi((w∗)Txi + b∗) − 1] = 0. α∗
+
+These together with two zero derivative conditions form KKT conditions
+
+αi > 0 ⇒ yi(wTxi + b∗) = 1 • Index set of support vectors S = {i|αi > 0} • b = ys − wTxs = ys − (cid:80) i∈S i xs
+
+More stable solution: b = 1 |S| (cid:80) s∈S
+
+More stable solution: b = 1 |S| (cid:80) s∈S
+
+ys − (cid:80) i∈S
+
+αiyixT
+
+i xs
+
+(cid:17)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Sequential Minimal Optimization (SMO) Algorithm
+
+Invented by John C. Platt (1998) • Coordinately optimize dual problem, select two variables and ﬁx others, then dual problem reduces to one variable quadratic programming with positivity constraint
+
+1. Initially, choose αi and αj 2. Fix other variables, solve for αi and αj 3. Update αi and αj, redo step 1 iteratively 4. Stop until convergence
+
+How to choose αi and αj? choose the pair far from KKT conditions the most
+
+Computational complexity O(n3) • Easy to generalize to high dimensional problem with kernel functions
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Soft Margin
+
+When data are not linear separable, introduce slack variables (tolerance control of fault) ξi (cid:62) 0
+
+Relax constraint to yi(wTxi + b) (cid:62) 1 − ξi • Primal problem: n (cid:88)
+
+Relax constraint to yi(wTxi + b) (cid:62) 1 − ξi • Primal problem: n (cid:88)
+
+1 2
+
+(cid:107)w(cid:107)2
+
+min w,b
+
+ξi
+
+i=1
+
+s.t. yi(wTxi + b) (cid:62) 1 − ξi,ξi (cid:62) 0,i = 1,...,n
+
+Similar derivation to dual problem:
+
+min α
+
+1 2
+
+(cid:88)
+
+(cid:88)
+
+αiαjyiyj(xT
+
+i xj) −
+
+(cid:88)
+
+αi,
+
+i
+
+j
+
+i
+
+s.t. 0 (cid:54) αi (cid:54) C,i = 1,...,n,
+
+(cid:88)
+
+αiyi = 0
+
+i
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Nonlinear SVM
+
+Nonlinear decision boundary could be mapped to linear boundary in high-dimensional space
+
+Modify objective function in dual problem: αiαjyiyj(φ(xi)Tφ(xj)) − (cid:80) i 1 2
+
+Kernel function as inner product: K(xi,xj) = φ(xi)Tφ(xj)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Kernel Methods
+
+Reduce eﬀect of curse of dimensionality
+
+Diﬀerent kernels lead to diﬀerent decision boundaries
+
+Popular kernels:
+
+Kernel Polynomial
+
+Gaussian
+
+Laplacian Fisher
+
+Deﬁnition 1 x2 + 1)d (xT e− (cid:107)x1−x2(cid:107)2 e− (cid:107)x1−x2(cid:107)
+
+2δ2
+
+δ2 tanh(βxT 1 x2 + θ)
+
+Parameters d is positive integer
+
+δ > 0
+
+δ > 0 β > 0,θ < 0
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Pros and Cons
+
+Where it is good
+
+Applications in pattern recognition: text classiﬁcation, face recognition
+
+Easy to deal with high-dimensional data with kernels • Robust (only depends on support vectors), and easy to generalize to new dataset
+
+Disadvantage
+
+Low computational eﬃciency for nonlinear SVM when sample size is large
+
+Poor interpretability without probability
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Confusion Matrix (Two-class)
+
+True Positive (TP): both true label and predicted label are positive
+
+True Negative (TN): both true label and predicted label are negative
+
+False Positive (FP): true label is negative, but predicted label is positive
+
+False Negative (FN): true label is positive, but predicted label is negative
+
+Accuracy =
+
+TP+TN
+
+TN+FN+FP+TP ; not a
+
+good index when samples are imbalanced • Precision = TP
+
+TP+FP
+
+Recall = TP
+
+TP+FN ; important in medical diagnosis (sensitivity) • F score: Fβ = (1+β2)Precision×Recall β2×Precision+Recall
+
+β = 1, F1 score • Speciﬁty = TN negative samples
+
+TN+FP ; recall for
+
+;
+
+True Label
+
+Prediction Result
+
+1 (Positive Instance) 0 (Negative Instance)
+
+1 (Positive Instance) TP (True Positive) FP (False Positive)
+
+0 (Negative Instance) FN (False Negative) TN (True Negative)
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Receiver Operating Characteristic (ROC) and AUC
+
+Aim to solve class distribution imbalance problem • Set diﬀerent threshold t for continuous predicted values (probability), e.g., if P(Y = 1|X = xi) > t, then ˆyi = 1
+
+Compute TPR (= TP
+
+TP+FN, or recall) vs. FPR(= FP
+
+FP+TN) for
+
+diﬀerent t and plot ROC curve
+
+The higher the ROC, the better the performance • AUC: area under ROC, the larger the better, the more robust of the method for the change of t; very good if > 0.75
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Other metrics
+
+Cohen’s Kappa Coeﬃcient κ ∈ [−1,1]: as large as possible • Multiple Classes Problem
+
+ROC and AUC are not well-deﬁned • Confusion matrix: C × C, each entry means the number of samples in the intersection of the predicted class i and the true class j
+
+Positive sample is the sample belonging to the class i, negative sample is the sample not belonging to the class i, so every sample could be positive or negative
+
+Convert to multiple 0-1 classiﬁcation problems • Precision and recall are the averages of that in the each 0-1 classiﬁcation problem
+
+F1 score is still deﬁned as the harmonic average of precision and recall
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Cohen’s Kappa Coeﬃcient (Optional)
+
+κ = po−pe 1−pe raters
+
+= 1 − 1−p0 1−pe
+
+measures the agreement between two
+
+po is the accuracy (or the relative observed agreement) • pe is the hypothetical probability of chance agreement, ntrue N , where npred c pe = (cid:80)C predicted in class c, ntrue class c, N is the total number of samples 50 + 25 50 = 0.7, pe = 25
+
+npred c N
+
+is the number of samples is the true number of samples in
+
+c
+
+c=1
+
+c
+
+Eg: po = 20+15
+
+50 × 20
+
+50 × 30
+
+50 = 0.5, κ = 0.4
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+Outlines
+
+Introduction
+
+Logistic Regression
+
+k-Nearest Neighbor
+
+Decision Trees
+
+Naive Bayes
+
+Linear Discriminant Analysis
+
+Support Vector Machine
+
+Model Assessment
+
+References
+
+Introduction Logistic Regression k-Nearest Neighbor Decision Trees Naive Bayes Linear Discriminant Analysis Support Vector Machine Model Assessment References
+
+References
+
+机器学习，周志华，2016. • Chapters 4, 8, 9, An Introduction to Statistical Learning with Applications in Python by Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor, Springer, 2023.
+
+Chapters 4, 9, 12-13, 15, The Elements of Statistical Machine Learning: Data mining, Inference and Prediction by Trevor Hastie, Robert Tibshirani, and Jerome Friedman, Springer, 2009.
+

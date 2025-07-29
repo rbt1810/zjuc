@@ -1,0 +1,173 @@
+{
+    "metadata": {
+        "content_type": "lecture_notes",
+        "document_title": "Introduction to Machine Learning",
+        "institution": "Zhejiang University",
+        "sections": [
+            "Course Syllabus",
+            "What Is Data Science",
+            "Machine Learning",
+            "Mathematical Representation",
+            "Conclusion"
+        ]
+    },
+    "pages": [
+        {
+            "title": "Definition",
+            "content": [
+                {
+                    "item_id": "ai_definition",
+                    "header": "Artificial Intelligence Definition",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Artificial Intelligence (AI) : learning from experiences (data), and improve the computer program adaptively"
+                        }
+                    ]
+                },
+                {
+                    "item_id": "math_definition",
+                    "header": "Mathematics Definition",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Mathematics : Learning the underlying model from data, and generalize the model to adapt new data"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Related Areas",
+            "content": [
+                {
+                    "item_id": "related_fields",
+                    "header": "Related Fields",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Control theory : optimize the cost with optimal control parameters",
+                                "Information theory : entropy, optimal coding with best information",
+                                "Psycology : reference for machine learning algorithms",
+                                "Neuroscience : artificial neural network",
+                                "Biology : genetic algorithms",
+                                "Theory of Computing : study the computational complexity",
+                                "Statistics : large-sample limiting behavior, statistical learning theory",
+                                "Artificial Intelligence : symbolic computing",
+                                "Bayesian theory : conditionally probabilistic network"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Applications",
+            "image": [
+                {
+                    "title": "Machine Learning Applications",
+                    "path": "~/zjuc/agent/lectures/introduction/Images/ml_applications.png",
+                    "description": "Visualization of various machine learning application domains"
+                }
+            ]
+        },
+        {
+            "title": "Supervised and Unsupervised Learning",
+            "content": [
+                {
+                    "item_id": "learning_types",
+                    "header": "Learning Types",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Supervised learning : classification, regression",
+                                "Unsupervised learning : density estimation, clustering, dimensionality reduction",
+                                "Semi-supervised learning : with missing data, e.g., EM ; self-supervised learning, learn the missing part of images, inpainting",
+                                "Reinforcement learning : play games, e.g., Go, StarCraft ; robotics ; auto-steering"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Supervised Learning",
+            "content": [
+                {
+                    "item_id": "supervised_properties",
+                    "header": "Supervised Learning Properties",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Given labels of data : the labels could be symbols (spam or non-spam), integers (0 or 1), real numbers, etc.",
+                                "Training : find the optimal parameters (or model) to minimize the error between the prediction and target",
+                                "Classification : SVM, KNN, Desicion tree, etc.",
+                                "Regression : linear regression, CART, etc."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Classification",
+            "content": [
+                {
+                    "item_id": "classification_properties",
+                    "header": "Classification Characteristics",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Output is discrete",
+                                "Examples : given the study hours, in-class performance, and final grades (Pass or Fail) of past students, can you predict the final grades of the current students based on their study hours and in-class performance ?",
+                                "Applications : Credit risk evaluation, clinical prediction of tumor, classification of protein functions, etc."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Regression",
+            "content": [
+                {
+                    "item_id": "regression_properties",
+                    "header": "Regression Characteristics",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "Output is continuous",
+                                "Examples : given the study hours, in-class performance, and final scores of past students, can you predict the final scores of the current students based on their study hours and in-class performance ?",
+                                "Applications : epidemiology, finance, investment analysis, etc."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Unsupervised Learning",
+            "content": [
+                {
+                    "item_id": "unsupervised_properties",
+                    "header": "Unsupervised Learning Properties",
+                    "content_array": [
+                        {
+                            "type": "list",
+                            "items": [
+                                "No labels",
+                                "Optimize the parameters based on some natural rules, e.g., cohesion or divergence",
+                                "Clutering : K-Means, SOM"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,596 @@
+Basic Concepts
+
+PHBS Course : Machine Learnings and Algorithms Data Preprocessing
+
+Zhen Zhang
+
+Data Preprocessing
+
+Basic Concepts
+
+Basic Concepts
+
+Data Preprocessing
+
+Outlines
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Types
+
+Tabular data : matrices, vectors, objects, relations, etc.
+
+Data objects : also called samples, examples, instances, data points, objects, tuples, vectors
+
+Attributes : each row of a table, also called dimensions, features, variables
+
+Graphical data : networks, graphs, etc.
+
+Multi-media data : texts, images, videos, audios, etc.
+
+Data Preprocessing
+
+Basic Concepts
+
+Types of Attributes
+
+Discrete : x ∈ some countable sets, e.g., N
+
+Nominal : Countries={China, US, UK, France, Germany}, Universities={Peking U, Tsinghua U, SUSTech, Shenzhen U, HIT}, not comparable
+
+Boolean : 0 or 1, male or female, spam or non-spam, etc. • Ordinal : Heights={tall, short}, Scores={A+, A, A-, B+, B, B-, C, C-, D, F}, can be compared, but cannot operated arithmetically
+
+Continuous : x ∈ some subset in Rn
+
+Numerical : Income, exact marks, weights, etc., can be operated arithmetically
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Basic Statistics
+
+Mean : EX = minc E(X − c)2 ≈ 1 n • Median : (cid:40)
+
+Mean : EX = minc E(X − c)2 ≈ 1 n • Median : (cid:80)n
+
+i=1 xi
+
+x( n+1 2 ) 2) + x( n (x( n
+
+E|X − c| =
+
+min c
+
+2+1))/2 otherwise
+
+Maximum : max i
+
+xi ; Minimum : min
+
+i
+
+xi
+
+Quantile : a generalization of median, k-th q-quantile xq : P[X < xq] (cid:54) k/q ; interquartile range (IQR)=Q3(75%) − Q1(25%)
+
+Variance : Var(X) = E[X − EX]2 ≈ 1 n (cid:80)n
+
+i=1(xi − ¯x)2 ;
+
+Mode : minc E|X − c|0 = the most frequently occurring value (deﬁne 00 = 0)
+
+Basic Concepts
+
+Central Tendency
+
+For one-peak skewed density distribution, empirical formula : Mean − Mode = 3 × (Mean − Median)
+
+Data Preprocessing
+
+Basic Concepts
+
+Measure the dispersion of data
+
+Box Plot
+
+Data Preprocessing
+
+Basic Concepts
+
+Metrics
+
+Proximity :
+
+Similarity : range is [0,1] • Dissimilarity : range is [0,∞], sometimes distance
+
+For nominal data, d(xi,xj) = encoding into Boolean data (cid:80)
+
+k I(xi,k(cid:54)=xj,k) p
+
+; or one-hot
+
+For Boolean data, symmetric distance d(xi,xj) = r+s q+r+s+t ; non-symmetric q+r+s+t or
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Metrics : Distance
+
+Example : Let H = F = 1 and L = S = 0, 4+1+0 =
+
+Example : Let H = F = 1 and L = S = 0, d(LandRover,Jeep) = 1+0 0.20,d(LandRover,TOYOTA) = 3+1 0.80,d(Jeep,TOYOTA) = 3+2
+
+Minkowski distance : d(xi,xj) = h Lh-norm
+
+Minkowski distance : d(xi,xj) = h Lh-norm
+
+(cid:113)(cid:80)p
+
+Positive deﬁniteness d(xi,xj) (cid:62) 0 and “=” if and only if i = j ; • Symmetry d(xi,xj) = d(xj,xi); • Triangle inequality d(xi,xj) (cid:54) d(xi,xk) + d(xk,xj)
+
+Basic Concepts
+
+Metrics : Distance (Cont’)
+
+Manhattan distance : h = 1, and d(xi,xj) = (cid:80)p
+
+k=1 |xik − xjk| • Euclidean distance : h = 2,
+
+and d(xi,xj) = (cid:113)(cid:80)p
+
+k=1 |xik − xjk|2 • Supremum distance :
+
+(a) Manhattan
+
+h = ∞, and d(xi,xj) = maxp
+
+k=1 |xik −xjk|
+
+(b) Euclidean
+
+(c) Supremum
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Metrics : Cosine Similarity
+
+Euclidean vs. Cosine :
+
+Deﬁnition : cos(xi,xj) = k=1 xikxjk (cid:113)(cid:80)p xi·xj (cid:107)xi(cid:107)(cid:107)xj(cid:107)
+
+Euclidean : measures the distance in absolute value, many applications
+
+Cosine : insensitive to
+
+Example : cos(x1,x2) = 0.94
+
+absolute value, e.g., analyze users’ interests based on movie ratings
+
+Basic Concepts
+
+Data Preprocessing
+
+Metrics : Other Distances
+
+For ordinal data, mapping the data to numerical data : n−1 ∈ [0,1]
+
+For mixed type, use weighted distance with prescribed weights :
+
+d(xi,xj) =
+
+(cid:80)G
+
+g=1 w(g) (cid:80)G
+
+ij d(g)
+
+ij
+
+g=1 w(g)
+
+ij
+
+Put the attributes of the same type into groups, for each data type g, use the corresponding distance d(g)
+
+ij
+
+Basic Concepts
+
+Basic Concepts
+
+Data Preprocessing
+
+Outlines
+
+Data Preprocessing
+
+Basic Concepts
+
+Why Data Preprocessing?
+
+Missing values
+
+Noisy with outliers
+
+Inconsistent representations
+
+Redundancy
+
+Errors may come during data input, data gathering, and data transferring
+
+Errors occur in about 5% of the data
+
+Data Preprocessing
+
+Basic Concepts
+
+Four Types of Data Preprocessing
+
+(a) Data cleaning
+
+(b) Data integration
+
+(c) Data conversion
+
+(d) Data reduction
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Data Scaling
+
+Why scaling :
+
+For better performance : e.g., RBF in SVM and penalty in Lasso/ridge regression assume the zero mean and unit variance • Normalize diﬀerent dimensions : many algorithms are sensitive to the variables with large variances, e.g., height (1.75m) and weight (70kg) in distance calculation i = xi−ˆµ
+
+Z-score scaling : x∗
+
+ˆσ , ˆµ : sample mean, ˆσ : sample
+
+variance, applicable if max and min are unknown and the data distributes well
+
+Basic Concepts
+
+Data Preprocessing
+
+Data Scaling (Cont’)
+
+i = xi−mink xk
+
+0-1 scaling : x∗
+
+∈ [0,1], applicable for
+
+maxk xk−mink xk
+
+bounded data sets, need to recompute the max and min when new data arrive • Decimal scaling : x∗ many magnitudes
+
+i = xi
+
+10k , applicable for data varying across
+
+Logistic scaling : sigmoid transform x∗ for data concentrating nearby origin i = 1
+
+1+e−xi , applicable
+
+Basic Concepts
+
+Data Preprocessing
+
+Data Discretization
+
+Why discretization :
+
+Improve the robustness : removing the outliers by putting them into certain intervals • For better interpretation • Reduce the storage and computational power
+
+Unsupervised discretization : equal-distance discretization, equal-frequency discretization, clustering-based discretization, 3σ-based discretization
+
+Supervised discretization : information gain based discretization, χ2-based discretization
+
+Basic Concepts
+
+Data Preprocessing
+
+Unsupervised Discretization
+
+Equal-distance discretization : split the range to n intervals (bins) with the same length, group the data into each bin, sensitive to outliers
+
+Equal-frenquency discretization : group the data into n subset so that each subset has the same number of points, tend to separate samples with similar values and produce uniform distribution
+
+Clustering-based discretization : do hierarchical clustering and form a hierarchical structure (e.g., using K-Means), and put the samples in the same branch into the same interval (a natural example is family tree)
+
+3σ-based discretization : put the samples into 8 intervals, need to take logarithm ﬁrst
+
+Basic Concepts
+
+Supervised Discretization - Information Gain
+
+Top-down splitting, similar to create a decision tree • Do a decision tree classiﬁcation using information gain, ﬁnd a proper splitting point for each continuous variable such that the information gain increases the most
+
+The ﬁnal leaf nodes summarize the discrete intervals
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Supervised Discretization - ChiMerge
+
+Bottom-up : similar to hierarchical clustering • ˆχ2 statistics proposed by Karl Pearson, is used to test whether the observations dramatically deviate from theoretical (Ai−EAi)2 distribution : ˆχ2 = (cid:80)k EAi is the number of samples in the i-th interval Ai = [ai−1,ai] (frequency of observations), (cid:83)k i=1 Ai covers the range of the variable, and EAi = pi is its expectation computed from the theoretical distribution; it can be shown that ˆχ2 → χ2
+
+(Ai−npi)2 npi
+
+= (cid:80)k
+
+, where ni
+
+i=1
+
+i=1
+
+ChiMerge : Given a threshold level t,
+
+k−1
+
+1. Treat each value of the continuous variable as an interval and sort them in increasing order;
+
+2. For each pair of adjacent intervals, compute its ˆχ2 statistics, if ˆχ2 < t, merge them into a new interval;
+
+3. Repeat the above steps until no adjacent intervals can be merged.
+
+Two shortcomings : t is hard to set appropriately; too long loop for large sample set, computationally intensive
+
+Basic Concepts
+
+Data Preprocessing
+
+ChiMerge : Iris Data Example
+
+(Aij−Eij)2 Eij
+
+ˆχ2 = (cid:80)m i=1
+
+(cid:80)k
+
+ˆχ2 = (cid:80)m i=1
+
+, where
+
+j=1 m = 2 (two adjacent intervals) k is the number of classes Aij is the number of samples in i-th interval and in class k Ri = (cid:80)k of samples in i-th interval Cj = (cid:80)m of samples in class j N = (cid:80)m i=1 number of samples Eij = Ri · Cj
+
+i=1 Aij is the total number
+
+(cid:80)k
+
+j=1 Aij is the total
+
+N
+
+χ2 of 4.3 and 4.4 : C1 = 4, C2 = 0, C3 = 0, N = 4, A11 = 1, A12 = A13 = 0, A21 = 3, A22 = A23 = 0, R1 = 1, R2 = 3, E11 = 1, E12 = E13 = 0, E21 = 3, E22 = E23 = 0, ˆχ2 = 0.
+
+Figure: Sepal lengths of 3 types of iris
+
+Basic Concepts
+
+ChiMerge Results
+
+Left : signiﬁcance level is 0.5 and the threshold for χ2 is 1.4; Right : signiﬁcance level is 0.9 and the threshold for χ2 is 4.6; The ﬁnal results keep the intervals with χ2 larger than the thresholds
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Data Redundancy
+
+When strong correlations exist among diﬀerent attributes, then we say that the some attributes can be derived from the others (Recall linear dependency for vectors)
+
+E.g., two attributes “Age” and “Birthday”, then “Age” can be calculated from “Birthday”
+
+Determine the data redundancy by correlation analysis • For continuous variables A and B, compute the correlation i=1(ai−¯A)(bi−¯B) kˆσAˆσB (cid:80)k
+
+1. If r > 0, A and B are positively correlated; 2. If r < 0, A and B are negatively correlated; 3. If r = 0, A and B are uncorrelated.
+
+Note that the correlation between A and B does not imply the causal inference.
+
+For discrete variables A and B, compute the χ2 statistics : large ˆχ2 value implies small correlation
+
+Basic Concepts
+
+Missing Data
+
+Where missing data come from?
+
+Missing Completely At Random (MCAR) : the occurrence of missing data is a random event
+
+Missing At Random (MAR) : depending on some control
+
+variables, e.g., the age > 20 is not acceptable in an investigation for teenager and thus is replaced by MAR • Missing Not At Random (MNAR) : missing data for bad
+
+performed employees after they are ﬁred
+
+Data Preprocessing
+
+Basic Concepts
+
+Simple Methods
+
+Deleting samples : for small size of samples with missing values
+
+Deleting variables : for series missing values in variables
+
+Data Preprocessing
+
+Basic Concepts
+
+Filling Methods
+
+Filling with zero
+
+Filling with means for numerical type, and with modes for non-numerical type, applicable for MCAR; drawback : concentrating in the mean and underestimating the variance; solution : ﬁlling in diﬀerent groups
+
+Filling with similar variables : auto-correlation is introduced
+
+Filling with past data
+
+Filling by K-Means : Compute the pairwise distances of the data using good variables (no missing values), then ﬁll the missing values with the mean of the ﬁrst K most similar good data, auto-correlation is introduced
+
+Filling with Expectation-Maximization (EM) : introduce hidden variables and use MLE to estimate the parameters (missing values)
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Filling Methods (Cont’)
+
+Random ﬁlling :
+
+Bayesian Bootstrap : for discrete data with range {xi}k randomly sample k − 1 numbers from U(0,1) as {a(i)}k a(0) = 0 and a(k) = 1; then randomly sample from {xi}k with probability distribution {a(i) − a(i−1)}k ﬁll in the missing values i=1, i=0 with i=1
+
+Approximate Bayesian Bootstrap(cid:181)Sample with replacement i }k∗
+
+Model based methods : treat missing variable as y, other variables as x; take the data without missing values as our training set to train a classiﬁcation or regression model; take the data with missing values as our test set to predict the miss values
+
+Basic Concepts
+
+Filling by Interpolation
+
+For the data of numeric type, each attribute (column vector) can be viewed as the function values zi = f (xi) at the points xi, where xi is a reference attribute (the reference attribute usually has no missing values, it can be chosen as the index)
+
+We can interpolate a function f using the existing values (xi,zi), and then ﬁll in the missing values zk with f (xk)
+
+Linear interpolation : treat z = f (x) as linear function between the neighboring points xk−1 and xk+1 of xk
+
+Lagrange interpolation : interpolate the m + 1 existing values i=1 by a degree m polynomial Lm(x) {(xli,zli)}m+1
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Special Values and Dummy Variables
+
+In Python, “np.nan” means missing values (Not a Number, missing ﬂoat value)
+
+“None” is a Python object, used to represent missing values of the object type
+
+Dummy variables : e.g., missing values in gender (“Male” or “Female”),
+
+then deﬁne a third value “unknown” for the missing values
+
+Basic Concepts
+
+Outliers
+
+Outliers : the data points seem to come from diﬀerent distribution, or noisy data
+
+Outlier detection : unsupervised, e.g., Credit cheating detection, medical analysis, and information security, etc.
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Outliers Detection - Statistics Based Methods
+
+The samples outside the upper and lower α-quantile for some small α (usually 1%)
+
+Observe from box plot • 3σ-rule in 1D : the sample x with x∗
+
+Z−score > 3 is an outlier
+
+Basic Concepts
+
+Outliers Detection - Distance Based Methods
+
+K-means : run K-means clustering ﬁrst, and then select the farthest m points from their centers as outliers
+
+KNN : run KNN ﬁrst, and then select the points that are far from their K nearest neighbors (distance > C) as outliers
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Outliers Detection - Local Outlier Factor
+
+Local Outlier Factor (LOF) is a density based method :
+
+1. We could compute the density at each position x, e.g., p(x) (how to deﬁne the density if we only have data samples);
+
+2. We could compare the density of each point x with the density of its neighbors, i.e., compare p(x) with p(xk) where xk is close to x (in a neighborhood of x, but how to deﬁne the neighborhood)
+
+Basic Concepts
+
+Data Preprocessing
+
+Computing Density by Distance
+
+Some deﬁnitions :
+
+d(A,B) : distance between A and B;
+
+dk(A) : k-distance of A, or the distance between A and the k-th nearest point from A
+
+Nk(A) : k-distance neighborhood of A, or the points within dk(A) from A;
+
+rdk(B,A) : k-reach-distance from A to B, the repulsive distance from A to B as if A has a hard-core with radius dk(A), rdk(B,A) = max{dk(A),d(A,B)}; note that rdk(A,B) (cid:54)= rdk(B,A), which implies that k-reach-distance is not symmetric.
+
+Figure: rd5(B,A) = d5(A) and rd5(B,C) = d(B,C)
+
+Basic Concepts
+
+Local Outlier Factor
+
+Some deﬁnitions :
+
+lrdk(A) : local reachability density is inversely proportional to the average distancep, lrdk(A) = 1/ intuitively, if for most O ∈ Nk(A), more than k points are closer to O than A is, then the denominator is much larger than dk(A) and lrdk(A) is small; e.g., k = 3 in the ﬁgure
+
+LOFk(A) : local outlier factor, (cid:80) O∈Nk(A)
+
+LOFk(A) : local outlier factor, (cid:80) LOFk(A) =
+
+LOFk(A) (cid:28) 1, the density of A is locally higher, dense point; LOFk(A) (cid:29) 1, the density of A is locally lower, probably outlier
+
+Data Preprocessing
+
+Basic Concepts
+
+Data Preprocessing
+
+Further topics
+
+Other methods for outlier detection :
+
+Isolation Forest : small path length (normally distributed) in a random forest (sklearn.ensemble.Isolation)
+
+One-class support vector machine : classiﬁcation as 1 (normal) vs. -1 (outlier) (sklearn.svm.OneClassSVM)
+
+Robust covariance : based on Gaussian assumption, 3σ rule in high dimensions (sklearn.covariance.EllipticEnvelope)
+
+Outlier processing :
+
+Delete outliers (treat them as missing values) • Robust regression : e.g., Theil-Sen regression, select the median of all possible slopes in two-point linear regression
+

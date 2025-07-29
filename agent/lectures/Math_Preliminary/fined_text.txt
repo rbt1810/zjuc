@@ -1,0 +1,1930 @@
+Linear Algebra
+
+MA233 Introduction to Big Data Science Mathematical Preliminary
+
+Zhen Zhang
+
+Southern University of Science and Technology
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Outlines
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+References
+
+Statistics and Machine Learning
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Inner Product and Euclidean Norm
+
+For ∀x,y ∈ Rn, their inner product is deﬁned as
+
+< x,y >=
+
+n (cid:88)
+
+xiyi = xTy.
+
+i=1
+
+It satisﬁes
+
+1. (Commutativity) < x,y >=< y,x >;
+
+2. (Scalar Multiplication) < λx,y >= λ < x,y >=< x,λy >;
+
+3. (Bilinearity) < x + y,z >=< x,z > + < y,z >, < x,y + z >=< x,y > + < x,z >;
+
+4. (Positivity) < x,x >(cid:62) 0, and < x,x >= 0 iﬀ x = 0. √
+
+4. (Positivity) < x,x >(cid:62) 0, and < x,x >= 0 iﬀ x = 0. √
+
+The Euclidean norm (l2-norm) is (cid:107)x(cid:107) =
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Linear Independency and Orthogonality
+
+Linear Independency :
+
+A set of vectors U = {bx1,...,xk} is linearly independent if for ∀i, xi does not lie in the space spanned by x1,...,xi−1,xi+1,xk. We say U spans a subspace V if V is the span of the vectors in U. U is a basis of V if it is both independent and spans V. The dimension of V is the size of a basis of V (i.e., the number of linearly independent vectors in U).
+
+Orthogonality :
+
+We say that U is an orthogonal set if for all i (cid:54)= j, < xi,xj >= 0. We say that U is an orthonormal set if it is orthogonal and if for every i, (cid:107)xi(cid:107) = 1.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Gram-Schmidt Orthogonalization
+
+Given a set of linear independent vectors V = {v1,...,vk}, we can apply Gram-Schmidt orthogonalization to obtain an orthonormal set {u1,...,uk} which have the same span as spanV. The procedure is as follows : 1. Let u1 = v1/(cid:107)v1(cid:107); 2. For j = 2 to k, project vj onto span{u1,...,uj−1} and ﬁnd i=1 < ui,vj > ui, then
+
+the perpendicular part ˜uj = vj − (cid:80)j−1 normalize it to be uj = ˜uj/(cid:107)˜uj(cid:107);
+
+This procedure is summarized in the matrix form : Q = AP, where Q = (u1 ···uk) ∈ Rk×k is an orthogonal matrix whose columns are given by ui’s, A = (v1 ···vk) ∈ Rk×k is a nonsingular matrix whose columns are given by vi’s, and P ∈ Rk×k is an upper tridiagonal matrix whose upper tridiagonal (i,j)-entry is given by < ui,vj >. This is known as the QR factorization : A = QR where R = P−1.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Concepts in Matrix
+
+Kernel and Range :
+
+Given a matrix A ∈ Rn×d, the range of A (Range(A)) is the span of its columns and the kernel of A (Ker(A)) is the subspace of all vectors that satisfy Ax = 0. The rank of A is the dimension of its range and is denoted by rank(A) or r(A) for short.
+
+Symmetric and Deﬁnite Matrix :
+
+A is symmetric if A = AT. A symmetric matrix A ∈ Rd×d is positive deﬁnite if for all x ∈ Rd, < x,Ax >(cid:62) 0, and equality holds if and only if (“iﬀ”) x = 0. This deﬁnition can be relaxed to give semideﬁniteness : A symmetric matrix A ∈ Rd×d is positive semideﬁnite if for all x ∈ Rd, xTAx (cid:62) 0. In particular, all the eigenvalues of a positive deﬁnite (resp. semideﬁnite) matrix are positive (resp. nonnegative). And A = BBT for some matrix B. (See next slides for eigen-decomposition)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Eigenvalues and Eigenvectors
+
+Let A ∈ Rd×d be a squared matrix. A nonzero vector xRd is an eigenvector of A with a corresponding eigenvalue λ if Ax = λx.
+
+Theorem (Eigen-decomposition or Spectral Decomposition) If A ∈ Rd×d is a symmetric matrix of rank k, then there exists an orthogonal basis of Rd, x1,...,xd, such that each xi is an eigenvector of A. Furthermore, A can be written as A = (cid:80)d is the eigenvalue corresponding to the eigenvector xi. In matrix form, this is A = UDUT, where the columns of U are the vectors x1,...,xd, and D = diag{λ1,...,λd} is a diagonal matrix. Finally, r(A) is the number of nonzero λi’s, and the corresponding eigenvectors span the range of A. The eigenvectors corresponding to the zero eigenvalues span the null space of A.
+
+i=1 λixixT
+
+i , where each λi
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Singular Values Decomposition (SVD)
+
+Let A ∈ Rm×n be a matrix of rank r. Unit (nonzero) vector v ∈ Rn and u ∈ Rm are called right and left singular vectors of A with corresponding singular values σ if Av = σv and uTA = σuT.
+
+Theorem (SVD) Let A ∈ Rm×n be a matrix of rank r. Then there exist orthonormal sets of right and left singular vectors of A, say {v1,...,vr} and {u1,...,ur} respectively, and the corresponding singular values σ1,...,σr, such that A = (cid:80)r i . In matrix form, this is A = UDV T, where the columns of U are the vectors u1,...,ur, the columns of V are the vectors v1,...,vr, and D = diag{σ1,...,σd} is a diagonal matrix.
+
+i=1 σiuivT
+
+Corollary The squared matrices ATA ∈ Rn×n and AAT ∈ Rm×m have (a subset of) the eigenvectors {v1,...,vr} and {u1,...,ur} respectively, corresponding the the same eigenvalues σ2
+
+1,...,σ2 r .
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Reyleigh Quotient
+
+Theorem Let A ∈ Rm×n be a matrix of rank r. Deﬁne v1 = argmax v∈Rn:(cid:107)v(cid:107)=1 (cid:107)Av(cid:107). Then v1,...,vr
+
+v2 = argmax v∈Rn:(cid:107)v(cid:107)=1 <v,v1>=0
+
+(cid:107)Av(cid:107),...,vr = argmax v∈Rn:(cid:107)v(cid:107)=1 ∀i<r,<v,vi>=0
+
+is an orthonormal set of right singular vectors of A. Remark :(Reyleigh Quotient) If A ∈ Rn×n is a squared matrix, then its eigenvalues can be found as the solution to the following optimization problems :
+
+λ1 = max
+
+v∈Rn:(cid:107)v(cid:107)=1
+
+vTAv,
+
+λ2 = max
+
+v∈Rn:(cid:107)v(cid:107)=1 <v,v1>=0
+
+vTAv,
+
+...,
+
+λn =
+
+max v∈Rn:(cid:107)v(cid:107)=1 ∀i<n,<v,vi>=0
+
+vTAv.
+
+References
+
+(cid:107)Av(cid:107),
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Power Method - Dominant Eigenvalue
+
+Assume the eigenvalues of A can be sorted according to their magnitudes : |λ1| > |λ2| (cid:62) |λ3| (cid:62) ··· (cid:62) |λn| (cid:62) 0. If The corresponding eigenvectors {v1,...,vn} form a basis of Rn, then any vector can be expressed as x = (cid:80)n i=1 βivi. Multiplying x by A on the left for n times, we have an idea
+
+Akx =
+
+n (cid:88)
+
+i=1
+
+βiλk
+
+i vi = λk 1
+
+n (cid:88)
+
+i=1
+
+βi
+
+(cid:0)λi λ1
+
+(cid:1)kvi ∼ λk
+
+1β1v1,
+
+k → ∞
+
+1. For any nonzero vector x, let y(0) = x;
+
+2. For k = 0,1,... : compute the smallest integer pk such that satisfying pk , y(k+1) = Ax(k),
+
+2. For k = 0,1,... : compute the smallest integer pk such that satisfying pk = (cid:107)y(k)(cid:107)∞, then compute x(k) = y(k)/y(k) y(k) µ(k+1) = y(k+1)
+
+.
+
+x(k) = v1/(cid:107)v1(cid:107)∞. Other methods : QR factorization, Householder transformations
+
+µ(k) = λ1 and lim k→∞
+
+It can be shown that lim k→∞
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Linear Systems
+
+A system of m linear algebraic equations in n unknown variables can be written in the matrix form : Ax = b, where A ∈ Rm×n, x ∈ Rn, and b ∈ Rm. This system has solutions iﬀ r([A,b]) = r(A). Theorem (Solvability Condition)
+
+1.
+
+If Ker(A) = {0}, then Ax = b either has a unique solution or has no solution. It has a solution iﬀ b⊥Ker(AT).
+
+2.
+
+If Ker(A) (cid:54)= {0}, then Ax = b either has inﬁnitely many solutions or has no solution. It has a solution iﬀ b⊥Ker(AT).
+
+If A ∈ Rn×n is a square matrix, we have a simple rule : the system has a unique solution iﬀ detA (cid:54)= 0. If the solution exists, we can solve it by x = A−1b, where A−1 is the inverse of A satisfying A−1A = AA−1 = I. Moreover, we can ﬁnd it by Cramer’s rule : xi = detAi the matrix obtained from A by replacing its i-th column with b. The direct application of this formula requires O(n!) arithmetic operations to ﬁnd detA, which is unacceptable for large n.
+
+detA , where Ai is
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Gaussian Elimination
+
+Gaussian Elimination is an algorithm that can reduce the computational complexity of solving linear systems to O(n3). It is equivalent to perform an elementary row transformation for A to obtain an upper or lower triangular matrix.
+
+Another way to view Gaussian elimination is the LU decomposition : The k-th row transformation can be represented by a left multiplication by M(k), where M(k) is a lower triangular matrix with its diagonal entries being all 1’s; after n operations, A is transformed to an upper triangular matrix U, i.e., M(n) ···M(2)M(1)A = U ; since the inverse of a lower triangular matrix is also a lower triangular matrix, we have A = LU, where L = (M(1))−1(M(2))−1 ···(M(n))−1 with its diagonal entries being all 1’s.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+LU Decomposition
+
+Theorem An n × n nonsingular matrix A can be decomposed uniquely in the form A = LU, where
+
+L =
+
+
+
+    
+
+1
+
+l21 ... ln,1
+
+0
+
+1 ... ···
+
+··· ... ... ln,n−1
+
+0 ...
+
+0 1
+
+
+
+    
+
+,U =
+
+
+
+    
+
+u11
+
+0 ... 0
+
+u12
+
+u22 ... ···
+
+··· ... ... 0
+
+u1,n ...
+
+un−1,n un,n
+
+The computational complexity for LU decomposition is O(n3). If A is symmetric, we have Cholesky decomposition A = LLT, where L is a lower diagonal matrix.
+
+
+
+    
+
+.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Iterative Solver
+
+We introduce two commonly used iterative methods : Jacobi iteration and Gauss-Seidel iteration. First we write A = D − L − U, where D = diag{a11,...,ann}, L = {lij} and U = {uij} are the lower and upper diagonal parts of −A respectively. That means lij = −aij for i > j and 0 for i (cid:54) j, uij = −aij for i < j and 0 for i (cid:62) j.
+
+Jacobi iteration : Rewrite the linear system as
+
+Dx = (L + U)x + b, if D−1 exists (aii the iteration x(k) = D−1(L + U)x(k−1) + D−1b, k = 1,2,...
+
+(cid:54)= 0), then we can build
+
+Gauss-Seidel iteration : Rewrite the linear system as (cid:54)= 0), then we can
+
+Both are easy to implement in component form and can be written as x(k) = Tx(k−1) + c, with T = D−1(L + U) for Jacobi iteration and (D − L)−1U for Gauss-Seidel iteration. (Fixed point iteration!)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Vector Norms
+
+Vector Norm is a non-negative real-valued function on Rn, usually denoted by (cid:107) · (cid:107) : Rn → R, with the following properties :
+
+1. (Positivity) (cid:107)x(cid:107) (cid:62) 0 for all x ∈ Rn ; (cid:107)x(cid:107) = 0 iﬀ x = 0; 2. (Homogeneity) (cid:107)αx(cid:107) = |α|(cid:107)x(cid:107) for ∀α ∈ R and x ∈ Rn ; 3. (Triangle Inequality) (cid:107)x + y(cid:107) (cid:54) (cid:107)x(cid:107) + (cid:107)y(cid:107) for ∀x,y ∈ Rn.
+
+Examples :
+
+l2-norm : (cid:107)x(cid:107)2 = (
+
+l1-norm : (cid:107)x(cid:107)1 =
+
+n (cid:80) i=1 n (cid:80) i=1
+
+x2 i )
+
+|xi|;
+
+1 2 ;
+
+l∞-norm : (cid:107)x(cid:107)∞ = max 1(cid:54)i(cid:54)n |xi|;
+
+Theorem Deﬁne lp-norm as (cid:107)x(cid:107)p = (
+
+n (cid:80) i=1
+
+xp i )
+
+1
+
+p, it is really a norm for p (cid:54) 1.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Vector Norms (Cont’)
+
+Remark : i) lp-norm is not a norm for 0 < p (cid:54) 1, since the triangular inequality is not satisﬁed. It is called semi-norm. ii) Useful to deﬁne l0-norm : (cid:107)x(cid:107)0 = #{1 (cid:54) i (cid:54) n : xi (cid:54)= 0}. Induced Distances : dist(x,y) = (cid:107)x − y(cid:107), e.g., l2-distance is
+
+(cid:107)x − y(cid:107)2 = (
+
+n (cid:80) i=1
+
+(xi − yi)2)
+
+1 2.
+
+Theorem ∀x ∈ Rn, (cid:107)x(cid:107)∞ (cid:54) (cid:107)x(cid:107)2 (cid:54) (cid:107)x(cid:107)1.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Matrix Norms
+
+Matrix Norm is a non-negative real-valued function on Rn×m, usually denoted by (cid:107) · (cid:107) : Rn×m → R, with the following properties :
+
+1. (Positivity) (cid:107)A(cid:107) (cid:62) 0 for all A ∈ Rn×m ; (cid:107)A(cid:107) = 0 iﬀ A = 0; 2. (Homogeneity) (cid:107)αA(cid:107) = |α|(cid:107)A(cid:107) for ∀α ∈ R and A ∈ Rn×m ; 3. (Triangle Inequality) (cid:107)A + B(cid:107) (cid:54) (cid:107)A(cid:107) + (cid:107)B(cid:107) for ∀A,B ∈ Rnp×m ;
+
+4. (cid:107)AB(cid:107) (cid:54) (cid:107)A(cid:107)(cid:107)B(cid:107) for ∀A,B ∈ Rn×m.
+
+Theorem If (cid:107) · (cid:107) is a vector norm on Rn, then (cid:107)A(cid:107) = max (cid:107)x(cid:107)=1
+
+(cid:107)Ax(cid:107) = max x(cid:54)=0
+
+is a matrix norm (called natural norm).
+
+Corollary (cid:107)Ax(cid:107) (cid:54) (cid:107)A(cid:107)(cid:107)x(cid:107) for ∀A ∈ Rn×m and x ∈ Rn.
+
+References
+
+(cid:107)Ax(cid:107) (cid:107)x(cid:107)
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Matrix Norm (Cont’)
+
+Examples :
+
+l1-norm : (cid:107)A(cid:107)1 = max 1(cid:54)j(cid:54)n • l∞-norm : (cid:107)A(cid:107)∞ = max 1(cid:54)i(cid:54)n (cid:80)n
+
+l1-norm : (cid:107)A(cid:107)1 = max 1(cid:54)j(cid:54)n • l∞-norm : (cid:107)A(cid:107)∞ = max 1(cid:54)i(cid:54)n (cid:80)n
+
+i=1 |aij|; (cid:80)n
+
+l2-norm is not trivial. For a symmetric matrix A, deﬁne its spectral radius as ρ(A) = max1(cid:54)i(cid:54)n λi, where λi(i = 1,...,n) are the eigenvalues of A. Then Theorem 1. (cid:107)A(cid:107)2 = (cid:112)ρ(ATA); 2. ρ(A) (cid:54) (cid:107)A(cid:107) for any natural norm (cid:107) · (cid:107).
+
+Theorem (Convergence of Jacobi and Gauss-Seidel Iterations) The Jacobi and Gauss-Seidel iterations converge to the unique solution of x = Tx + c iﬀ ρ(T) < 1. Moreover, we have the error estimate (cid:107)x − x(k)(cid:107) (cid:54) (cid:107)T(cid:107)k 1−(cid:107)T(cid:107)(cid:107)x(1) − x(0)(cid:107).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Matrix Calculus
+
+By convention, the lowercase letter a denotes a scalar, the bold letter x = (x1,...,xn)T denotes a column vector, and the uppercase letter A = (aij) denotes an m × n matrix. Assume x (or x) is independent variables, a, b, etc. are constant vectors, A, B, etc. are constant matrices, f (x), g(x), u(x), and v(x) are (scalar or vector valued) functions of x (or x)
+
+Vector-by-vector formula : (resulting in matrix ∂y (cid:1))
+
+∂x = 0, ∂(Ax)
+
+1. Linear vector-valued functions : ∂a ∂(xTA)
+
+1. Linear vector-valued functions : ∂a ∂(xTA)
+
+∂x = AT,
+
+∂x = (cid:0)∂ui
+
+(cid:1) is Jacobian,
+
+2. Nonlinear vector-valued functions : ∂u = a ∂(u(x)) = f (x)∂(u(x)) ∂x
+
+∂xj
+
+, , ∂(Au(x)) ,
+
+∂x = A∂(u(x))
+
+∂x
+
+∂x ∂(u(x)) ∂x
+
+3. Chain rule : ∂g(u(x))
+
+∂x = ∂g(u)
+
+∂u
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Matrix Calculus
+
+Scalar-by-vector : (resulting in row vector ∂y
+
+∂x = (∇xy)T)
+
+Some of the formula can be obtained from the previous page by letting the numerator be of dimension one, the others are :
+
+1. Inner product : ∂(aTx) ∂(u(x)TAv(x)) ∂x
+
+1. Inner product : ∂(aTx) ∂(u(x)TAv(x)) ∂x
+
+∂x = aT, ∂aTu(x)
+
+∂x = ∂(xTa)
+
+∂x = aT ∂(u(x))
+
+,
+
+∂x
+
+∂x + vTAT ∂(u(x)) ∂x = xT(A + AT), ∂(xTAx)
+
+= uTA∂(v(x)) 2. Quadratic forms : ∂(xTAx) is symmetric, ∂(aTxxTb) ∂(Ax+b)TC(Dx+e) ∂x ∂x = (x−a)T 3. l2 norm : ∂(cid:107)x−a(cid:107) 4. 2nd order derivative (resulting in a matrix) :
+
+∂x = 2xTA if A
+
+= xT(abT + baT) ∂x = (Dx + e)TCTA + (Ax + b)TCD
+
+(cid:107)x−a(cid:107)
+
+∂x∂xT = (A + AT), ∂2(xTAx) ∂2f (x) ∂x∂xT = H = ( ∂f ∂xi∂xj
+
+∂2(xTAx)
+
+∂x∂xT = 2A if A is symmetric,
+
+) is the Hessian matrix.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Trace and Frobenius inner product
+
+Trace is deﬁned as the sum of the diagonal entries in a matrix : tr(A) = (cid:80)n
+
+i=1 aii
+
+tr(A) = tr(AT) • tr(AB) = tr(BA), tr(ABC) = tr(CAB) = tr(BCA) ∂A = BT, ∂tr(ABATC) • ∂tr(AB) • a = tr(a) for scalar a, as a result, < x,y >= tr(xTy) = tr(yxT) (useful formula)
+
+The Frobenius inner product is deﬁned for matrices : < A,B >F= tr(ABT) = (cid:80)n Frobenius norm : (cid:107)A(cid:107)F = (cid:112)tr(AAT) = A last useful formula : d
+
+i,j=1 aijbij. The induced norm is called
+
+(cid:113)(cid:80)n
+
+i,j=1 a2 ij.
+
+dt logdet(A(t)) = tr(A(t)−1A(cid:48)(t))
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Outlines
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+References
+
+Statistics and Machine Learning
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Basics
+
+Three Sources of Uncertainty
+
+1. Inherent randomness in the system being modeled. (e.g. quantum mechanics, particles are probabilitic.)
+
+2. Incomplete observability
+
+(e.g. Monty Hall problem. 3 dogs, one of which has a bonus behind it.)
+
+3. Incomplete modeling (e.g. linear regression.)
+
+Random Variables (r.V.) X : r.V., its values x X = x happens with a certain probability p(X = x). Range of X may be discrete or continuous.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Discrete variables & Probability mass functions (PMF)
+
+P(X = x) = p(x) or X ∼ p(x), 0 ≤ p(x) ≤ 1. Joint probability distribution : p(X = x,Y = y) = p(x,y) Properties :
+
+(1) Dom(P) = Range(X) = set of all possible states of X.
+
+(2) ∀x ∈ Range(X), 0 ≤ p(x) ≤ 1. (3) (cid:80)
+
+p(x) = 1 (Normalized)
+
+x∈Range(X)
+
+e.g. uniform distribution : P(X = xi) = 1 k,
+
+i = 1,...,k.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Continuous variables & Probability density function (p.d.f)
+
+Properties :
+
+(1) Dom(P) = Range(X) = set of all possible states of X.
+
+(2) ∀x ∈ Range(X),p(x) ≥ 0. (No need for p(x) ≤ 1) (3) (cid:82) p(x)dx = 1. p(x) does not give the probability of a speciﬁc state x, but the prob of X landing inside the interval [x,x + δx) with an inﬁnitesimal δx. (prob = p(x)δx) e.g. uniform distribution function on an interval [a,b] :
+
+u(x;a,b) =
+
+ 
+
+
+
+0
+
+1 b − a
+
+x /∈ [a,b]
+
+x ∈ [a,b]
+
+x ∼ U(a,b)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Marginal Probability & Conditional Probability
+
+Marginal Probability : prob over a subset of all variables. discrete : p(x) = P(X = x) = (cid:80) y continuous : p(x) = (cid:82) p(x,y)dy
+
+P(X = x,Y = y) = (cid:80) y
+
+Conditional Probability : prob of some event given some other events have happened. P(X = x,Y = y) P(X = x)
+
+P(Y = y|X = x) =
+
+(well-deﬁned if P(X = x) > 0)
+
+Chain Rules :
+
+P(X(1), · · · , X(n)) = P(X(1))P(X(2)|X(1))P(X(3)|X(1), X(2)) · · · P(X(n)|X(1), · · · , X(n−1))
+
+p(x,y)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Independence & Conditional Independence
+
+X and Y are independent, if ∀x,y, P(X = x,Y = y) = P(X = x)P(Y = y)
+
+X,Y are conditionally independent given Z if ∀x,y,z, P(X = x,Y = y|Z = z) = P(X = x|Z = z)P(Y = y|Z = z).
+
+short-hand notation : X⊥Y, X⊥Y|Z.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Expectation Variance and Covariance
+
+Ex∼p[f (x)] =
+
+(cid:40) (cid:80) p(x)f (x) x (cid:82) p(x)f (x)dx
+
+,
+
+E[αf (x) + βg(x)] = αEf (x) + βEg(x) Var[f (x)] = E[(f (x) − Ef (x))2], std[f (x)] = (cid:112)Var[f (x)] Cov[f (X),g(Y)] = E[(f (x) − Ef (x))(g(Y) − Eg(Y))] measures how much two variable are linearly related to each other as well as their scales. Cov[f (X),g(Y)] = Cov[f (X),g(Y)] X⊥Y ⇒ Cov[X,Y] = 0 or Corv[X,Y] = 0 (cid:48)(cid:48) ⇐(cid:48)(cid:48) is only true when X,Y ∼ normal distribution X) = (Cov(Xi,Yj))1≤i,j≤n Covariance Matrix : Cov( Diagonal Cov(Xi,Xi) = Var(Xi)
+
+std[f (X),g(Y)] ∈ [−1,1] normalized
+
+(cid:42)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Common Prob Distributions
+
+1) Bernoulli : binary r.v. one parameter φ ∈ [0,1] p(X = 1) = φ, p(X = 0) = 1 − φ or p(X = x) = φx(1 − φ)x x ∈ {0,1}, EX[X] = φ VarX[X] = φ(1 − φ).
+
+2) Muttinoulli (Categorical) Range(X) = {0,1,··· ,k}
+
+p(X = i) = pi
+
+k (cid:80) i=1
+
+pi = 1 only k − 1 parameters.
+
+3) Gaussian (Normal) (cid:113) 1 N(x;µ,σ2) = E(X) = µ, β = σ−2=precision.
+
+2πσ2 exp(− 1 Var[X] = σ2 > 0
+
+2σ2(x − µ)2)
+
+4) ..., continue after the importance of Gaussian.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Why are Gaussian important
+
+(1) Central Limit Theorem (many versions)
+
+{Xi}n Sn = 1 ⇒ Sn → EX1 = µ as n → ∞) stronger result : distribution σ2 = Var[X1]. Pr[ lim n→∞ N(0,1).
+
+i=1 i.i.d. (independent and identically distributed), n(X1 + ··· + Xn). (Law of Large numbers
+
+√
+
+n(Sn − µ) ⇒ N(0,σ2) as n → ∞),in
+
+√
+
+n(Sn − µ) ≤ z] = Φ( z
+
+σ), where Φ(x) is c.d.f of
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Why are Gaussian important
+
+(2) Information theory : Gaussian encodes the maximum amout of
+
+uncertainty H[x] = Ex∼p[−logp(x)] = −(cid:82) p(x)logp(x)dx. max p
+
+E[X] s.t.
+
+(cid:113) 1
+
+(cid:82) p(x)dx = 1 ⇒ p∗(x) = (cid:82) xp(x)dx = µ (cid:82) (x − µ)2p(x)dx = σ2,
+
+2πσ2 exp(− 1
+
+2σ2(x − µ)2)
+
+λ1 λ2 λ3 p(x) = exp{λ1 − 1 + λ2(x − µ) + λ3(x − µ)3}, λ2 = 0, λ1 : nomalization constant, λ3 = −1/(2σ2).
+
+Multivariate normal : (cid:113) 1 (cid:42) N((cid:42)x; (cid:42)µ, Σ) = Σ−1 = Ω precision matrix. E(cid:42)x = (cid:42)µ Cov((cid:42)x) = Σ,
+
+(2π)n det(Σ) exp(−1
+
+2((cid:42)x − (cid:42)µ)TΣ−1((cid:42)x − (cid:42)µ))
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Common Prob Distributions (Continued)
+
+4) Exponential and Laplace (Doubly exponential) exponential : p(x;λ) = λ⊥x≥0 exp(−λx) Laplace (x;µ,r) = 1 5) Dirac and Empirical Dirac : p(x) = δ(x − µ) which puts prob 1 (samples), i.e. P(X = x(i)) = 1
+
+m on each of x(i).
+
+m, i = 1,··· ,m.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Common Prob Distributions (Continued)
+
+6) Mixture :
+
+P(x) = (cid:80)P(c = i)P(x|c = i), where P(c) is multimoulli. Empirical is mixture with Dirac. Latent variable c, P(X|c) relates the latent variable c to the visible variables X. e.g. Gaussian Mixtures P(x|c = i) is Gaussian for ∀i, ∼ N(x;µ(i),Σ(i)). P(c = i) is prior prob. P(c|x) is posterior prob. Gaussian mixture model is universal approximator of density in the sense that any smooth density can be approximated with any speciﬁc non-zero amount of error by a Gaussian mixture model with enough components.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Bayes’ Rule
+
+P(x|y) = P(x)P(y|x) P(y) = (cid:80) x
+
+i.e P(x|y)P(y) = P(x,y) = P(x)P(y|x)
+
+P(y)
+
+P(x)P(y|x)
+
+P(x) : prior; P(x|y) : posterior
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Transformations
+
+X,Y two r.v.s. Y = g(X), g is invertible p.d.f. of X is Px, p.d.f. of Y is Py, then Pk((cid:42)y) = Px(g−1((cid:42)y))
+
+or Pk((cid:42)x) = Py(g−1((cid:42)x)) Let J = (∂yi ∂xj
+
+)i,j.
+
+(cid:12) (cid:12) (cid:12)
+
+∂(cid:42)y ∂(cid:42)x
+
+(cid:12) (cid:12) = Py(g((cid:42)x))|detJ|. (cid:12)
+
+(cid:12) (cid:12) (cid:12)
+
+References
+
+∂(cid:42)x ∂(cid:42)y
+
+(cid:12) (cid:12) (cid:12)
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Information Theory
+
+information measures the amount of uncertainty :
+
+(1) Likely events have low information
+
+(2) Less likely events have higher information
+
+(3) Information events have additive information. (toss a coin
+
+twice)
+
+Self-information at event X = x, I(x) ∆= −logP(x), other logarithms (base-2) is called bits or shannons. Shannon entropy : H(X) = Ex∼p[I(X)] = −Ex∼p[logP(x)]. It gives a lower bound on the number of bits need on average to encode symbols drawn from P. If X is continuous, H(P) is diﬀerential entropy. e.g. Discrete uniform distribution maximite discrete entropy within the distributions having the same number of states
+
+max {pi}
+
+k (cid:80) i=1
+
+−pi logpi = E logp, s.t.
+
+k (cid:80) i=1
+
+pi = 1. ⇒ pi = 1 k.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of Entropy
+
+If the sun rises in the East there is no information content, the sun always rises in the East.
+
+If you toss an unbiased coin then there is information in whether it lands heads or tails up. If the coin is biased towards heads then there is more information if it lands tails.
+
+Surprisal associated with an event is the negative of the logarithm of the probability of the event −log2(p).
+
+People use diﬀerent bases for the logarithm, but it doesn’t make much diﬀerence, it only makes a scaling diﬀerence. But if you use base 2 then the units are the familiar bits. If the event is certain,so that p = 1, the information associated with it is zero. The lower the probability of an event the higher the surprise, becoming inﬁnity when the event is impossible.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of Entropy
+
+But why logarithms? The logarithm function occurs naturally in information theory. Consider for example the tossing of four coins. There are 16 possible states for the coins, HHHH, HHHT, ..., TTTT. But only four bits of information are needed to describe the state. HTHH could be represented by 0100.
+
+4 = log2(16) = −log2(1/16).
+
+Going back to the biased coin, suppose that the probability of tossing heads is 3/4 and 1/4 of tossing tails. If I toss heads then that was almost expected, there’s not that much information. Technically it’s −log2(0.75) = 0.415 bits. But if I toss tails then it is −log2(0.25) = 2 bits.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of Entropy
+
+This leads naturally to looking at the average information, this is our entropy :
+
+−
+
+(cid:88)
+
+p log2(p),
+
+where the sum is taken over all possible outcomes.
+
+(Note that when there are only two possible outcomes the formula for entropy must be the same when p is replaced by 1 − p. And this is true here.)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Cross Entropy
+
+Suppose you have a model for the probability of discrete events, call this pM k where the index k just means one of K possibilities. The sum of these probabilities must obviously be one.
+
+And suppose that you have some empirical data for the probabilities of those events, pE
+
+k. With the sum again being one.
+
+The cross entropy is deﬁned as
+
+−
+
+(cid:88)
+
+pE k ln(pM
+
+k ).
+
+k
+
+It is a measure of how far apart the two distributions are.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Example of Cross Entropy
+
+Suppose that you have a machine-learning algorithm that is meant to tell you whether a fruit is a passion fruit, orange or guava.
+
+As a test you input the features for an orange. And the algorithm is going to output three numbers, perhaps thanks to the softmax function, which can be interpreted as the probabilities of the fruit in question (the orange) being one of P,O or G. Will it correctly identify it as an orange?
+
+The model probabilities come out of the algorithm as
+
+P = 0.13, pM pM
+
+O = 0.69, and pM
+
+G = 0.18.
+
+Ok, it’s done quite well. It thinks the fruit is most likely to be an orange. But it wasn’t 100% sure.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Example of Cross Entropy
+
+Empirically we know that
+
+P = 0, pE pE
+
+O = 1, and pE
+
+G = 0,
+
+because it deﬁnitely is an orange. The cross entropy is thus
+
+−(0 × ln(0.13) + 1 × ln(0.69) + 0 × ln(0.18)) = 0.371.
+
+The cross entropy is minimized when the model probabilities are the same as the empirical probabilities.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Example of Cross Entropy
+
+To see this we can use Lagrange multipliers. Write
+
+L = −
+
+(cid:88)
+
+k ln(pM pE
+
+k ) − λ
+
+(cid:32)
+
+(cid:88)
+
+pM k − 1
+
+(cid:33)
+
+.
+
+k
+
+k
+
+The second term on the right is needed because the sum of the model probabilities is constrained to be one.
+
+Now diﬀerentiate with respect to each model probability, and set the results to zero :
+
+∂L ∂pM k
+
+= −
+
+pE k pM k
+
+− λ = 0.
+
+But since the sums of the two probabilities must be one we ﬁnd that λ = −1 and pM
+
+k = pE k.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Example of Cross Entropy
+
+Because the cross entropy is minimized when the model probabilities are the same as the empirical probabilities we can see that cross entropy is a candidate for a useful cost function when you have a classiﬁcation problem.
+
+If you take another look at the sections on MLE and on cost functions, and compare with the above on entropy you’ll ﬁnd a great deal of overlap and similarities in the mathematics. The same ideas keep coming back in diﬀerent guises and with diﬀerent justiﬁcations and uses.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Kullback-Leibler (KL) divergence
+
+Two distributions P(x),Q(x)
+
+H(P,Q) = −Ex∼p logQ(x) cross-entropy
+
+DKL(P||Q) = Ex∼p[log P(X) information “diatance”.
+
+Q(X)] = −H(P) + H(P,Q) Extra
+
+Properties : DKL(P||Q) = 0 iﬀ P = Q a.e. DkL(P||Q) ≥ 0 But DkL(P||Q) (cid:54)= DkL(Q||P), 0log0 = lim x→0
+
+x logx = 0.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Outlines
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+References
+
+Statistics and Machine Learning
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Tasks of Machine Learning
+
+(1) Classiﬁcation : ﬁnd f : Rn → {1,··· ,k} s.t. y ≈ f (x). (2) Regression : ﬁnd f : Rn → R, s.t. y ≈ f (x). (3) Anomaly Detection : ﬁnd P(x) for normal samples, predict
+
+abnormal samplesˆ˜x with small prob P(˜x) < ε. (4) Imputation of missing values : predict P(x) for
+
+x = (x1,··· ,xn) then insert the value of xi for a new sample (cid:42)x with xi missing.
+
+(5) Denoising : Given a corrupted example ˜x ∈ Rn, ﬁnd a clean example ˜x ∈ Rn s.t. x ≈ ˜x with some noise, i.e. ﬁnd P(x|˜x).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Tasks of Machine Learning
+
+(6) Density Estimation or PMF estimation :
+
+ﬁnd Pmodel :Rn → R, Pmodel(x) for given samples (cid:42)x. All previous problems, and clustering dimensionality reduction etc, could fall into this category. This is rather diﬃcult, computationally intractable. supertrained learning : P(y|x) = P(x,y) P(x,y(cid:48))
+
+.
+
+(cid:80) (cid:48)
+
+y
+
+Learning conditional statistics (e.g. expectation). given a measure of diviation (loss function). L(y,f ) want to ﬁnd the best f ∗ that minimize it i.e. min If L = (cid:107)y − f (cid:107)2 If L = (cid:107)y − f (cid:107)1, then f ∗(x) = conditional median.
+
+Ex,y∼PdataL(y,f (x)).
+
+f 2, then f ∗(x) = Ey∼Pdata(y|x)[y].
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Linear Regression
+
+Pdata(x,y) = 1 m
+
+m (cid:80) i=1
+
+δ(x − x(i),y − y(i))
+
+f (x) = wTx,
+
+m (cid:80) i=1
+
+(cid:13)y(i) − wTx(i)(cid:13) (cid:13) 2 (cid:13) 2
+
+Ex,y∼Pdata(x,y) (cid:107)y − f (x)(cid:107)2
+
+1 m
+
+2 ≈ min w
+
+min f =wTx Pdata(x,y) ≈ Ptrain(x,y) ∇wMSEtrain = 0 ⇔ w = (X(train)TX(train))−1X(train)Ty(train)
+
+Goals : 1) Make MSEtrain small (under ﬁtting if this is not achieved) 2) Make MSEtrain − MSEtest small (over ﬁtting if this is not
+
+achieved)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Linear Regression
+
+e.g. y = b +
+
+m (cid:80) i=1
+
+wixi
+
+m = 9, overﬁtting m = 1, underﬁtting m = 3, optimal
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Linear Regression
+
+Performance : MSEtest = 1
+
+m(test)
+
+(cid:13)X(test)w − y(test)(cid:13) (cid:13) 2 2. (cid:13)
+
+If (X(train),y(train)) and (X(test),y(test)) ∼ Pdata(x,y), then MSEtrain = MSEtest for ˆw computed from 1).
+
+However, in general, MSEtrain ≤ MSEtest, since ˆw is computed from 2).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Regularizaition
+
+Insteat of minimizing MSEtrain, we take into account the model complexity, in the case of linear regression, λ(cid:107)w(cid:107)2 2, J(w) = MSEtrain + λ(cid:107)w(cid:107)2
+
+e, λ → 0 over ﬁtting.
+
+λ → +∞, underﬁtting, optimal λ ∈ (0,+∞).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Statistical Estimators
+
+Point Estimation : estimate Q in f (x;Q) by ˆQ.
+
+ˆQ = argmin Q
+
+Ex,y∼Pdata(x,y)L(y,f (x,Q))
+
+= argmin
+
+Q
+
+1 m
+
+m (cid:88)
+
+i=1
+
+L(y(i),f (x(i);Q))
+
+⇒ ˆQm = g((x(i),y(n)) ∼ (x(m),y(m));Q)
+
+Function Estimation : nonparameterized f (x) in some functional space H, then the least square rule gives ˆf as the best approximation of f among H.–point estimation in H. bais(ˆQm) = E[ˆQm] − Q ˆQ is unbiased if bais(ˆQm) = 0. lim asymptotically unbiased if m→∞
+
+bais(ˆQm) = 0.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Statistical Estimators
+
+e.g. Bernoulli, {x(1),··· ,x(m)}, P(x(i);Q) = Qx(i)(1 − Q)1−x(i). Let ˆQm = 1 m
+
+m (cid:80) i=1 e.g. Gaussian, {x(1),··· ,x(m)}, P(x(i)) = N(x(i);µ,σ2) = 1√ 2σ m (cid:80) i=1
+
+m (cid:80) i=1
+
+x(i), E[ˆQm] = 1 m
+
+E[x(i)] = 0, unbiased.
+
+2
+
+exp(−(x(i)−µ) 2σ2
+
+)
+
+m (cid:80) i=1 m (cid:80) m = 1 ˆσ2 m i=1 m] = m−1 E[ˆσ2 m = 1 m−1
+
+E[x(i)] = µ. unbiased
+
+x(i), E[ˆµm] = 1 m
+
+ˆµm = 1 m
+
+2 (x(i) − ˆµm)
+
+sample variances
+
+m σ2 (cid:54)= σ2 biased (x(i) − ˆµm)
+
+m (cid:80) i=1
+
+2
+
+but ˆσ2
+
+= m−1
+
+m ˆσ2
+
+m is unbiased.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Variance and Standard Error
+
+ˆQm :estimator.
+
+(cid:113)
+
+Var(ˆQm) =standard error = SE(ˆQm)
+
+e.g. SE(ˆµm) =
+
+(cid:115)
+
+Var[ 1 m
+
+m (cid:80) i=1
+
+x(i)] = σ√ m
+
+CLT ⇒ ˆµm ∼ N(µ,SE2(ˆµm)) Conﬁdence interval : (ˆµm − 1.96SE(ˆµm), ˆµm + 1.96SE(ˆµm)). e.g. Bernoulli : Var(ˆQm) = 1 m2
+
+m (cid:80) i=1
+
+Var(x(i)) = 1
+
+mQ(1 − Q),
+
+√
+
+Q(1−Q) m
+
+SE(ˆQm) = Bias-variance Tradeoﬀ MSE = E[(ˆQm − Q)2] = Bais(ˆQm)2 + Var(ˆQm) = E[(ˆQm − E ˆQm)2 + 2(ˆQm − E ˆQm)(E ˆQm − Q) + (E ˆQm − Q)2]
+
+decreasing function of m.
+
+√
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Variance and Standard Error
+
+Underﬁtting : High bias, low variance Overﬁtting : Low bias, high variance Consistency : ˆQm is a consistent estimator if ˆQm i.e. P(ˆQm − Q|>ε) → 0 (m → ∞) for ∀ε > 0. Consistency⇒ Asymptotic unbiasedness. A counter-example for the reverse statement : x(i) ∼ N(x;µ,σ2), ˆµ = x(1), then E[ˆµ] = E[x(1)] = µ. But ˆµ does not trends to µ as m → ∞.
+
+P→Q (m → ∞).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Maximum Likelihood Estimation (MLE)
+
+Usually used in parametric density estimation. Pdata(x) ≈ Pmodel(x;Q), {x(i)}m Assume ∃Q, as if x(i) ∼ Pmodel(x;Q). MLE for Q is
+
+i=1 drawed i.i.d from Pdata(x).
+
+QML = argmax
+
+Q
+
+Pmodel(X;Q) = argmax
+
+Q
+
+m (cid:81) i=1
+
+Pmodel(x(i);Q)
+
+or
+
+m (cid:81) Q i=1 EX∼ˆPdata
+
+QML = argmax
+
+= argmax
+
+Q
+
+logPmodel(x(i);Q)
+
+logPmodel(X;Q)
+
+Property : QML minimizes KL divergence (dissimilarity) between ˆPdata and Pmodel DKL(ˆPdata||Pmodel) = EX∼ˆPdata min Q
+
+[log ˆPdata(X) − logPmodel(X;Q)]
+
+EX∼ˆPdata
+
+DKL ⇔ min Q
+
+[−logPmodel(X;Q)]
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Maximum Likelihood Estimation (MLE) is a common method for estimating parameters in a statistical/probabilistic model.
+
+In words, you simply ﬁnd the parameter (or parameters) that maximizes the likelihood of observing what actually happened.
+
+Let’s see this in a few classical examples.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Example : Taxi numbers
+
+You arrive at the train station in a city you’ve never been to before. You go to the taxi rank so as to get to your ﬁnal destination. There is one taxi, you take it. While discussing European politics with the taxi driver you notice that the cab’s number is 1234. How many taxis are in that city?
+
+To answer this we need some assumptions. Taxi numbers are positive integers, starting at 1, no gaps and no repeats. We’ll need to assume that we are equally likely to get into any cab. And then we introduce the parameter N as the number of taxis.
+
+What is the MLE for N ?
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Example : Taxi numbers
+
+What is the MLE for N ?
+
+Well, what is the probability of getting into taxi number 1234 when there are N taxis?
+
+It is
+
+1 N
+
+for N ≥ 1234 and zero otherwise.
+
+What value of N maximizes this expression? Obviously it is N = 1234. That is the MLE for the parameter N. It looks a bit disturbing because it seems a coincidence that you happened to get into the cab with the highest number. But then the probability of getting into any cab is equally likely. It is also disturbing that if there are N taxis then the average cab number is (N + 1)/2, and we somehow feel that should play a role.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Example : Coin tossing
+
+Suppose you toss a coin n times and get h heads. What is the probability, p, of tossing a head next time?
+
+The probability of getting h heads from n tosses is, assuming that the tosses are independent,
+
+n! h!(n − h)!
+
+ph(1 − p)n−h =
+
+(cid:18)n h
+
+(cid:19)
+
+ph(1 − p)n−h.
+
+Applying MLE is the same as maximizing this expression with respect to p.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Example : Coin tossing
+
+This likelihood function (without the coeﬃcient in the front that is independent of p) is shown below for n = 100 and h = 55. There is a very obvious maximum.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Example : Coin tossing
+
+Often with MLE when multiplying probabilities, as here, you will take the logarithm of the likelihood and maximize that.
+
+This doesn’t change the maximizing value but it does stop you from having to multiply many small numbers, which is going to be problematic with ﬁnite precision.
+
+(Look at the scale of the numbers on the vertical axis in the ﬁgure.)
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Examples of MLE
+
+Example : Coin tossing
+
+Since the ﬁrst part of this expression is independent of p we maximize hlnp + (n − h)ln(1 − p) with respect to p. See below.
+
+This just means diﬀerentiating with respect to p and setting the
+
+derivative equal to zero. This results in p = eminently reasonable.
+
+h n
+
+, which seems
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Conditional Log-likelihood
+
+MLE for Q in P(Y|X;Q)
+
+QML = argmax
+
+Q
+
+P(Y|X;Q) = argmax
+
+Q
+
+m (cid:89)
+
+i=1
+
+P(y(i)|x(i);Q)
+
+e.g. linear Regression : y = wTx + ε, 1√ Then P(y|x;w) ∼ N(y;wTx,σ2),
+
+2πσ
+
+ε ∼ N(0,σ2). exp(−(y−wTx)2
+
+2σ2
+
+).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Conditional Log-likelihood
+
+MLE ⇔max
+
+w
+
+=max w
+
+m (cid:88)
+
+i=1 m (cid:88)
+
+i=1
+
+logP(y(i)|x(i);w)
+
+(−logσ −
+
+1 2
+
+log(2π) −
+
+(y(i) − wTx(i)) 2σ2
+
+2
+
+= − mlogσ −
+
+m 2
+
+log(2π) − min
+
+w
+
+m (cid:88)
+
+i=1
+
+2 (y(i) − wTx(i))
+
+⇔min
+
+w
+
+1 m
+
+m (cid:88)
+
+i=1
+
+2 (y(i) − wTx(i))
+
+= min w
+
+MSEtrain
+
+)
+
+References
+
+/σ2
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Properties of MLE
+
+Under certain conditions (given below). MLE is a consistent estimator of the truth. (1) Pdata lies in {Pmodel(;Q);Q}; otherwise, no estimator can
+
+recover Pdata.
+
+(2) ∃Q, s.t. Pdata = Pmodel(;Q); otherwise, MLE can recover
+
+Pdata, but not be able to determine Q.
+
+EX∼Pdata[ˆQML − Q]2 (cid:38) Cramer-Rao bowd as m → ∞. But MLE is not always unbiased, e.g. ˆσ2
+
+m (cid:80) i=1
+
+ML = 1 m
+
+(x(i) − ˆµ)
+
+2
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Bayesian Statistics
+
+Previously, Q is ﬁxed but unknown. ˆQ is a random variable as a function of data {x(i)}m i=1 (x(i) is random). Bayesian : {x(i)}m and uncertain (random). Prior prob distribution P(Q), before observing the data. Given Q, {x(i)}m i=1 is generated from P(x(1),··· ,x(m)|Q). Bayes’ rule ⇒ P(Q|x(1),··· ,x(m)) = P(x(1),···,x(m)|Q)P(Q) P(Q) is usually given e.g. uniform or Gaussian with high entropy, observation of data causes the posterior to loose entropy and concentrate around a few highly likely values of parameters. Bayesian estimates the distribution of Q instead of point estimate.
+
+i=1 is observed and non-random. Q is unknown
+
+.
+
+P(x(1),···,x(m))
+
+P ∈ X(m+1)|x(1),··· ,x(m)) =
+
+(cid:90)
+
+P(x(m+1)|Q)P(Q|x(1),··· ,x(m))dQ
+
+As more observations are given, knowledge about Q becomes diﬀerent (more).
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Bayesian Statistics
+
+uncertainty
+
+Point Estimate variance of estimator through random sampling of data
+
+Bayesian
+
+distribution, integral over it
+
+prior info
+
+performance
+
+computational cost
+
+No
+
+good as sample size increases low
+
+Yes with human knowledge generalize better for limited training data high
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+References
+
+Bayesian Statistics
+
+e.g. Bayesian Linear Regression ˆy = wTx. Given (X(train),y(train)), P(y(train)|X(train), w) = N(y(train); X(train), w, I) exp(− 1 2 (y(train) − X(train)w)T (y(train) − X(train)w)) 2(w − µ0)TΛ−1 Prior of w : P(w) = N(w;µ0,Λ0)exp(−1 Posterior : P(w|X(train),y(train))P(y(∗)|X(train),w)P(w) exp(−1 exp(−1 exp(−1 exp(−1 terms without w are normalizing constant. If µ0 = 0, Λ0 = 1 regression estimator of w. also gives the variance Λm = (XTX + αI)−1
+
+ˆy(train) = X(train)w
+
+0 (w − µ0))
+
+2(w − µ0)TΛ−1 0 w − 2µT mΛ−1 m µm)
+
+2(y − Xw)T(y − Xw))exp(−1 2(−2yTXw + wTXTXw + wTΛ−1 2(w − µm)TΛ−1 2(w − µm)TΛ−1
+
+0 (w − µ0)) 0 Λ−1 0 w))
+
+2µT
+
+m (w − µm) + 1 m (w − µm))
+
+αI, µm = (XTX + αI)−1XTy is the ridge
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+Maximum A Posterior (MAP) similar to MLE
+
+e.g. µm is MAP in the previous example. MAP choose the point of maximum posterior prob.
+
+QMAP = argmax
+
+Q
+
+P(Q|X) = argmax
+
+Q
+
+{logP(X|Q) + logP(Q)}
+
+Bayesian linear regression, log−prior (cid:107)w(cid:107)2 Additional information in prior helps to reduce the variance in the MAP, but does not increase bias. Diﬀerent regularizations (penalties) corresponds to diﬀerent log-prior. (but not all, smoe penalty may not be a logarithm of a prob distribution, some others depend on data) Lsso Penalty → Laplace distribution Laplace(x;0,λ−1).
+
+2 ridge penalties.
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Outlines
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+References
+
+Statistics and Machine Learning
+
+References
+
+Linear Algebra
+
+Probability and Information Theory
+
+Statistics and Machine Learning
+
+References
+
+Numerical Analysis, 9th Edition, by Richard L. Burden, J. Douglas Faires, Brooks/Cole, 2011.
+
+Machine learning : an applied mathematics introduction, by Wilmott, Paul. Panda Ohana Publishing, 2019.
+
+Deep learning, by Ian Goodfellow, Yoshua Bengio, and Aaron Courville, MIT Press, 2016.
+
+References
+
