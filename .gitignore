@@ -1,3 +1,14 @@
 vllm/
 models/
 unsloth/
+agent/bin
+agent/include
+agent/lib
+agent/lib64
+agent/models
+models_agent/sentence-transformers_all-mpnet-base-v2/config.json
+models_agent/sentence-transformers_all-mpnet-base-v2/pytorch_model.bin
+models_agent/sentence-transformers_all-mpnet-base-v2/sentence_bert_config.json
+models_agent/sentence-transformers_all-mpnet-base-v2/special_tokens_map.json
+models_agent/sentence-transformers_all-mpnet-base-v2/tokenizer_config.json
+models_agent/sentence-transformers_all-mpnet-base-v2/vocab.txt

@@ -1,0 +1,369 @@
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file deep_learning/deep_learning.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file dimensionality_reduction/dimensionality_reduction.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file clustering/clustering.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file ensemble_learning/ensemble_learning.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file classification/classification.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file regression/regression.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file preprocessing/preprocessing.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file Math_Preliminary/Math_Preliminary.pdf
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/extract_advanced_text.py", line 3, in <module>
+    elements = partition(f"{sys.argv[1]}/{sys.argv[1]}.pdf", strategy="auto")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/partition/auto.py", line 166, in partition
+    file_type = detect_filetype(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 102, in detect_filetype
+    ctx = _FileTypeDetectionContext.new(
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 323, in new
+    self._validate()
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/unstructured/file_utils/filetype.py", line 531, in _validate
+    raise FileNotFoundError(f"no such file {self._file_path_arg}")
+FileNotFoundError: no such file introduction/introduction.pdf
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Warning: No languages specified, defaulting to English.
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 3, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 4, in <module>
+    reader = PdfReader("lectures/{sys.argv[1]}/{sys.argv[1]}.pdf")
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 136, in __init__
+    self._initialize_stream(stream)
+  File "/home/wangzy/zjuc/agent/lib/python3.10/site-packages/pypdf/_reader.py", line 155, in _initialize_stream
+    with open(stream, "rb") as fh:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/{sys.argv[1]}/{sys.argv[1]}.pdf'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/deep_learning/Images/image_Im5.jpg'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/dimensionality_reduction/Images/image_Im5.png'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/clustering/Images/image_Im5.png'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/ensemble_learning/Images/image_Im5.png'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/classification/Images/image_Im5.png'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/regression/Images/image_Im5.png'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/preprocessing/Images/image_Im5.png'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/Math_Preliminary/Images/image_Im5.jpg'
+Traceback (most recent call last):
+  File "/home/wangzy/zjuc/agent/image_extract.py", line 8, in <module>
+    with open(f"lectures/{sys.argv[1]}/Images/image_{img.name}", "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'lectures/introduction/Images/image_Im5.png'

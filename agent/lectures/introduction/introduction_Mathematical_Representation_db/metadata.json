@@ -1,0 +1,187 @@
+{
+  "metadata": [
+    {
+      "block_id": "block_0_0",
+      "text": "标题: Input Space. x ∈ X is an input vector, also called:. Typically multi-dimensional",
+      "full_text": "标题: Input Space. x ∈ X is an input vector, also called:. Typically multi-dimensional",
+      "page": 0,
+      "index": 0
+    },
+    {
+      "block_id": "block_0_1",
+      "text": "标题: Output Space. y ∈ Y is an output vector, also called:. Typically one-dimensional",
+      "full_text": "标题: Output Space. y ∈ Y is an output vector, also called:. Typically one-dimensional",
+      "page": 0,
+      "index": 1
+    },
+    {
+      "block_id": "block_0_2",
+      "text": "标题: Joint Distribution. For supervised learning, we assume that:. where P is a joint distribution on the sample space 𝒳 × 𝒴",
+      "full_text": "标题: Joint Distribution. For supervised learning, we assume that:. where P is a joint distribution on the sample space 𝒳 × 𝒴",
+      "page": 0,
+      "index": 2
+    },
+    {
+      "block_id": "block_1_3",
+      "text": "标题: Goal. 摘要: The goal of supervised learning. given x, predict what is y",
+      "full_text": "标题: Goal. 摘要: The goal of supervised learning. given x, predict what is y",
+      "page": 1,
+      "index": 3
+    },
+    {
+      "block_id": "block_1_4",
+      "text": "标题: Training Dataset. 摘要: Dataset used for training. used to learn an approximation:. or",
+      "full_text": "标题: Training Dataset. 摘要: Dataset used for training. used to learn an approximation:. or",
+      "page": 1,
+      "index": 4
+    },
+    {
+      "block_id": "block_1_5",
+      "text": "标题: Test Dataset. 摘要: Dataset used for testing. used to make a prediction:. or. to verify prediction accuracy",
+      "full_text": "标题: Test Dataset. 摘要: Dataset used for testing. used to make a prediction:. or. to verify prediction accuracy",
+      "page": 1,
+      "index": 5
+    },
+    {
+      "block_id": "block_2_6",
+      "text": "标题: Goal. 摘要: The goal of unsupervised learning. In probabilistic settings, find the distribution of x and approximate it. There is no output variable y",
+      "full_text": "标题: Goal. 摘要: The goal of unsupervised learning. In probabilistic settings, find the distribution of x and approximate it. There is no output variable y",
+      "page": 2,
+      "index": 6
+    },
+    {
+      "block_id": "block_2_7",
+      "text": "标题: Training Dataset. 摘要: Dataset used for training. used to learn an approximation",
+      "full_text": "标题: Training Dataset. 摘要: Dataset used for training. used to learn an approximation",
+      "page": 2,
+      "index": 7
+    },
+    {
+      "block_id": "block_3_8",
+      "text": "标题: Decision Function Space. or",
+      "full_text": "标题: Decision Function Space. or",
+      "page": 3,
+      "index": 8
+    },
+    {
+      "block_id": "block_3_9",
+      "text": "标题: Loss Functions. Measure for the 'goodness' of the prediction:",
+      "full_text": "标题: Loss Functions. Measure for the 'goodness' of the prediction:",
+      "page": 3,
+      "index": 9
+    },
+    {
+      "block_id": "block_3_10",
+      "text": "标题: Risk. Expected loss over the data distribution:",
+      "full_text": "标题: Risk. Expected loss over the data distribution:",
+      "page": 3,
+      "index": 10
+    },
+    {
+      "block_id": "block_3_11",
+      "text": "标题: Target of Learning. Choose the optimal model that minimizes risk:",
+      "full_text": "标题: Target of Learning. Choose the optimal model that minimizes risk:",
+      "page": 3,
+      "index": 11
+    },
+    {
+      "block_id": "block_4_12",
+      "text": "标题: Empirical Risk Minimization (ERM). Minimize the average loss over training data:",
+      "full_text": "标题: Empirical Risk Minimization (ERM). Minimize the average loss over training data:",
+      "page": 4,
+      "index": 12
+    },
+    {
+      "block_id": "block_4_13",
+      "text": "标题: Structural Risk Minimization (SRM). Balances fit and model complexity:",
+      "full_text": "标题: Structural Risk Minimization (SRM). Balances fit and model complexity:",
+      "page": 4,
+      "index": 13
+    },
+    {
+      "block_id": "block_5_14",
+      "text": "标题: Numerical Optimization Approaches. Computational methods to solve minimization problems:",
+      "full_text": "标题: Numerical Optimization Approaches. Computational methods to solve minimization problems:",
+      "page": 5,
+      "index": 14
+    },
+    {
+      "block_id": "block_5_15",
+      "text": "标题: Algorithm Selection Criteria",
+      "full_text": "标题: Algorithm Selection Criteria",
+      "page": 5,
+      "index": 15
+    },
+    {
+      "block_id": "block_6_16",
+      "text": "标题: Training Error",
+      "full_text": "标题: Training Error",
+      "page": 6,
+      "index": 16
+    },
+    {
+      "block_id": "block_6_17",
+      "text": "标题: Test Error",
+      "full_text": "标题: Test Error",
+      "page": 6,
+      "index": 17
+    },
+    {
+      "block_id": "block_7_18",
+      "text": "标题: Generalization Error",
+      "full_text": "标题: Generalization Error",
+      "page": 7,
+      "index": 18
+    },
+    {
+      "block_id": "block_7_19",
+      "text": "标题: Bias-Variance Tradeoff",
+      "full_text": "标题: Bias-Variance Tradeoff",
+      "page": 7,
+      "index": 19
+    },
+    {
+      "block_id": "block_8_20",
+      "text": "标题: What is Overfitting?. Occurs when a model:",
+      "full_text": "标题: What is Overfitting?. Occurs when a model:",
+      "page": 8,
+      "index": 20
+    },
+    {
+      "block_id": "block_8_21",
+      "text": "标题: Symptoms of Overfitting",
+      "full_text": "标题: Symptoms of Overfitting",
+      "page": 8,
+      "index": 21
+    },
+    {
+      "block_id": "block_8_22",
+      "text": "标题: Visual Representation",
+      "full_text": "标题: Visual Representation",
+      "page": 8,
+      "index": 22
+    },
+    {
+      "block_id": "block_9_23",
+      "text": "标题: Regularization. Technique to prevent overfitting by adding complexity penalty:",
+      "full_text": "标题: Regularization. Technique to prevent overfitting by adding complexity penalty:",
+      "page": 9,
+      "index": 23
+    },
+    {
+      "block_id": "block_9_24",
+      "text": "标题: Cross-Validation (CV). Procedure for robust model selection and hyperparameter tuning:",
+      "full_text": "标题: Cross-Validation (CV). Procedure for robust model selection and hyperparameter tuning:",
+      "page": 9,
+      "index": 24
+    },
+    {
+      "block_id": "block_9_25",
+      "text": "标题: Hyperparameter Optimization. Strategies for tuning hyperparameters:",
+      "full_text": "标题: Hyperparameter Optimization. Strategies for tuning hyperparameters:",
+      "page": 9,
+      "index": 25
+    }
+  ],
+  "vector_dim": 768
+}
