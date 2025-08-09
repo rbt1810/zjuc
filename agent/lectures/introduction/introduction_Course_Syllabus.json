@@ -1,0 +1,233 @@
+{
+    "metadata": {
+        "document_title": "MA333 Introduction to Big Data Analysis Syllabus"
+    },
+    "pages": [
+        {
+            "page_number": 1,
+            "content": [
+                {
+                    "header": "MA333 Introduction to Big Data Analysis",
+                    "summary": "Course Introduction",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Zhen Zhang"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Southern University of Science and Technology"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "page_number": 2,
+            "content": [
+                {
+                    "header": "Outlines",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Course Syllabus"
+                        },
+                        {
+                            "type": "text",
+                            "value": "What Is Data Science"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Machine Learning"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Mathematical Representation"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Conclusion"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "page_number": 3,
+            "content": [
+                {
+                    "header": "Course Info",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Semester 2024-2025 Spring"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Instructor : ZHANG, Zhen"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Office : Room M5014, School of Science"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Phone : 88018753"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Email : zhangz@sustech.edu.cn"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Office hours : Tuesday morning, 10:00-12:00 ; or send email to make an appointment for other time"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Lecture : 3 credits, 3 hours per week"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Prerequisite : Calculus (or Mathematical Analysis) ; Linear Algebra ; Probability Theory or Probability Theory and Mathematical Statistics (or other similar courses)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "page_number": 4,
+            "content": [
+                {
+                    "header": "Grading Policy",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Homework : Approximately 6 homework assignments (including programming assignments and written problems). The written homework could be handed in after class"
+                        },
+                        {
+                            "type": "text",
+                            "value": "In-class quizzes : typically once every two weeks, test how well you learned about the basic concepts, including fill-in-the-blank, single and multiple choices, and simple Q & A"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Programming projects : include coding, data analytics, and reports"
+                        },
+                        {
+                            "type": "text",
+                            "value": "One closed-book final exam"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Grading policy : assignments (30%), quizzes (15%), programming projects (20%), and the final exam (35%)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "page_number": 5,
+            "content": [
+                {
+                    "header": "Contents",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Intended for undergraduate students who are interested in pursuing industrial work and research in big data science"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Concise and self-contained introduction to mathematical aspect of big data science, including theoretical analysis, algorithms and programming with python"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Major topics :"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Introduction to python programming and data preprocessing"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Three fundamental problems : classification, regression, clustering"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Model selection, dimensionality reduction"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Hot topics : text analysis, social network analysis, neural network and deep learning, and recommender systems if time permits"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "page_number": 6,
+            "content": [
+                {
+                    "header": "References",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "数据科学导引，欧高炎等著，高等教育出版社，2017"
+                        },
+                        {
+                            "type": "text",
+                            "value": "机器学习，周志华著，清华大学出版社，2016"
+                        },
+                        {
+                            "type": "text",
+                            "value": "An Introduction to Statistical Learning with Applications in Python, by Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor, Springer, 2023. https://www.statlearning.com/"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Pattern Recognition and Machine Learning, by Christopher M. Bishop, Springer, 2006"
+                        },
+                        {
+                            "type": "text",
+                            "value": "The Elements of Statistical Machine Learning : Data mining, Inference and Prediction, 2nd Edition, by Trevor Hastie, Robert Tibshirani, and Jerome Friedman, Springer, 2009. https://hastie.su.domains/ElemStatLearn/"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Foundations of Machine Learning, by Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar, MIT Press, 2018"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Understanding Machine Learning, by Shai Shalev-Shwartz and Shai Ben-David, Cambridge University Press, 2018"
+                        },
+                        {
+                            "type": "text",
+                            "value": "Deep learning, by Ian Goodfellow, Yoshua Bengio, and Aaron Courville, MIT Press, 2016. https://www.deeplearningbook.org/"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "page_number": 7,
+            "content": [
+                {
+                    "header": "References",
+                    "content_array": [
+                        {
+                            "type": "text",
+                            "value": "Reference book about statistics and machine learning."
+                        }
+                    ]
+                }
+            ],
+            "image": [
+                {
+                    "title": "References",
+                    "path": [
+                        "image_Im5.png",
+                        "image_Im6.jpg",
+                        "image_Im7.jpg"
+                    ],
+                    "description": "Reference book about statistics and machine learning."
+                }
+            ]
+        }
+    ]
+}

@@ -22,7 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 绑定重新生成按钮事件
     document.getElementById('regenerate-button').addEventListener('click', regenerateResponse);
+    setInterval(updateCurrentTime, 1000);
+    updateCurrentTime();
 });
+
+function updateCurrentTime() {
+    const now = new Date();
+    document.getElementById('current-time').textContent =
+        `系统时间：${now.toLocaleString()}`;
+}
 
 // 检查系统状态
 function checkSystemStatus() {
@@ -53,96 +61,52 @@ function checkSystemStatus() {
 }
 
 // 提问函数
-// 提问函数
 async function askQuestion() {
+    // 获取用户输入的问题
     const question = document.getElementById('question').value;
-    const loader = document.getElementById('loader');
-    const responseDiv = document.getElementById('response');
-    const sourcesContainer = document.getElementById('sources-container');
-    const queryText = document.getElementById('query-text');
-    const answerText = document.getElementById('answer-text');
-    const responseTimeMeta = document.getElementById('response-time-meta');
-    const responseTimeElement = document.getElementById('response-time');
     const maxLength = document.getElementById('max-length').value;
     const topK = document.getElementById('top-k').value;
 
+    // 验证输入
     if (!question.trim()) {
         alert('请输入问题');
         return;
     }
 
     // 显示加载动画
+    const loader = document.getElementById('loader');
     loader.style.display = 'block';
-    responseDiv.style.display = 'none';
-    sourcesContainer.innerHTML = '';
 
+    // 发送请求到后端
     try {
-        const startTime = Date.now();
-
-        // 发送请求到后端
         const response = await fetch('/ask', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                query: question,
+                query: question,  // 确保发送实际的问题内容
                 max_length: parseInt(maxLength),
                 top_k: parseInt(topK)
             })
         });
 
-        if (!response.ok) {
-            throw new Error(`请求失败: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`请求失败: ${response.status}`);
 
         const data = await response.json();
 
-        // 计算响应时间
-        const endTime = Date.now();
-        const duration = (endTime - startTime) / 1000;
-        const durationFormatted = duration < 1 ?
-            `${Math.round(duration * 1000)}ms` :
-            `${duration.toFixed(2)}秒`;
+        // 更新UI显示响应
+        document.getElementById('query-text').textContent = data.query;
+        document.getElementById('answer-text').textContent = data.response; // 使用实际响应
 
-        // 更新页面显示
-        queryText.textContent = data.query;
-        answerText.innerHTML = formatAnswer(data.response);
-        responseTimeMeta.textContent = `耗时: ${durationFormatted}`;
-        responseTimeElement.textContent = durationFormatted;
-
-        // 添加参考资料
-        if (data.sources && data.sources.length > 0) {
-            data.sources.forEach(source => {
-                const sourceCard = document.createElement('div');
-                sourceCard.className = 'source-card';
-                sourceCard.innerHTML = `
-                    <h5>${source.doc_title}</h5>
-                    <div class="source-meta">
-                        <span>章节: ${source.section}</span>
-                        <span>页码: ${source.page}</span>
-                    </div>
-                    <div class="source-content">${source.text_excerpt}</div>
-                    <div class="similarity">相似度: ${source.similarity.toFixed(4)}</div>
-                `;
-                sourcesContainer.appendChild(sourceCard);
-            });
-        } else {
-            sourcesContainer.innerHTML = '<p>没有找到相关参考资料</p>';
-        }
-
-        // 显示结果并隐藏加载器
-        loader.style.display = 'none';
-        responseDiv.style.display = 'block';
-
-        // 添加到历史记录
-        addToHistory(data.query, data.response);
+        // 显示响应区域
+        document.getElementById('response').style.display = 'block';
     } catch (error) {
-        loader.style.display = 'none';
-        alert(`请求出错: ${error.message}`);
         console.error('请求出错:', error);
+        alert('请求出错: ' + error.message);
+    } finally {
+        loader.style.display = 'none';
     }
 }
+
 
 // 重新生成回答
 function regenerateResponse() {

@@ -1,0 +1,61 @@
+{
+  "metadata": [
+    {
+      "block_id": "block_0_0",
+      "text": "标题: Artificial Intelligence Definition. Artificial Intelligence (AI) : learning from experiences (data), and improve the computer program adaptively",
+      "full_text": "标题: Artificial Intelligence Definition. Artificial Intelligence (AI) : learning from experiences (data), and improve the computer program adaptively",
+      "page": 0,
+      "index": 0
+    },
+    {
+      "block_id": "block_0_1",
+      "text": "标题: Mathematics Definition. Mathematics : Learning the underlying model from data, and generalize the model to adapt new data",
+      "full_text": "标题: Mathematics Definition. Mathematics : Learning the underlying model from data, and generalize the model to adapt new data",
+      "page": 0,
+      "index": 1
+    },
+    {
+      "block_id": "block_1_2",
+      "text": "标题: Related Fields",
+      "full_text": "标题: Related Fields",
+      "page": 1,
+      "index": 2
+    },
+    {
+      "block_id": "block_3_3",
+      "text": "标题: Learning Types",
+      "full_text": "标题: Learning Types",
+      "page": 3,
+      "index": 3
+    },
+    {
+      "block_id": "block_4_4",
+      "text": "标题: Supervised Learning Properties",
+      "full_text": "标题: Supervised Learning Properties",
+      "page": 4,
+      "index": 4
+    },
+    {
+      "block_id": "block_5_5",
+      "text": "标题: Classification Characteristics",
+      "full_text": "标题: Classification Characteristics",
+      "page": 5,
+      "index": 5
+    },
+    {
+      "block_id": "block_6_6",
+      "text": "标题: Regression Characteristics",
+      "full_text": "标题: Regression Characteristics",
+      "page": 6,
+      "index": 6
+    },
+    {
+      "block_id": "block_7_7",
+      "text": "标题: Unsupervised Learning Properties",
+      "full_text": "标题: Unsupervised Learning Properties",
+      "page": 7,
+      "index": 7
+    }
+  ],
+  "vector_dim": 768
+}

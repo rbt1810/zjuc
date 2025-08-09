@@ -220,8 +220,8 @@ def main():
     
     # 配置路径
     model_path = os.path.join(script_dir, "models", "sentence-transformers_all-mpnet-base-v2")
-    input_json = os.path.join(script_dir, "lectures", "introduction", "introduction_Mathematical_Representation.json")
-    output_json = os.path.join(script_dir, "lectures", "introduction", "introduction_Mathematical_Representation_vectorized.json")
+    input_json = os.path.join(script_dir, "lectures", "introduction", "introduction_Course_Syllabus.json")
+    output_json = os.path.join(script_dir, "lectures", "introduction", "introduction_Course_Syllabus_vectorized.json")
     
     print("=" * 50)
     print("极简版JSON文档向量化系统")

@@ -1,0 +1,61 @@
+{
+  "metadata": [
+    {
+      "block_id": "block_0_0",
+      "text": "标题: Interdisciplinary Positioning. Essential interconnected disciplines:",
+      "full_text": "标题: Interdisciplinary Positioning. Essential interconnected disciplines:",
+      "page": 0,
+      "index": 0
+    },
+    {
+      "block_id": "block_1_1",
+      "text": "标题: Essential Mathematical Domains",
+      "full_text": "标题: Essential Mathematical Domains",
+      "page": 1,
+      "index": 1
+    },
+    {
+      "block_id": "block_1_2",
+      "text": "标题: Where Mathematics Emerges",
+      "full_text": "标题: Where Mathematics Emerges",
+      "page": 1,
+      "index": 2
+    },
+    {
+      "block_id": "block_2_3",
+      "text": "标题: Essential Statistical Domains",
+      "full_text": "标题: Essential Statistical Domains",
+      "page": 2,
+      "index": 3
+    },
+    {
+      "block_id": "block_2_4",
+      "text": "标题: Where Statistics Emerges",
+      "full_text": "标题: Where Statistics Emerges",
+      "page": 2,
+      "index": 4
+    },
+    {
+      "block_id": "block_3_5",
+      "text": "标题: Integration Points",
+      "full_text": "标题: Integration Points",
+      "page": 3,
+      "index": 5
+    },
+    {
+      "block_id": "block_4_6",
+      "text": "标题: Knowledge Integration Points",
+      "full_text": "标题: Knowledge Integration Points",
+      "page": 4,
+      "index": 6
+    },
+    {
+      "block_id": "block_4_7",
+      "text": "标题: Core Realizations",
+      "full_text": "标题: Core Realizations",
+      "page": 4,
+      "index": 7
+    }
+  ],
+  "vector_dim": 768
+}

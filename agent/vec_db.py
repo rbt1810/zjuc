@@ -146,9 +146,9 @@ class VectorDatabase:
 # 主函数：构建和使用向量数据库
 if __name__ == "__main__":
     # 配置文件路径
-    VECTORS_FILE = "./lectures/introduction/introduction_Mathematical_Representation_vectorized.json"  # 之前生成的向量化文件
+    VECTORS_FILE = "./lectures/introduction/introduction_Course_Syllabus_vectorized.json"  # 之前生成的向量化文件
     MODEL_PATH = "models/sentence-transformers_all-mpnet-base-v2"  # 向量化模型路径
-    DB_PATH = "./lectures/introduction/introduction_Mathematical_Representation_db"  # 数据库保存路径
+    DB_PATH = "./lectures/introduction/introduction_Course_Syllabus_db"  # 数据库保存路径
     
     # 1. 创建向量数据库实例
     print("=" * 60)

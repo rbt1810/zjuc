@@ -1,0 +1,110 @@
+{
+  "metadata": [
+    {
+      "block_id": "block_0_0",
+      "text": "标题: Outlines",
+      "full_text": "标题: Outlines",
+      "page": 0,
+      "index": 0
+    },
+    {
+      "block_id": "block_1_1",
+      "text": "标题: Examples Query. Can you give some examples of data ?",
+      "full_text": "标题: Examples Query. Can you give some examples of data ?",
+      "page": 1,
+      "index": 1
+    },
+    {
+      "block_id": "block_1_2",
+      "text": "标题: Data Examples",
+      "full_text": "标题: Data Examples",
+      "page": 1,
+      "index": 2
+    },
+    {
+      "block_id": "block_2_3",
+      "text": "标题: The 5 V's of Big Data",
+      "full_text": "标题: The 5 V's of Big Data",
+      "page": 2,
+      "index": 3
+    },
+    {
+      "block_id": "block_3_4",
+      "text": "标题: Definition and Perspectives",
+      "full_text": "标题: Definition and Perspectives",
+      "page": 3,
+      "index": 4
+    },
+    {
+      "block_id": "block_4_5",
+      "text": "标题: Historical Example. A pioneering work of data science : Kepler’s Laws",
+      "full_text": "标题: Historical Example. A pioneering work of data science : Kepler’s Laws",
+      "page": 4,
+      "index": 5
+    },
+    {
+      "block_id": "block_5_6",
+      "text": "标题: Key Components",
+      "full_text": "标题: Key Components",
+      "page": 5,
+      "index": 6
+    },
+    {
+      "block_id": "block_6_7",
+      "text": "标题: Ordinary data types :",
+      "full_text": "标题: Ordinary data types :",
+      "page": 6,
+      "index": 7
+    },
+    {
+      "block_id": "block_6_8",
+      "text": "标题: Basic assumption. the data are generated from an underlying model, which is unknown in practice",
+      "full_text": "标题: Basic assumption. the data are generated from an underlying model, which is unknown in practice",
+      "page": 6,
+      "index": 8
+    },
+    {
+      "block_id": "block_6_9",
+      "text": "标题: Model Types",
+      "full_text": "标题: Model Types",
+      "page": 6,
+      "index": 9
+    },
+    {
+      "block_id": "block_7_10",
+      "text": "标题: Challenges",
+      "full_text": "标题: Challenges",
+      "page": 7,
+      "index": 10
+    },
+    {
+      "block_id": "block_7_11",
+      "text": "标题: Solutions :",
+      "full_text": "标题: Solutions :",
+      "page": 7,
+      "index": 11
+    },
+    {
+      "block_id": "block_8_12",
+      "text": "标题: Algorithm Framework. Algorithms are in the interdisciplinary part of computer science and mathematics : establish mathematical models, solve it numerically, implement it in the computer languages",
+      "full_text": "标题: Algorithm Framework. Algorithms are in the interdisciplinary part of computer science and mathematics : establish mathematical models, solve it numerically, implement it in the computer languages",
+      "page": 8,
+      "index": 12
+    },
+    {
+      "block_id": "block_8_13",
+      "text": "标题: Algorithmic Techniques",
+      "full_text": "标题: Algorithmic Techniques",
+      "page": 8,
+      "index": 13
+    },
+    {
+      "block_id": "block_8_14",
+      "text": "标题: IEEE 2006 top 10 algorithms in data mining",
+      "full_text": "标题: IEEE 2006 top 10 algorithms in data mining",
+      "page": 8,
+      "index": 14
+    }
+  ],
+  "vector_dim": 768
+}

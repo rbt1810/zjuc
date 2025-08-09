@@ -10,6 +10,7 @@ from sentence_transformers import SentenceTransformer
 import faiss
 from accelerate import dispatch_model, infer_auto_device_map
 from accelerate.utils import get_balanced_memory
+from flask_cors import CORS
 
 # 配置常量
 QWEN_MODEL_PATH = "/home/wangzy/zjuc/models/Qwen3-32B"  # 本地Qwen3-32B模型路径
@@ -22,6 +23,7 @@ SERVER_PORT = 5000
 
 # 初始化Flask应用
 app = Flask(__name__, template_folder='/home/wangzy/zjuc/agent/templates/')
+CORS(app)
 app.config['JSON_AS_ASCII'] = False  # 禁用ASCII编码，修复中文显示问题
 start_time = time.time()
 
@@ -85,6 +87,7 @@ class TextVectorizer:
     
     def vectorize(self, text: str) -> np.ndarray:
         """将文本转换为向量"""
+        log(f"向量化文本: {text[:50]}...")
         if not self.model:
             raise RuntimeError("向量化模型未初始化")
         
@@ -133,6 +136,7 @@ class VectorDatabase:
     
     def 搜索(self, 查询向量: np.ndarray, k: int = 5) -> list:
         """在数据库中搜索相似项"""
+        log(f"执行搜索: k={k}")
         # 输入验证
         if 查询向量.shape[1] != self.向量维度:
             raise ValueError(f"查询向量维度错误。数据库维度: {self.向量维度}, 输入维度: {查询向量.shape[1]}")
@@ -251,6 +255,7 @@ class QwenModel:
     
     def 生成(self, prompt: str, max_length: int = 1024, temperature: float = 0.7) -> str:
         """使用Qwen模型生成文本"""
+        log(f"生成响应: max_length={max_length}")
         if not self.model or not self.tokenizer:
             raise RuntimeError("模型未正确初始化")
         
@@ -339,6 +344,7 @@ class AI助教:
         提示 = self.构建提示(查询, 上下文)
         
         # 生成响应
+        log(f"🧠 开始生成响应: {查询} (max_length={max_length})")
         try:
             log("⚡ 使用Qwen生成响应...")
             start_time = time.time()
@@ -348,7 +354,7 @@ class AI助教:
             return 响应
         except Exception as e:
             log(f"❌ 响应生成失败: {str(e)}", "ERROR")
-            return ""
+            return "抱歉，生成响应时出错"
     
     def 构建提示(self, 查询: str, 上下文: list) -> str:
         """构建提示模板"""
@@ -366,24 +372,24 @@ class AI助教:
         return 提示
 
     def respond_to_query(self, query: str, max_length=1000, top_k=5) -> dict:
-        """处理用户查询并生成响应（添加参数支持）"""
-        # 步骤1：检索相关知识
-        relevant_content = self.retrieve_relevant_content(query, top_k)
+        """处理用户查询并生成响应"""
+        # 1. 检索相关内容
+        relevant_content = self.检索相关内容(query, top_k)
         
-        # 步骤2：生成AI助教回答
-        ai_response = self.generate_response(query, relevant_content, max_length)
+        # 2. 生成AI助教回答
+        ai_response = self.生成响应(query, relevant_content, max_length)
         
-        # 步骤3：构建响应结构
+        # 3. 构建响应结构
         return {
             "query": query,
             "response": ai_response,
             "sources": [
                 {
-                    "doc_title": item["doc_title"],
-                    "section": item["section"],
+                    "doc_title": item.get("文档标题", "无标题"),
+                    "section": item.get("章节", "未知章节"),
                     "page": item.get("page_idx", 0),
-                    "similarity": item["similarity"],
-                    "text_excerpt": item["text"]
+                    "similarity": item.get("相似度", 0.0),
+                    "text_excerpt": item.get("内容", "")[:300]
                 }
                 for item in relevant_content
             ]
@@ -398,22 +404,39 @@ def home():
     return render_template('agent.html')
 
 # 在提问端点添加参数支持
-def ask_question():
+
+@app.route('/ask', methods=['POST'])
+def handle_ask():
     try:
+        # 获取JSON数据
         data = request.get_json()
         if not data or 'query' not in data:
             return json_response({"error": "缺少查询参数"}, 400)
-            
-        question = data['query']
-        max_length = data.get('max_length', 1000)  # 默认1000
-        top_k = data.get('top_k', 5)  # 默认5
         
-        # 使用AI助教实例回答问题（传递参数）
-        response_data = assistant.respond_to_query(question, max_length, top_k)
+        # 提取参数
+        question = data['query']
+        max_length = data.get('max_length', 1000)
+        top_k = data.get('top_k', 5)
+        
+        # 确保助教实例已初始化
+        global 助教
+        if not 助教:
+            return json_response({"error": "AI助教未初始化"}, 500)
+        
+        # 使用AI助教生成响应
+        response_data = 助教.respond_to_query(question, max_length, top_k)
         
         return json_response(response_data)
     except Exception as e:
-        return json_response({"error": str(e)}, 500)
+        log(f"处理提问时出错: {str(e)}\n{traceback.format_exc()}", "ERROR")
+        return json_response({"error": "内部服务器错误"}, 500)
+
+# def _build_cors_preflight_response():
+#     response = Response()
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+#     response.headers.add("Access-Control-Allow-Methods", "POST")
+#     return response
 
 # 在健康检查端点添加更多状态信息
 @app.route('/health')
@@ -455,36 +478,39 @@ def 初始化助教():
     """初始化AI助教智能体"""
     global 助教
     
-    # 清理显存
-    clear_gpu_memory()
-    
-    # 初始化组件
-    log("🚀 正在初始化文本向量化模型...")
-    向量化器 = TextVectorizer(VECTOR_MODEL_PATH)
-    
-    log("🚀 正在初始化向量数据库...")
-    向量数据库 = VectorDatabase(VECTOR_DB_INDEX_PATH, VECTOR_DB_METADATA_PATH)
-    
-    log("🚀 正在初始化Qwen3-32B模型...")
-    qwen模型 = QwenModel(QWEN_MODEL_PATH)
-    
-    # 创建智能体
-    助教 = AI助教(向量数据库, 向量化器, qwen模型)
-    log("🎉 AI助教智能体初始化完成!")
+    try:
+        # 清理显存
+        clear_gpu_memory()
+        
+        # 初始化组件
+        log("🚀 正在初始化文本向量化模型...")
+        向量化器 = TextVectorizer(VECTOR_MODEL_PATH)
+        
+        log("🚀 正在初始化向量数据库...")
+        向量数据库 = VectorDatabase(VECTOR_DB_INDEX_PATH, VECTOR_DB_METADATA_PATH)
+        
+        log("🚀 正在初始化Qwen3-32B模型...")
+        qwen模型 = QwenModel(QWEN_MODEL_PATH)
+        
+        # 创建智能体
+        助教 = AI助教(向量数据库, 向量化器, qwen模型)
+        log("🎉 AI助教智能体初始化完成!")
+        
+        # 返回成功消息
+        return True
+    except Exception as e:
+        log(f"❌ AI助教初始化失败: {str(e)}", "ERROR")
+        return False
 
 # 主函数
 if __name__ == '__main__':
     try:
         # 初始化智能体
-        初始化助教()
-        
-        # 打印路由
-        log("\n🔌 注册的路由:")
-        for rule in app.url_map.iter_rules():
-            log(f"  {rule}")
+        if not 初始化助教():
+            log("❌ AI助教初始化失败，无法启动服务", "ERROR")
+            sys.exit(1)
         
         # 启动服务器
-        log(f"🌐 启动服务: http://{SERVER_HOST}:{SERVER_PORT}")
         app.run(host=SERVER_HOST, port=SERVER_PORT, threaded=True)
     except Exception as e:
         log(f"❌ 系统启动失败: {str(e)}", "ERROR")

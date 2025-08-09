@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI助教智能问答系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+    <script src="static/main.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -295,8 +297,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* 响应区域 */
@@ -628,25 +635,25 @@
                 flex-direction: column;
                 align-items: stretch;
             }
-            
+
             .settings-group {
                 width: 100%;
                 justify-content: space-between;
             }
-            
+
             .btn {
                 width: 100%;
             }
-            
+
             .status-cards {
                 grid-template-columns: 1fr;
             }
-            
+
             .question-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            
+
             .meta-info {
                 width: 100%;
                 justify-content: space-between;
@@ -654,6 +661,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -663,7 +671,7 @@
                 <div class="system-info">
                     <div class="info-item">
                         <i class="fas fa-clock"></i>
-                        <span>系统时间：2025-08-03 23:59:23</span>
+                        <span id="current-time">系统时间：加载中...</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-user-graduate"></i>
@@ -676,7 +684,7 @@
                 </div>
             </div>
         </header>
-        
+
         <div class="main-content">
             <div class="qa-section">
                 <div class="status-cards">
@@ -693,7 +701,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!-- 模型状态 -->
                     <div class="status-card">
                         <div class="card-header">
@@ -707,7 +715,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!-- 知识库状态 -->
                     <div class="status-card">
                         <div class="card-header">
@@ -721,7 +729,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!-- 响应时间 -->
                     <div class="status-card">
                         <div class="card-header">
@@ -734,18 +742,19 @@
                                 <div class="card-subtext>">上次请求</div>
                             </div>
                         </div>
-                    </div>          
+                    </div>
                 </div>
-                
+
                 <div class="input-container">
-                    <textarea id="question" placeholder="请输入您的问题...（例如：请解释神经网络的基本原理）">请解释神经网络的基本原理，特别是卷积神经网络在图像识别中的应用。</textarea>
+                    <textarea id="question"
+                        placeholder="请输入您的问题...（例如：请解释神经网络的基本原理）">请解释神经网络的基本原理，特别是卷积神经网络在图像识别中的应用。</textarea>
                     <div class="input-controls">
                         <div class="settings-group">
                             <div class="setting">
                                 <label for="max-length"><i class="fas fa-ruler"></i> 最大长度</label>
                                 <input type="number" id="max-length" min="100" max="4096" value="1024">
                             </div>
-                            
+
                             <div class="setting">
                                 <label for="top-k"><i class="fas fa-search"></i> 检索数量</label>
                                 <input type="number" id="top-k" min="1" max="10" value="5">
@@ -756,13 +765,13 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="loader" id="loader">
                     <div class="loader-spinner"></div>
                     <div class="loader-text">AI助教正在思考您的问题...</div>
                     <div class="loader-subtext">正在检索知识库资源并进行深度分析</div>
                 </div>
-                
+
                 <div class="response-container" id="response">
                     <div class="question-header">
                         <h3>问题：<span id="query-text">请解释神经网络的基本原理，特别是卷积神经网络在图像识别中的应用。</span></h3>
@@ -777,7 +786,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="answer-section">
                         <div class="answer-header">
                             <div class="answer-icon">
@@ -786,38 +795,10 @@
                             <h4>AI助教的回答：</h4>
                         </div>
                         <div class="answer-content" id="answer-text">
-                            <p><strong>神经网络</strong>是一种受生物神经系统启发的计算模型，它由相互连接的节点（神经元）组成，通过调整节点间连接的权重来学习数据的内在规律。基本原理如下：</p>
                             
-                            <h5>1. 神经元结构：</h5>
-                            <p>每个神经元接收输入信号，经加权求和后通过激活函数产生输出：</p>
-                            <p><code>输出 = f(w₁x₁ + w₂x₂ + ... + wₙxₙ + b)</code></p>
-                            <p>其中f是激活函数（如ReLU、Sigmoid）</p>
-                            
-                            <h5>2. 网络层级：</h5>
-                            <p>• 输入层：接收原始数据<br>
-                            • 隐藏层：进行特征提取和转换<br>
-                            • 输出层：生成最终预测结果</p>
-                            
-                            <h5>3. 学习过程：</h5>
-                            <p>通过反向传播算法和梯度下降优化，不断调整权重参数使预测误差最小化</p>
-                            
-                            <h5>卷积神经网络(CNN)在图像识别中的应用</h5>
-                            <p>CNN专门设计用于处理网格结构数据（如图像），核心特点：</p>
-                            
-                            <p><strong>• 卷积层：</strong> 使用卷积核提取局部特征，实现参数共享大幅减少参数量<br>
-                            <strong>• 池化层：</strong> 降采样保留主要特征增强模型鲁棒性<br>
-                            <strong>• 全连接层：</strong> 最终完成分类任务</p>
-                            
-                            <p>在图像识别中，CNN通过分层特征提取机制有效学习图像的层级特征：</p>
-                            
-                            <p>1. 浅层网络：提取边缘、纹理等底层特征<br>
-                            2. 中层网络：学习部分物体组件（如车轮、眼睛）<br>
-                            3. 深层网络：理解完整的物体和复杂模式</p>
-                            
-                            <p>这种分层抽象能力使CNN成为计算机视觉领域的首选模型，在ImageNet等基准数据集上取得突破性进展。</p>
                         </div>
                     </div>
-                    
+
                     <div class="sources-section">
                         <div class="sources-header">
                             <div class="source-icon">
@@ -825,45 +806,11 @@
                             </div>
                             <h4>参考资料</h4>
                         </div>
-                        <div class="sources-container">
-                            <div class="source-card">
-                                <div class="source-meta">
-                                    <span>Deep Learning Book (Ch.9)</span>
-                                    <span>页码：321-340</span>
-                                </div>
-                                <div class="source-title">卷积神经网络结构详解</div>
-                                <div class="source-content">
-                                    <p>卷积层的数学推导过程与特征映射可视化分析，包括常用卷积核的作用解释...</p>
-                                </div>
-                                <div class="similarity">相似度：92%</div>
-                            </div>
+                        <div class="sources-container" id="sources-container">
                             
-                            <div class="source-card">
-                                <div class="source-meta">
-                                    <span>IEEE会议论文</span>
-                                    <span>作者：Krizhevsky, 2012</span>
-                                </div>
-                                <div class="source-title">AlexNet深度CNN架构</div>
-                                <div class="source-content">
-                                    <p>ImageNet比赛冠军模型，首次证明深层CNN在图像分类上的优越性...</p>
-                                </div>
-                                <div class="similarity">相似度：86%</div>
-                            </div>
-                            
-                            <div class="source-card">
-                                <div class="source-meta">
-                                    <span>课程讲义</span>
-                                    <span>第7章：神经网络基础</span>
-                                </div>
-                                <div class="source-title">激活函数与反向传播</div>
-                                <div class="source-content">
-                                    <p>详细讲解Sigmoid、ReLU等激活函数的数学特性和梯度计算过程...</p>
-                                </div>
-                                <div class="similarity">相似度：79%</div>
-                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="action-buttons">
                         <button class="btn btn-secondary" id="copy-button">
                             <i class="fas fa-copy"></i> 复制回答
@@ -877,7 +824,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="sidebar">
                 <div class="sources-section">
                     <div class="sources-header">
@@ -897,7 +844,7 @@
                                 <p>第1-3章：神经元模型、前向传播、激活函数</p>
                             </div>
                         </div>
-                        
+
                         <div class="source-card">
                             <div class="source-meta">
                                 <span>编程实验</span>
@@ -908,7 +855,7 @@
                                 <p>基于TensorFlow实现MNIST分类任务</p>
                             </div>
                         </div>
-                        
+
                         <div class="source-card">
                             <div class="source-meta">
                                 <span>参考视频</span>
@@ -921,7 +868,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="history-section">
                     <div class="history-header">
                         <h4><i class="fas fa-history"></i> 问答历史</h4>
@@ -935,25 +882,25 @@
                             <div class="history-content">在神经网络中引入非线性因素的关键组件，常用的激活函数包括Sigmoid、Tanh和ReLU...</div>
                             <div class="history-date">08/03 14:23</div>
                         </div>
-                        
+
                         <div class="history-item">
                             <h5><i class="fas fa-question-circle"></i> 过拟合的解决方法</h5>
                             <div class="history-content">在训练数据上表现良好但在新数据上表现差的现象，可通过正则化、Dropout等策略缓解...</div>
                             <div class="history-date">08/02 09:45</div>
                         </div>
-                        
+
                         <div class="history-item">
                             <h5><i class="fas fa-question-circle"></i> CNN与RNN的区别</h5>
                             <div class="history-content">处理空间信息vs时序信息，卷积核共享参数vs循环连接结构...</div>
                             <div class="history-date">08/01 16:31</div>
                         </div>
-                        
+
                         <div class="history-item">
                             <h5><i class="fas fa-question-circle"></i> 反向传播的数学原理</h5>
                             <div class="history-content">基于链式法则的梯度计算方法，通过计算损失函数对网络参数的偏导数实现参数更新...</div>
                             <div class="history-date">07/30 11:02</div>
                         </div>
-                        
+
                         <div class="history-item">
                             <h5><i class="fas fa-question-circle"></i> 批归一化(BatchNorm)的作用</h5>
                             <div class="history-content">减少内部协变量偏移，加速训练收敛，允许使用更高学习率...</div>
@@ -964,217 +911,337 @@
             </div>
         </div>
     </div>
-    
+
     <div class="toast" id="toast">内容已复制到剪贴板！</div>
-    
-    <!-- <script>
-        // 模拟加载和显示效果
-        document.addEventListener('DOMContentLoaded', function() {
-            const askButton = document.getElementById('ask-button');
-            const loader = document.getElementById('loader');
-            const response = document.getElementById('response');
-            const copyButton = document.getElementById('copy-button');
-            const toast = document.getElementById('toast');
-            
-            // 提问按钮点击事件
-            askButton.addEventListener('click', function() {
-                // 显示加载动画
-                loader.style.display = 'flex';
-                
-                // 模拟网络请求延迟
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    response.style.display = 'block';
-                    
-                    // 滚动到响应区域
-                    response.scrollIntoView({ behavior: 'smooth' });
-                }, 1500);
-            });
-            
-            // 复制回答按钮点击事件
-            copyButton.addEventListener('click', function() {
-                // 显示提示框
-                toast.classList.add('show');
-                
-                // 隐藏提示框
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2000);
-            });
-            
-            // 点击历史项效果
-            const historyItems = document.querySelectorAll('.history-item');
-            historyItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // 移除之前活动的历史项
-                    historyItems.forEach(item => item.classList.remove('active'));
-                    
-                    // 设置当前为活跃状态
-                    this.classList.add('active');
-                    
-                    // 填充问题到输入框
-                    const question = this.querySelector('h5').textContent;
-                    document.getElementById('question').value = question;
-                });
-            });
-        });
-    </script> -->
+
     <script>
-        // 在DOM加载完成后执行
         document.addEventListener('DOMContentLoaded', function () {
-            // 获取DOM元素引用
+            // 获取DOM元素引用 - 确保元素存在
             const askButton = document.getElementById('ask-button');
             const loader = document.getElementById('loader');
             const response = document.getElementById('response');
             const copyButton = document.getElementById('copy-button');
-            const exportButton = document.getElementById('export-button');
-            const regenerateButton = document.getElementById('regenerate-button');
-            const clearHistoryButton = document.getElementById('clear-history-button');
             const questionInput = document.getElementById('question');
             const toast = document.getElementById('toast');
-            const historyContainer = document.getElementById('history-container');
+            const historyContainer = document.getElementById('history-container'); // 确保HTML中有这个id的元素
             const currentTimeElement = document.getElementById('current-time');
-
-            // 更新系统时间（演示动态更新UI）
+            const sourcesContainer = document.getElementById('sources-container');
+            const answerText = document.getElementById('answer-text');
+            const queryText = document.getElementById('query-text');
+            const responseTimeElement = document.getElementById('response-time');
+            const maxLengthInput = document.getElementById('max-length');
+            const topKInput = document.getElementById('top-k');
+            // 安全检查：确保元素存在
+            if (!historyContainer) {
+                console.error("history-container元素不存在!");
+            }
+            // 更新系统时间
             function updateTime() {
                 const now = new Date();
                 const timeString = `系统时间：${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
-                currentTimeElement.textContent = timeString;
+                if (currentTimeElement) {
+                    currentTimeElement.textContent = timeString;
+                }
             }
-
             // 初始化时间并每秒更新
             updateTime();
             setInterval(updateTime, 1000);
-
-            // 1. 提问按钮点击事件
-            askButton.addEventListener('click', function () {
-                // 获取用户输入的问题
+            // 提问函数 - 实际发送请求到后端
+            async function askQuestion() {
+                // 获取用户输入的问题和参数
                 const question = questionInput.value.trim();
+                const maxLength = maxLengthInput.value;
+                const topK = topKInput.value;
 
                 if (!question) {
                     alert('请输入问题内容');
                     return;
                 }
-
                 // 更新显示的问题文本
-                document.getElementById('query-text').textContent = question;
-
+                queryText.textContent = question;
                 // 显示加载动画
-                loader.style.display = 'flex';
-                response.style.display = 'none';
+                if (loader) loader.style.display = 'flex';
+                if (response) response.style.display = 'none';
+                try {
+                    // 发送请求到后端
+                    const response = await fetch('/ask', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            query: question,
+                            max_length: parseInt(maxLength),
+                            top_k: parseInt(topK)
+                        })
+                    });
+                    if (!response.ok) {
+                        // 尝试获取详细的错误信息
+                        let errorMessage = `请求失败: ${response.status}`;
+                        try {
+                            const errorData = await response.json();
+                            errorMessage = errorData.error || errorMessage;
+                        } catch (e) {
+                            console.warn("无法解析错误响应:", e);
+                        }
+                        throw new Error(errorMessage);
+                    }
+                    const data = await response.json();
+                    console.log("响应数据:", data);
+                    // 更新页面显示
+                    if (answerText) answerText.innerHTML = formatAnswer(data.response);
 
-                // 模拟AI处理延迟
-                setTimeout(() => {
-                    // 隐藏加载动画，显示响应区域
-                    loader.style.display = 'none';
-                    response.style.display = 'block';
+                    // 更新参考资料
+                    if (sourcesContainer) {
+                        sourcesContainer.innerHTML = '';
+                        if (data.sources && data.sources.length > 0) {
+                            data.sources.forEach(source => {
+                                const sourceCard = document.createElement('div');
+                                sourceCard.className = 'source-card';
+                                sourceCard.innerHTML = `
+                                        <div class="source-meta">
+                                            <span>${source.doc_title}</span>
+                                            <span>${source.section}</span>
+                                        </div>
+                                        <div class="source-title">${source.text_excerpt}</div>
+                                        <div class="similarity">相似度：${source.similarity ? source.similarity.toFixed(2) : 'N/A'}</div>
+                                    `;
+                                sourcesContainer.appendChild(sourceCard);
+                            });
+                        } else {
+                            sourcesContainer.innerHTML = '<p>没有找到相关参考资料</p>';
+                        }
+                    }
 
                     // 添加到历史记录
-                    addToHistory(question);
+                    addToHistory(question, data.response);
 
-                    // 滚动到响应区域
-                    response.scrollIntoView({ behavior: 'smooth' });
-                }, 1500);
-            });
+                } catch (error) {
+                    console.error("请求出错:", error);
+
+                    // 显示错误信息
+                    if (answerText) answerText.innerHTML = `<p class="error">请求出错: ${error.message}</p>`;
+
+                } finally {
+                    // 隐藏加载器，显示响应区域
+                    if (loader) loader.style.display = 'none';
+                    if (response) response.style.display = 'block';
+                }
+            }
+            // 1. 提问按钮点击事件
+            if (askButton) askButton.addEventListener('click', askQuestion);
 
             // 2. 复制回答按钮点击事件
-            copyButton.addEventListener('click', function () {
-                const answerText = document.getElementById('answer-text').innerText;
+            if (copyButton) {
+                copyButton.addEventListener('click', function () {
+                    if (!answerText) return;
 
-                // 使用现代剪贴板API
-                navigator.clipboard.writeText(answerText)
-                    .then(() => {
-                        // 显示提示框
-                        toast.classList.add('show');
+                    const answerContent = answerText.innerText;
 
-                        // 隐藏提示框
-                        setTimeout(() => {
-                            toast.classList.remove('show');
-                        }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('复制失败:', err);
-                        alert('复制失败，请手动复制内容');
-                    });
-            });
+                    // 使用现代剪贴板API
+                    navigator.clipboard.writeText(answerContent)
+                        .then(() => {
+                            // 显示提示框
+                            if (toast) {
+                                toast.classList.add('show');
+                                setTimeout(() => {
+                                    toast.classList.remove('show');
+                                }, 2000);
+                            }
+                        })
+                        .catch(err => {
+                            console.error('复制失败:', err);
+                            alert('复制失败，请手动复制内容');
+                        });
+                });
+            }
 
-            // 3. 导出报告按钮点击事件
-            exportButton.addEventListener('click', function () {
-                alert('导出报告功能已触发!');
-                // 实际应用中这里会有导出PDF或文档的逻辑
-            });
+            // 3. 重新生成按钮点击事件
+            const regenerateBtn = document.querySelector('.btn-danger');
+            if (regenerateBtn) {
+                regenerateBtn.addEventListener('click', function () {
+                    if (questionInput && questionInput.value.trim()) {
+                        askQuestion();
+                    } else {
+                        alert('请先输入问题');
+                    }
+                });
+            }
 
-            // 4. 重新生成按钮点击事件
-            regenerateButton.addEventListener('click', function () {
-                alert('重新生成功能已触发!');
-                // 实际应用中会重新生成回答
-            });
-
-            // 5. 清空历史按钮点击事件
-            clearHistoryButton.addEventListener('click', function () {
-                if (confirm('确定要清空所有历史记录吗？')) {
-                    historyContainer.innerHTML = '';
-                    localStorage.removeItem('questionHistory');
-                }
-            });
-
-            // 6. 为历史记录项添加点击事件（事件委托）
-            historyContainer.addEventListener('click', function (e) {
-                if (e.target.closest('.history-item')) {
-                    const historyItem = e.target.closest('.history-item');
-
-                    // 移除之前活动的历史项
-                    document.querySelectorAll('.history-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-
-                    // 设置当前为活跃状态
-                    historyItem.classList.add('active');
-
-                    // 填充问题到输入框
-                    const question = historyItem.querySelector('h5').textContent;
-                    questionInput.value = question;
-                }
-            });
-
+            // 4. 清空历史按钮点击事件
+            const clearHistoryBtn = document.querySelector('.btn-danger');
+            if (clearHistoryBtn) {
+                clearHistoryBtn.addEventListener('click', function () {
+                    if (confirm('确定要清空所有历史记录吗？')) {
+                        if (historyContainer) historyContainer.innerHTML = '';
+                        localStorage.removeItem('questionHistory');
+                    }
+                });
+            }
+            // 5. 为历史记录项添加点击事件（事件委托）
+            if (historyContainer) {
+                historyContainer.addEventListener('click', function (e) {
+                    if (e.target.closest('.history-item')) {
+                        const historyItem = e.target.closest('.history-item');
+                        // 移除之前活动的历史项
+                        document.querySelectorAll('.history-item').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        // 设置当前为活跃状态
+                        historyItem.classList.add('active');
+                        // 填充问题到输入框
+                        if (questionInput) {
+                            const question = historyItem.querySelector('h5').textContent;
+                            questionInput.value = question;
+                        }
+                    }
+                });
+            }
             // 添加到历史记录的辅助函数
-            function addToHistory(question) {
+            function addToHistory(question, answer) {
+                if (!historyContainer) return;
+
                 const now = new Date();
                 const dateString = `${now.getMonth() + 1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-
                 const historyItem = document.createElement('div');
                 historyItem.className = 'history-item';
                 historyItem.innerHTML = `
                         <h5><i class="fas fa-question-circle"></i> ${question.substring(0, 60)}</h5>
-                        <div class="history-content">这是关于"${question.substring(0, 30)}"的回答摘要...</div>
+                        <div class="history-content">${answer.substring(0, 100)}...</div>
                         <div class="history-date">${dateString}</div>
                     `;
-
-                historyContainer.insertBefore(historyItem, historyContainer.firstChild);
-
-                // 保存到本地存储（实际应用）
-                saveHistoryToLocal(question, dateString);
-            }
-
-            // 保存历史记录到本地存储（演示）
-            function saveHistoryToLocal(question, date) {
-                // 实际实现会存储完整数据
-            }
-
-            // 7. 输入框键盘事件 - 按Enter提交（同时防止Shift+Enter换行）
-            questionInput.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault(); // 阻止默认的换行行为
-                    askButton.click(); // 触发提问按钮点击事件
+                // 安全添加元素
+                if (historyContainer.firstChild) {
+                    historyContainer.insertBefore(historyItem, historyContainer.firstChild);
+                } else {
+                    historyContainer.appendChild(historyItem);
                 }
-            });
+                // 保存到本地存储
+                saveHistoryToLocal(question, answer, dateString);
+            }
+            // 保存历史记录到本地存储
+            function saveHistoryToLocal(question, answer, date) {
+                const history = JSON.parse(localStorage.getItem('questionHistory')) || [];
+                history.unshift({ question, answer, date });
+                localStorage.setItem('questionHistory', JSON.stringify(history));
+            }
+            // 7. 输入框键盘事件 - 按Enter提交（同时防止Shift+Enter换行）
+            if (questionInput) {
+                questionInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault(); // 阻止默认的换行行为
+                        askQuestion(); // 触发提问
+                    }
+                });
+            }
+            // 格式化答案文本
+            function formatAnswer(text) {
+                // 替换换行符为HTML换行
+                let formatted = text.replace(/\n/g, '<br>');
+                // 识别标题并加粗
+                const headings = ['一、', '二、', '三、', '四、', '五、', '六、', '七、', '八、', '九、', '十、'];
+                headings.forEach(heading => {
+                    const regex = new RegExp(`${heading}(.+?)<br>`, 'g');
+                    formatted = formatted.replace(regex, `<strong>${heading}$1</strong><br>`);
+                });
+                // 识别列表项
+                formatted = formatted.replace(/([1-9]\.\s)/g, '<span style="font-weight: bold; margin-right: 8px;">$1</span>');
+                // 识别代码块
+                formatted = formatted.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+                return formatted;
+            }
 
-            // 8. 动态更新响应时间状态（演示）
-            setInterval(() => {
-                const responseTime = (Math.random() * 200 + 200).toFixed(0);
-                document.getElementById('response-time-status').textContent = `${responseTime} ms`;
-            }, 5000);
+            // 初始化历史记录
+            function initHistory() {
+                if (!historyContainer) return;
+
+                const history = JSON.parse(localStorage.getItem('questionHistory')) || [];
+                history.forEach(item => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.innerHTML = `
+                            <h5><i class="fas fa-question-circle"></i> ${item.question.substring(0, 60)}</h5>
+                            <div class="history-content">${item.answer.substring(0, 100)}...</div>
+                            <div class="history-date">${item.date}</div>
+                        `;
+                    historyContainer.appendChild(historyItem);
+                });
+            }
+
+            // 初始化历史记录
+            initHistory();
+
+            // 初始化系统状态显示
+            function checkSystemStatus() {
+                fetch('/health')
+                    .then(response => response.json())
+                    .then(data => {
+                        // 更新服务状态
+                        const serviceStatus = document.getElementById('service-status');
+                        if (serviceStatus) {
+                            serviceStatus.textContent = data.status === 'healthy' ? '运行正常' : '服务异常';
+                        }
+
+                        // 更新模型状态
+                        const modelStatus = document.getElementById('model-status');
+                        if (modelStatus) {
+                            modelStatus.textContent = data.model && data.model.model_loaded ? 'Qwen-32B (已加载)' : '未加载';
+                        }
+
+                        // 更新知识库状态
+                        const kbStatus = document.getElementById('kb-status');
+                        if (kbStatus) {
+                            kbStatus.textContent = data.vector_db && data.vector_db.vector_db_loaded ?
+                                `${data.vector_db.vector_count || 0} 篇文献` : '未加载';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('获取系统状态失败:', error);
+                        const serviceStatus = document.getElementById('service-status');
+                        if (serviceStatus) {
+                            serviceStatus.textContent = '获取状态失败';
+                        }
+                    });
+            }
+
+            // 检查系统状态
+            checkSystemStatus();
         });
     </script>
+    
+    <!-- <div id="debug-panel"
+        style="position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: white; padding: 10px; z-index: 1000; display: none;">
+        <button onclick="toggleDebug()" style="position: absolute; top: 5px; right: 5px;">关闭</button>
+        <h3>调试信息</h3>
+        <div id="debug-log" style="height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px;"></div>
+    </div>
+    <script>
+        // 调试工具函数
+        function debugLog(message) {
+            console.log(message);
+            const logElement = document.getElementById('debug-log');
+            if (logElement) {
+                logElement.innerHTML += `<div>${message}</div>`;
+                logElement.scrollTop = logElement.scrollHeight;
+            }
+        }
+
+        function toggleDebug() {
+            const panel = document.getElementById('debug-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 在关键位置添加调试日志
+        document.addEventListener('DOMContentLoaded', function () {
+            debugLog("页面加载完成");
+            // ...其他初始化代码...
+        });
+
+        async function askQuestion() {
+            debugLog("开始提问处理...");
+            // ...在关键步骤添加debugLog调用...
+        }
+    </script> -->
 </body>
+
 </html>
