@@ -78,14 +78,6 @@
             margin: 0 auto 20px;
         }
 
-        .system-info {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 15px;
-            font-size: 0.95rem;
-        }
-
         .info-item {
             display: flex;
             align-items: center;
@@ -117,27 +109,24 @@
             gap: 30px;
         }
 
-        /* 状态卡片 */
+        /* 在 <style> 标签中添加 */
         .status-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 10px;
+            display: none; /* 彻底隐藏状态卡片区域 */
         }
-
-        .status-card {
+        
+        .input-container {
+            margin-top: 30px; /* 增加上边距 */
+            border-radius: 16px;
+            padding: 25px;
             background: white;
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            border-left: 4px solid var(--primary);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
         }
-
-        .status-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        
+        /* 调整系统信息显示 */
+        .system-info {
+            margin-top: 15px;
         }
+            
 
         .card-header {
             display: flex;
@@ -174,14 +163,6 @@
         .card-subtext {
             font-size: 0.9rem;
             color: var(--text-secondary);
-        }
-
-        /* 输入区域 */
-        .input-container {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         textarea {
@@ -629,6 +610,19 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* 调整输入区域上边距 */
+        .input-container {
+            margin-top: 20px;
+        }
+
+        /* 调整主内容区域布局 */
+        .qa-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* 减少间距 */
+        }
+
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             .input-controls {
@@ -687,64 +681,6 @@
 
         <div class="main-content">
             <div class="qa-section">
-                <div class="status-cards">
-                    <!-- 服务状态 -->
-                    <div class="status-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-server"></i>
-                            </div>
-                            <div>
-                                <div class="card-title">服务状态</div>
-                                <div class="card-value" id="service-status">运行中</div>
-                                <div class="card-subtext">响应正常</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 模型状态 -->
-                    <div class="status-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <div>
-                                <div class="card-title">模型状态</div>
-                                <div class="card-value" id="model-status">Qwen-32B</div>
-                                <div class="card-subtext">已加载</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 知识库状态 -->
-                    <div class="status-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div>
-                                <div class="card-title">知识库状态</div>
-                                <div class="card-value" id="kb-status">1,285 篇文献</div>
-                                <div class="card-subtext>">已索引</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 响应时间 -->
-                    <div class="status-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div>
-                                <div class="card-title">响应时间</div>
-                                <div class="card-value" id="response-time-status">356 ms</div>
-                                <div class="card-subtext>">上次请求</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="input-container">
                     <textarea id="question"
                         placeholder="请输入您的问题...（例如：请解释神经网络的基本原理）">请解释神经网络的基本原理，特别是卷积神经网络在图像识别中的应用。</textarea>
@@ -794,9 +730,7 @@
                             </div>
                             <h4>AI助教的回答：</h4>
                         </div>
-                        <div class="answer-content" id="answer-text">
-                            
-                        </div>
+                        <div class="answer-content" id="answer-text"></div>
                     </div>
 
                     <div class="sources-section">
@@ -806,9 +740,7 @@
                             </div>
                             <h4>参考资料</h4>
                         </div>
-                        <div class="sources-container" id="sources-container">
-                            
-                        </div>
+                        <div class="sources-container" id="sources-container"></div>
                     </div>
 
                     <div class="action-buttons">

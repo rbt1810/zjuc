@@ -88,14 +88,14 @@ async function askQuestion() {
                 top_k: parseInt(topK)
             })
         });
-
         if (!response.ok) throw new Error(`请求失败: ${response.status}`);
-
         const data = await response.json();
 
         // 更新UI显示响应
         document.getElementById('query-text').textContent = data.query;
         document.getElementById('answer-text').textContent = data.response; // 使用实际响应
+        document.getElementById('response-time').textContent =
+            `耗时：${data.response_time} ms`; // 使用毫秒显示
 
         // 显示响应区域
         document.getElementById('response').style.display = 'block';
